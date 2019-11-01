@@ -3,6 +3,7 @@ import { Container, Avatar, Typography, Box } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./LoginPage.styles";
 import LoginForm from "./LoginForm";
+import Copyright from "../../../utils/Copyright";
 
 interface LoginPageProps {}
 
@@ -23,14 +24,6 @@ const LoginPage: React.FC<LoginPageProps> = props => {
         <Copyright />
       </Box>
     </Container>
-  );
-};
-
-const Copyright = () => {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"© 2019 Rafal Labisz "}
-    </Typography>
   );
 };
 

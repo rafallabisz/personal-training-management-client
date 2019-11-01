@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, Button, Grid } from "@material-ui/core";
 import useStyles from "./LoginPage.styles";
 import { NavLink } from "react-router-dom";
-import { routes } from "../../routes";
+import { routes } from "../../../routes";
 
 interface LoginFormProps {}
 
