@@ -21,6 +21,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EmailIcon from "@material-ui/icons/Email";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import PhoneIcon from "@material-ui/icons/Phone";
 import clsx from "clsx";
 import TopMenu from "./TopMenu";
 
@@ -106,10 +107,10 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           </ListItem>
 
           <ListItem>
-            <Tooltip title="Email">
-              <ListItemIcon>{<EmailIcon />}</ListItemIcon>
+            <Tooltip title="City">
+              <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="rafal@gmail.com" />
+            <ListItemText primary="Wrocław" />
           </ListItem>
 
           <ListItem>
@@ -120,10 +121,17 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           </ListItem>
 
           <ListItem>
-            <Tooltip title="City">
-              <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
+            <Tooltip title="Phone">
+              <ListItemIcon>{<PhoneIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="Wrocław" />
+            <ListItemText primary="500 500 500" />
+          </ListItem>
+
+          <ListItem>
+            <Tooltip title="Email">
+              <ListItemIcon>{<EmailIcon />}</ListItemIcon>
+            </Tooltip>
+            <ListItemText primary="rafal@gmail.com" />
           </ListItem>
         </List>
         <Divider />
