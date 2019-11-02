@@ -11,7 +11,8 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Tooltip
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -97,19 +98,30 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
         <Divider />
         <List className={classes.listDrawer}>
           <ListItem>
-            <ListItemIcon>{<AccountCircleIcon />}</ListItemIcon>
+            <Tooltip title="Name">
+              <ListItemIcon>{<AccountCircleIcon />}</ListItemIcon>
+            </Tooltip>
             <ListItemText primary="Rafał Labisz" />
           </ListItem>
+
           <ListItem>
-            <ListItemIcon>{<EmailIcon />}</ListItemIcon>
+            <Tooltip title="Email">
+              <ListItemIcon>{<EmailIcon />}</ListItemIcon>
+            </Tooltip>
             <ListItemText primary="rafal@gmail.com" />
           </ListItem>
+
           <ListItem>
-            <ListItemIcon>{<DateRangeIcon />}</ListItemIcon>
+            <Tooltip title="Age">
+              <ListItemIcon>{<DateRangeIcon />}</ListItemIcon>
+            </Tooltip>
             <ListItemText primary="22" />
           </ListItem>
+
           <ListItem>
-            <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
+            <Tooltip title="City">
+              <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
+            </Tooltip>
             <ListItemText primary="Wrocław" />
           </ListItem>
         </List>
