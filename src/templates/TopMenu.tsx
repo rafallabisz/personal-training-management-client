@@ -19,6 +19,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
         {listMenu.map((content, i) => (
           <Tab label={content} {...a11yProps(i)} key={i} />
         ))}
+
         <Typography className={classes.typographyHello}>Hello, Raf</Typography>
         <Button color="inherit">Sign out</Button>
       </Tabs>

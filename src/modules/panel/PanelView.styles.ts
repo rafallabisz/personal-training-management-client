@@ -77,6 +77,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "12px",
       marginRight: "25px",
       marginLeft: "auto"
+    },
+    typographyNameApp: {
+      paddingLeft: "48px",
+      letterSpacing: "2px"
     }
   })
 );

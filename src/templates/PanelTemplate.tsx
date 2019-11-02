@@ -66,7 +66,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
 
           <Grid container>
             <Grid item xs={12}>
-              <Typography variant="h6" noWrap>
+              <Typography variant="h6" noWrap className={classes.typographyNameApp}>
                 Personal training management
               </Typography>
             </Grid>

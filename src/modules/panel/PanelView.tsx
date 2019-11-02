@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Box } from "@material-ui/core";
 import useStyles from "./PanelView.styles";
 import PanelTemplate from "../../templates/PanelTemplate";
+import TrainingPanel from "./TrainingPanel";
 
 interface PanelViewProps {}
 
@@ -37,7 +38,7 @@ const PanelView: React.FC<PanelViewProps> = props => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <TabPanel value={value} index={0}>
-          training
+          <TrainingPanel />
         </TabPanel>
         <TabPanel value={value} index={1}>
           comments
