@@ -72,6 +72,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     listDrawer: {
       paddingLeft: "8px"
+    },
+    typographyHello: {
+      padding: "12px",
+      marginRight: "25px",
+      marginLeft: "auto"
     }
   })
 );
