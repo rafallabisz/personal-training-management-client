@@ -4,18 +4,19 @@ import { Tabs, Tab } from "@material-ui/core";
 interface TopMenuProps {
   value: number;
   setValue: React.Dispatch<React.SetStateAction<number>>;
+  listMenu: string[];
 }
 
-const TopMenu: React.FC<TopMenuProps> = ({ value, setValue }) => {
+const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
   return (
     <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-      <Tab label="Training" {...a11yProps(0)} />
-      <Tab label="Comments" {...a11yProps(1)} />
-      <Tab label="Settings" {...a11yProps(2)} />
+      {listMenu.map((content, i) => (
+        <Tab label={content} {...a11yProps(i)} />
+      ))}
     </Tabs>
   );
 };
