@@ -15,8 +15,10 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import EmailIcon from "@material-ui/icons/Email";
+import DateRangeIcon from "@material-ui/icons/DateRange";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 import clsx from "clsx";
 import TopMenu from "./TopMenu";
 
@@ -93,13 +95,23 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <List className={classes.listDrawer}>
+          <ListItem>
+            <ListItemIcon>{<AccountCircleIcon />}</ListItemIcon>
+            <ListItemText primary="Rafał Labisz" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>{<EmailIcon />}</ListItemIcon>
+            <ListItemText primary="rafal@gmail.com" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>{<DateRangeIcon />}</ListItemIcon>
+            <ListItemText primary="22" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
+            <ListItemText primary="Wrocław" />
+          </ListItem>
         </List>
         <Divider />
       </Drawer>

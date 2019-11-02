@@ -15,7 +15,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
   return (
     <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
       {listMenu.map((content, i) => (
-        <Tab label={content} {...a11yProps(i)} />
+        <Tab label={content} {...a11yProps(i)} key={i} />
       ))}
     </Tabs>
   );
