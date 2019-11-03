@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       backgroundImage: `url(${bgcImage})`,
-      height: "100vh"
+      height: "100vh",
+      overflowY: "hidden"
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,

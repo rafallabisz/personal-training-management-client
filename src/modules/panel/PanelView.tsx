@@ -3,6 +3,7 @@ import { Typography, Box } from "@material-ui/core";
 import useStyles from "./PanelView.styles";
 import PanelTemplate from "../../templates/PanelTemplate";
 import TrainingPanel from "./TrainingPanel";
+import CommentsPanel from "./CommentsPanel";
 
 interface PanelViewProps {}
 
@@ -41,7 +42,7 @@ const PanelView: React.FC<PanelViewProps> = props => {
           <TrainingPanel />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          comments
+          <CommentsPanel />
         </TabPanel>
         <TabPanel value={value} index={2}>
           settings
