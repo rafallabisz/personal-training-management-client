@@ -10,14 +10,14 @@ import {
   TextField,
   Tooltip
 } from "@material-ui/core";
-import useStyles from "./TrainingPanel.styles";
+import useStyles from "./OfferPanel.styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
-interface TrainingPanelProps {}
+interface OfferPanelProps {}
 
-const TrainingPanel: React.FC<TrainingPanelProps> = props => {
+const OfferPanel: React.FC<OfferPanelProps> = props => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -61,4 +61,4 @@ const TrainingPanel: React.FC<TrainingPanelProps> = props => {
     </Card>
   );
 };
-export default TrainingPanel;
+export default OfferPanel;

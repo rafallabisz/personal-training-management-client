@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       backgroundColor: theme.palette.primary.light,
       paddingBottom: "10px",
-      width: "40vw"
+      width: "35vw"
     },
     rating: {
       display: "inline-block",

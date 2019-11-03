@@ -2,8 +2,9 @@ import React from "react";
 import { Typography, Box } from "@material-ui/core";
 import useStyles from "./PanelView.styles";
 import PanelTemplate from "../../templates/PanelTemplate";
-import TrainingPanel from "./TrainingPanel";
+import OfferPanel from "./OfferPanel";
 import CommentsPanel from "./CommentsPanel";
+import SettingsPanel from "./SettingsPanel";
 
 interface PanelViewProps {}
 
@@ -39,13 +40,13 @@ const PanelView: React.FC<PanelViewProps> = props => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <TabPanel value={value} index={0}>
-          <TrainingPanel />
+          <OfferPanel />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <CommentsPanel />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          settings
+          <SettingsPanel />
         </TabPanel>
       </main>
     </PanelTemplate>
