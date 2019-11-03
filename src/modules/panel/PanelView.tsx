@@ -29,7 +29,7 @@ const TabPanel = (props: TabPanelProps) => {
 };
 
 const PanelView: React.FC<PanelViewProps> = props => {
-  const listMenu = ["Training", "Comments", "Settings"];
+  const listMenu = ["Offer", "Comments", "Settings"];
   const classes = useStyles();
   const [value, setValue] = React.useState<number>(0);
 

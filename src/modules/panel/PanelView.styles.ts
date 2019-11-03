@@ -3,7 +3,6 @@ import { Theme, createStyles } from "@material-ui/core";
 import bgcImage from "../../assets/img/bgc2.jpg";
 
 const drawerWidth = 240;
-//#3f51b5cf headerColor
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       }),
-      backgroundColor: "#e3dcdc38"
+      backgroundColor: theme.palette.secondary.light
     },
     drawerClose: {
       transition: theme.transitions.create("width", {
@@ -56,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up("sm")]: {
         width: theme.spacing(9) + 1
       },
-      backgroundColor: "#e3dcdc38"
+      backgroundColor: theme.palette.secondary.light
     },
     toolbar: {
       display: "flex",
