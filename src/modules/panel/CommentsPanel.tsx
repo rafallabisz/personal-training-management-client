@@ -26,7 +26,7 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
       <Card className={classes.card}>
         <CardHeader
           avatar={<Avatar>{<ChatIcon />}</Avatar>}
-          action={<span className={classes.rating}>4.7</span>}
+          action={<span className={classes.rating}>5.0</span>}
           title="Author Undefined"
           subheader="September 14, 2016"
         />
@@ -39,7 +39,7 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
       <Card className={classes.card}>
         <CardHeader
           avatar={<Avatar>{<ChatIcon />}</Avatar>}
-          action={<span className={classes.rating}>4.7</span>}
+          action={<span className={classes.rating}>3.5</span>}
           title="Author Undefined"
           subheader="September 14, 2016"
         />

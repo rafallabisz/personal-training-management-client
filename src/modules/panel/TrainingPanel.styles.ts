@@ -5,7 +5,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       backgroundColor: theme.palette.primary.light,
-      paddingBottom: "10px"
+      paddingBottom: "10px",
+      maxHeight: "70vh",
+      overflowY: "auto"
     },
     wrapper: {
       display: "flex",

@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
-      gridRowGap: "15px"
+      gridRowGap: "35px",
+      justifyItems: "center",
+      maxHeight: "70vh",
+      overflowY: "auto"
     },
     card: {
       backgroundColor: theme.palette.primary.light,
