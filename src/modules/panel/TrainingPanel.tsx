@@ -7,11 +7,11 @@ import {
   ListItem,
   CardActions,
   Button,
-  Fab,
-  TextField
+  TextField,
+  Tooltip
 } from "@material-ui/core";
 import useStyles from "./TrainingPanel.styles";
-import AddIcon from "@material-ui/icons/Add";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
@@ -30,25 +30,29 @@ const TrainingPanel: React.FC<TrainingPanelProps> = props => {
             type="search"
             className={classes.textField}
             margin="normal"
-            // variant="filled"
           />
-          <Fab size="small" color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
+          <Button variant="contained" color="primary" size="small" startIcon={<AddCircleIcon />}>
+            Add
+          </Button>
         </CardActions>
       </div>
-      <List>
-        <ListItem>
-          <ListItemText primary="Trening personalny 1 na 1" />
-          <DeleteForeverIcon />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Plan treningowy " />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Plan dietetyczny" />
-        </ListItem>
-      </List>
+      <CardContent>
+        <List>
+          <ListItem>
+            <ListItemText primary="Trening personalny 1 na 1" className={classes.listItem} />
+            <Tooltip title="Delete">
+              <DeleteForeverIcon className={classes.iconExit} />
+            </Tooltip>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Plan treningowy " />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Plan dietetyczny" />
+          </ListItem>
+        </List>
+      </CardContent>
+
       <CardActions>
         <Button variant="contained" color="primary" size="small" className={classes.btnSave} startIcon={<SaveIcon />}>
           Save

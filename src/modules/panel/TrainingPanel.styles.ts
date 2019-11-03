@@ -25,6 +25,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     btnSave: {
       marginLeft: "8px"
+    },
+    iconExit: {
+      color: theme.palette.error.main,
+      transition: ".1s linear",
+      "&:hover": {
+        cursor: "pointer",
+        color: theme.palette.error.dark
+      }
+    },
+    listItem: {
+      flex: "none"
     }
   })
 );

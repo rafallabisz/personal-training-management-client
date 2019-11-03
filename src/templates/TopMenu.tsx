@@ -27,10 +27,6 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
   );
 };
 
-/*color: inherit;
-    opacity: 0.7;
-    padding: 6px 12px; */
-
 const a11yProps = (index: number) => {
   return {
     id: `simple-tab-${index}`,
