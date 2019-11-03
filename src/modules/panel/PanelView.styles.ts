@@ -81,6 +81,12 @@ const useStyles = makeStyles((theme: Theme) =>
     typographyNameApp: {
       paddingLeft: "48px",
       letterSpacing: "2px"
+    },
+    tabTopMenu: {
+      transition: ".1s linear",
+      "&:hover": {
+        backgroundColor: "#3A4BA7"
+      }
     }
   })
 );

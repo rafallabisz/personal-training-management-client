@@ -17,7 +17,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
     <>
       <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
         {listMenu.map((content, i) => (
-          <Tab label={content} {...a11yProps(i)} key={i} />
+          <Tab label={content} {...a11yProps(i)} key={i} className={classes.tabTopMenu} />
         ))}
 
         <Typography className={classes.typographyHello}>Hello, Raf</Typography>
