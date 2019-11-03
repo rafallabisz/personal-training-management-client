@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField, Button, Grid } from "@material-ui/core";
-import useStyles from "./LoginPage.styles";
+import useStyles from "../AuthPage.styles";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes";
 
@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
       </Button>
       <Grid container justify="center">
         <Grid item>
-          <NavLink to={routes.registerPage} className={classes.signUp}>
+          <NavLink to={routes.registerPage} className={classes.linkToSign}>
             Don't have an account? Sign Up
           </NavLink>
         </Grid>
