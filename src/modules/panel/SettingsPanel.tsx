@@ -47,10 +47,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
               <TextField
                 id="filled-search"
                 label="Phone"
-                type="search"
+                type="number"
                 className={classes.textField}
                 margin="normal"
-                defaultValue={"500 500 500"}
+                defaultValue={"500500500"}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -67,20 +67,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
               <TextField
                 id="filled-search"
                 label="Age"
-                type="search"
+                type="number"
                 className={classes.textField}
                 margin="normal"
                 defaultValue={"22"}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="Phone"
-                type="search"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={"500 500 500"}
               />
             </Grid>
 
@@ -92,6 +82,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
                 className={classes.textField}
                 margin="normal"
                 autoComplete="current-password"
+                defaultValue={"asdasd"}
               />
             </Grid>
           </Grid>
