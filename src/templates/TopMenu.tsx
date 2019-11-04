@@ -1,6 +1,6 @@
 import React from "react";
-import { Tabs, Tab, Button, Typography, Box } from "@material-ui/core";
-import useStyles from "../modules/panel/PanelView.styles";
+import { Tabs, Tab, Button, Typography } from "@material-ui/core";
+import useStyles from "./PanelTemplate.styles";
 
 interface TopMenuProps {
   value: number;

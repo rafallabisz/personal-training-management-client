@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import { Theme, createStyles } from "@material-ui/core";
-import bgcImage from "../../assets/img/bgc2.jpg";
+import bgcImage from "../assets/img/bgc2.jpg";
 
 const drawerWidth = 240;
 
@@ -66,17 +66,8 @@ const useStyles = makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
       marginBottom: "16px"
     },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3)
-    },
     listDrawer: {
       paddingLeft: "8px"
-    },
-    typographyHello: {
-      padding: "12px",
-      marginRight: "25px",
-      marginLeft: "auto"
     },
     typographyNameApp: {
       paddingLeft: "48px",
@@ -87,6 +78,11 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         backgroundColor: "#3A4BA7"
       }
+    },
+    typographyHello: {
+      padding: "12px",
+      marginRight: "25px",
+      marginLeft: "auto"
     }
   })
 );

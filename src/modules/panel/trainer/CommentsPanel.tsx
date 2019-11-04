@@ -1,7 +1,6 @@
 import React from "react";
 import { CardContent, Card, CardHeader, Avatar, IconButton, Typography } from "@material-ui/core";
 import useStyles from "./CommentsPanel.styles";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatIcon from "@material-ui/icons/Chat";
 interface CommentsPanelProps {}
 

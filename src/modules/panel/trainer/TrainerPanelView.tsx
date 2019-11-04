@@ -1,12 +1,12 @@
 import React from "react";
 import { Typography, Box } from "@material-ui/core";
-import useStyles from "./PanelView.styles";
-import PanelTemplate from "../../templates/PanelTemplate";
+import useStyles from "./TrainerPanelView.styles";
+import PanelTemplate from "../../../templates/PanelTemplate";
 import OfferPanel from "./OfferPanel";
 import CommentsPanel from "./CommentsPanel";
 import SettingsPanel from "./SettingsPanel";
 
-interface PanelViewProps {}
+interface TrainerPanelViewProps {}
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -30,7 +30,7 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-const PanelView: React.FC<PanelViewProps> = props => {
+const TrainerPanelView: React.FC<TrainerPanelViewProps> = props => {
   const listMenu = ["Offer", "Comments", "Settings"];
   const classes = useStyles();
   const [value, setValue] = React.useState<number>(0);
@@ -52,4 +52,4 @@ const PanelView: React.FC<PanelViewProps> = props => {
     </PanelTemplate>
   );
 };
-export default PanelView;
+export default TrainerPanelView;

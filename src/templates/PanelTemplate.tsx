@@ -1,5 +1,5 @@
 import React from "react";
-import useStyles from "../modules/panel/PanelView.styles";
+import useStyles from "./PanelTemplate.styles";
 import {
   AppBar,
   Toolbar,
@@ -13,7 +13,6 @@ import {
   ListItemIcon,
   ListItemText,
   Tooltip,
-  Button
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
