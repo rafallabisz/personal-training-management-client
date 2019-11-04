@@ -1,6 +1,8 @@
 import React from "react";
 import { Tabs, Tab, Button, Typography } from "@material-ui/core";
 import useStyles from "./PanelTemplate.styles";
+import { routes } from "../routes";
+import { NavLink } from "react-router-dom";
 
 interface TopMenuProps {
   value: number;
@@ -21,7 +23,9 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
         ))}
 
         <Typography className={classes.typographyHello}>Hello, Raf</Typography>
-        <Button color="inherit">Sign out</Button>
+        <Button component={NavLink} to={routes.loginPage} color="inherit">
+          Sign out
+        </Button>
       </Tabs>
     </>
   );

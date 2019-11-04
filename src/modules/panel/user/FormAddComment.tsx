@@ -18,7 +18,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
             name="simple-controlled"
             value={valueRating}
             precision={0.5}
-            onChange={(event: any, newValue: number) => {
+            onChange={(event: React.ChangeEvent<{}>, newValue: number) => {
               setValueRating(newValue);
             }}
           />
