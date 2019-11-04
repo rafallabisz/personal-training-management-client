@@ -2,9 +2,8 @@ import React from "react";
 import useStyles from "../trainer/TrainerPanelView.styles";
 import { Typography, Box } from "@material-ui/core";
 import PanelTemplate from "../../../templates/PanelTemplate";
-import OfferPanel from "../trainer/OfferPanel";
-import CommentsPanel from "../trainer/CommentsPanel";
 import SettingsPanel from "../trainer/SettingsPanel";
+import TrainersPanel from "./TrainersPanel";
 
 interface UserPanelViewProps {}
 interface TabPanelProps {
@@ -39,12 +38,9 @@ const UserPanelView: React.FC<UserPanelViewProps> = props => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <TabPanel value={value} index={0}>
-          <OfferPanel />
+          <TrainersPanel />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <CommentsPanel />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
           <SettingsPanel />
         </TabPanel>
       </main>
