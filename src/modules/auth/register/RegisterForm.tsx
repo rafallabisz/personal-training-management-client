@@ -61,7 +61,15 @@ const RegisterForm: React.FC<RegisterFormProps> = props => {
           <FormControlLabel control={<Checkbox value="allowExtraEmails" color="primary" />} label="Personal trainer" />
         </Grid>
       </Grid>
-      <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+      <Button
+        component={NavLink}
+        to={routes.loginPage}
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+      >
         Sign Up
       </Button>
       <Grid container justify="center">
