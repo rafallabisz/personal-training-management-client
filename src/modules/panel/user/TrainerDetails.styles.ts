@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     textField: {
       marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1)
-      // width: 200
+      marginRight: theme.spacing(1),
+      width: "85%"
     },
     textFieldAuthor: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: "70%",
+      width: "85%",
       marginTop: 0
     },
     btnBack: {
