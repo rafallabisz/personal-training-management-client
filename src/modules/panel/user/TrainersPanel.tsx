@@ -7,8 +7,6 @@ import {
   Button,
   CardHeader,
   Avatar,
-  Typography,
-  Grid,
   ListItemIcon,
   ListItemText,
   List,
@@ -19,11 +17,9 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
-import SaveIcon from "@material-ui/icons/Save";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { routes } from "../../../routes";
-import { NavLink } from "react-router-dom";
 import TrainerDetails from "./TrainerDetails";
+import SearchIcon from "@material-ui/icons/Search";
 
 interface TrainersPanelProps {}
 
@@ -38,13 +34,13 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
         <CardActions>
           <TextField
             id="filled-search"
-            label="Search trainer"
+            label="Enter city"
             type="search"
             className={classes.textField}
             margin="normal"
           />
-          <Button variant="contained" color="primary" size="small" startIcon={<AddCircleIcon />}>
-            Add
+          <Button variant="contained" color="primary" size="small" startIcon={<SearchIcon />}>
+            Search
           </Button>
         </CardActions>
       </Card>

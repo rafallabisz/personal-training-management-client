@@ -11,7 +11,8 @@ import {
   CardActions,
   Button,
   TextField,
-  Grid
+  Grid,
+  Typography
 } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -97,7 +98,7 @@ const TrainerDetails: React.FC<TrainerDetailsProps> = ({ setBtnMoreDetails }) =>
         <Card className={classes.card}>
           <CardActions>
             <Grid container direction="column" justify="flex-start" alignItems="flex-start">
-              Twoja ocena
+              <Typography>Your rating</Typography>
               <Rating
                 name="simple-controlled"
                 value={valueRating}

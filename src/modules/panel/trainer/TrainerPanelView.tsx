@@ -1,34 +1,12 @@
 import React from "react";
-import { Typography, Box } from "@material-ui/core";
 import useStyles from "./TrainerPanelView.styles";
 import PanelTemplate from "../../../templates/PanelTemplate";
 import OfferPanel from "./OfferPanel";
 import CommentsPanel from "./CommentsPanel";
 import SettingsPanel from "./SettingsPanel";
+import TabPanel from "../../../utils/TabPanel";
 
 interface TrainerPanelViewProps {}
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      <Box p={3}>{children}</Box>
-    </Typography>
-  );
-};
 
 const TrainerPanelView: React.FC<TrainerPanelViewProps> = props => {
   const listMenu = ["Offer", "Comments", "Settings"];
