@@ -14,7 +14,6 @@ import {
 } from "@material-ui/core";
 import useStyles from "./TrainersPanel.styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
