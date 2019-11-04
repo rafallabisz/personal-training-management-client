@@ -3,19 +3,11 @@ import { Theme, createStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      maxHeight: "70vh",
-      overflowY: "auto"
-    },
     card: {
       backgroundColor: theme.palette.primary.light,
       paddingBottom: "10px",
-      marginBottom: "15px"
+      width: "35vw"
     },
-    wrapDataTrainer: {
-      display: "flex"
-    },
-
     cardHeader: {
       paddingBottom: 0
     },
@@ -29,7 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: "auto",
       paddingRight: "10px"
     },
-    btnBack: {
+
+    btnMoreDetails: {
       marginLeft: "8px"
     }
   })

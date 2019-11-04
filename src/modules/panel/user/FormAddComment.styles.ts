@@ -3,29 +3,20 @@ import { Theme, createStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      maxHeight: "70vh",
-      overflowY: "auto"
-    },
-    containerCardTrainers: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gridRowGap: "35px",
-      justifyItems: "center"
-      // maxHeight: "70vh",
-      // overflowY: "auto"
-    },
-    cardSearch: {
+    card: {
       backgroundColor: theme.palette.primary.light,
       paddingBottom: "10px",
-      marginBottom: "20px"
-      // width: "35vw"
+      marginBottom: "15px"
     },
-
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: "90%",
+      width: "85%"
+    },
+    textFieldAuthor: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: "85%",
       marginTop: 0
     }
   })
