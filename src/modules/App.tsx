@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { routes } from "../routes";
 import LoginPage from "./auth/login/LoginPage";
 import RegisterPage from "./auth/register/RegisterPage";
-import TrainerPanelView from "./panel/trainer/TrainerPanelView";
+import PanelView from "./panel/PanelView";
 
 const App: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path={routes.loginPage} component={LoginPage} />
         <Route exact path={routes.registerPage} component={RegisterPage} />
-        <Route exact path={routes.main} component={TrainerPanelView} />
+        <Route exact path={routes.main} component={PanelView} />
         <Redirect to={routes.loginPage} />
       </Switch>
     </Router>
