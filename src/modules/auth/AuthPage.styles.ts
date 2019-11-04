@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       backgroundImage: `url(${bgcAuth})`,
       height: "100vh",
-      overflowY: "hidden",
+      overflow: "auto",
       backgroundSize: "cover",
       backgroundPosition: "center"
     },
