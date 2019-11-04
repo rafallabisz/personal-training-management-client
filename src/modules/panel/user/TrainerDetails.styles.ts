@@ -4,24 +4,18 @@ import { Theme, createStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gridRowGap: "35px",
-      justifyItems: "center",
       maxHeight: "70vh",
       overflowY: "auto"
     },
     card: {
       backgroundColor: theme.palette.primary.light,
       paddingBottom: "10px",
-      width: "35vw"
+      marginBottom: "15px"
     },
-    cardSearch: {
-      backgroundColor: theme.palette.primary.light,
-      paddingBottom: "10px",
-      marginBottom: "20px"
-      // width: "35vw"
+    wrapDataTrainer: {
+      display: "flex"
     },
+
     cardHeader: {
       paddingBottom: 0
     },
@@ -38,14 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: "90%",
+      width: 200
+    },
+    textFieldAuthor: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: "35%",
       marginTop: 0
     },
-    btnMoreDetails: {
+    btnBack: {
       marginLeft: "8px"
-    },
-    linkToMoreDetails: {
-      textDecoration: "none"
     }
   })
 );

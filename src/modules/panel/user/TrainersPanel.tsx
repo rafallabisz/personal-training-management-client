@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CardActions,
   Card,
@@ -21,11 +21,17 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import SaveIcon from "@material-ui/icons/Save";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { routes } from "../../../routes";
+import { NavLink } from "react-router-dom";
+import TrainerDetails from "./TrainerDetails";
 
 interface TrainersPanelProps {}
 
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
+  const [isActiveBtnMoreDetails, setBtnMoreDetails] = useState<boolean>(false);
   const classes = useStyles();
+  if (isActiveBtnMoreDetails) return <TrainerDetails setBtnMoreDetails={setBtnMoreDetails} />;
+
   return (
     <>
       <Card className={classes.cardSearch}>
@@ -72,6 +78,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
               size="small"
               className={classes.btnMoreDetails}
               startIcon={<MoreVertIcon />}
+              onClick={() => setBtnMoreDetails(true)}
             >
               More details
             </Button>
