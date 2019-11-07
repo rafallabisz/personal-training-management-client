@@ -47,6 +47,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           autoFocus
           value={loginData.email}
           onChange={handleChange}
+          error={error !== undefined}
         />
         <TextField
           variant="outlined"
@@ -60,8 +61,9 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           autoComplete="current-password"
           value={loginData.password}
           onChange={handleChange}
+          error={error !== undefined}
+          helperText={error !== undefined && "Incorrect email or password!"}
         />
-
         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
           {isFetching && (
             <span className={classes.spinner}>
