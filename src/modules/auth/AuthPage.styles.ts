@@ -40,6 +40,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     linkToSign: {
       textDecoration: "none"
+    },
+    spinner: {
+      position: "absolute",
+      display: "flex",
+      marginLeft: "-45px"
     }
   })
 );

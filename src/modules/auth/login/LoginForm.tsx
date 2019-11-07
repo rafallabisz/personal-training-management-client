@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Button, Grid, CircularProgress } from "@material-ui/core";
 import useStyles from "../AuthPage.styles";
 import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
@@ -62,16 +62,12 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           onChange={handleChange}
         />
 
-        <Button
-          // component={NavLink}
-          // to={routes.main}
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          // onClick={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}
-        >
+        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+          {isFetching && (
+            <span className={classes.spinner}>
+              <CircularProgress color="secondary" size={20} />
+            </span>
+          )}
           Sign In
         </Button>
         <Grid container justify="center">
