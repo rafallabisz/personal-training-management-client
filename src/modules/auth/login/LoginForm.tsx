@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Grid } from "@material-ui/core";
 import useStyles from "../AuthPage.styles";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
 import { LoginData } from "../AuthPage.interfaces";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = props => {
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state: Store) => state.user);
+  const { isFetching, error, isLoggedIn } = useSelector((state: Store) => state.user);
 
   const [loginData, setLoginData] = useState<LoginData>({ email: "", password: "" });
 
@@ -29,55 +29,60 @@ const LoginForm: React.FC<LoginFormProps> = props => {
 
   const classes = useStyles();
 
+  if (isLoggedIn) {
+    return <Redirect to={routes.main} />;
+  }
   return (
-    <form className={classes.form} noValidate onSubmit={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}>
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="email"
-        label="Email Address"
-        name="email"
-        autoComplete="email"
-        autoFocus
-        value={loginData.email}
-        onChange={handleChange}
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="password"
-        label="Password"
-        type="password"
-        id="password"
-        autoComplete="current-password"
-        value={loginData.password}
-        onChange={handleChange}
-      />
+    <>
+      <form className={classes.form} noValidate onSubmit={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          value={loginData.email}
+          onChange={handleChange}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={loginData.password}
+          onChange={handleChange}
+        />
 
-      <Button
-        component={NavLink}
-        to={routes.main}
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        // onClick={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}
-      >
-        Sign In
-      </Button>
-      <Grid container justify="center">
-        <Grid item>
-          <NavLink to={routes.registerPage} className={classes.linkToSign}>
-            Don't have an account? Sign Up
-          </NavLink>
+        <Button
+          // component={NavLink}
+          // to={routes.main}
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          // onClick={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}
+        >
+          Sign In
+        </Button>
+        <Grid container justify="center">
+          <Grid item>
+            <NavLink to={routes.registerPage} className={classes.linkToSign}>
+              Don't have an account? Sign Up
+            </NavLink>
+          </Grid>
         </Grid>
-      </Grid>
-    </form>
+      </form>
+    </>
   );
 };
 export default LoginForm;

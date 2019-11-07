@@ -37,6 +37,7 @@ export interface UserReducerState {
   currentUser?: UserData;
   isFetching: boolean;
   error?: string;
+  isLoggedIn: boolean;
 }
 
 export interface Store {

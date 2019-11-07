@@ -3,7 +3,8 @@ import { Reducer } from "redux";
 import { UserActionTypes } from "./auth.types";
 
 const initState: UserReducerState = {
-  isFetching: false
+  isFetching: false,
+  isLoggedIn: false
 };
 
 export const userReducer: Reducer<UserReducerState, UserActions> = (state = initState, action) => {
@@ -17,7 +18,8 @@ export const userReducer: Reducer<UserReducerState, UserActions> = (state = init
       return {
         ...state,
         currentUser: action.payload,
-        isFetching: false
+        isFetching: false,
+        isLoggedIn: true
       };
     case UserActionTypes.SIGN_IN_FAILURE:
       return {
