@@ -4,10 +4,16 @@ import useStyles from "../AuthPage.styles";
 import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes";
 import { LoginData } from "../AuthPage.interfaces";
+import { useSelector, useDispatch } from "react-redux";
+import { Store } from "../duck/auth.interfaces";
+import { authLogIn } from "../duck/auth.operations";
 
 interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = props => {
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state: Store) => state.user);
+
   const [loginData, setLoginData] = useState<LoginData>({ email: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -16,10 +22,15 @@ const LoginForm: React.FC<LoginFormProps> = props => {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  console.log(loginData);
+  const authSignIn = (e: React.SyntheticEvent<any, Event>) => {
+    e.preventDefault();
+    dispatch(authLogIn(loginData));
+  };
+
   const classes = useStyles();
+
   return (
-    <form className={classes.form} noValidate>
+    <form className={classes.form} noValidate onSubmit={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}>
       <TextField
         variant="outlined"
         margin="normal"
@@ -55,6 +66,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
         variant="contained"
         color="primary"
         className={classes.submit}
+        // onClick={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}
       >
         Sign In
       </Button>
