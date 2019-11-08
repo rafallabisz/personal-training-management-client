@@ -35,16 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       marginTop: theme.spacing(1)
     },
-    submit: {
-      margin: theme.spacing(3, 0, 2)
-    },
     linkToSign: {
       textDecoration: "none"
-    },
-    spinner: {
-      position: "absolute",
-      display: "flex",
-      marginLeft: "-45px"
     }
   })
 );

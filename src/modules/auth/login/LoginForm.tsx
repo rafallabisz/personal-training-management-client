@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid, CircularProgress } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import useStyles from "../AuthPage.styles";
 import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
 import { useSelector, useDispatch } from "react-redux";
 import { Store, SignInCredentials } from "../duck/auth.interfaces";
 import { authSignInActionCreator, authClearErrors } from "../duck/auth.operations";
+import SpinnerButton from "../../../utils/SpinnerButton";
 
 interface LoginFormProps {}
 
@@ -71,14 +72,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           helperText={error !== undefined && "Incorrect email or password!"}
           onFocus={() => handleClearErrors()}
         />
-        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-          {isFetching && (
-            <span className={classes.spinner}>
-              <CircularProgress color="secondary" size={20} />
-            </span>
-          )}
-          Sign In
-        </Button>
+        <SpinnerButton isFetching={isFetching}>Sign In</SpinnerButton>
         <Grid container justify="center">
           <Grid item>
             <NavLink to={routes.registerPage} className={classes.linkToSign} onClick={() => handleClearErrors()}>

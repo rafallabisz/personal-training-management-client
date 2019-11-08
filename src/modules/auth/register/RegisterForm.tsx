@@ -6,6 +6,7 @@ import { routes } from "../../../routes";
 import { SignUpCredentials, Store } from "../duck/auth.interfaces";
 import { authSignUpActionCreator } from "../duck/auth.operations";
 import { useDispatch, useSelector } from "react-redux";
+import SpinnerButton from "../../../utils/SpinnerButton";
 
 interface RegisterFormProps {}
 
@@ -110,9 +111,7 @@ const RegisterForm: React.FC<RegisterFormProps> = props => {
           />
         </Grid>
       </Grid>
-      <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-        Sign Up
-      </Button>
+      <SpinnerButton isFetching={isFetching}>Sign Up</SpinnerButton>
       <Grid container justify="center">
         <Grid item>
           <NavLink to={routes.loginPage} className={classes.linkToSign}>
