@@ -5,7 +5,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
 import { useSelector, useDispatch } from "react-redux";
 import { Store, SignInCredentials } from "../duck/auth.interfaces";
-import { authSignInActionCreator } from "../duck/auth.operations";
+import { authSignInActionCreator, authClearErrors } from "../duck/auth.operations";
 
 interface LoginFormProps {}
 
@@ -21,9 +21,13 @@ const LoginForm: React.FC<LoginFormProps> = props => {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  const authSignIn = (e: React.SyntheticEvent<any, Event>) => {
+  const handleSignIn = (e: React.SyntheticEvent<any, Event>) => {
     e.preventDefault();
     dispatch(authSignInActionCreator(loginData));
+  };
+
+  const handleClearErrors = () => {
+    dispatch(authClearErrors());
   };
 
   const classes = useStyles();
@@ -33,7 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
   }
   return (
     <>
-      <form className={classes.form} noValidate onSubmit={(e: React.SyntheticEvent<any, Event>) => authSignIn(e)}>
+      <form className={classes.form} noValidate onSubmit={(e: React.SyntheticEvent<any, Event>) => handleSignIn(e)}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -47,6 +51,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           value={loginData.email}
           onChange={handleChange}
           error={error !== undefined}
+          onFocus={() => handleClearErrors()}
         />
         <TextField
           variant="outlined"
@@ -62,6 +67,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           onChange={handleChange}
           error={error !== undefined}
           helperText={error !== undefined && "Incorrect email or password!"}
+          onFocus={() => handleClearErrors()}
         />
         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
           {isFetching && (
@@ -73,7 +79,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
         </Button>
         <Grid container justify="center">
           <Grid item>
-            <NavLink to={routes.registerPage} className={classes.linkToSign}>
+            <NavLink to={routes.registerPage} className={classes.linkToSign} onClick={() => handleClearErrors()}>
               Don't have an account? Sign Up
             </NavLink>
           </Grid>

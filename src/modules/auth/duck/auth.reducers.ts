@@ -28,6 +28,12 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
         isFetching: false
       };
 
+    case AuthActionTypes.CLEAR_ERRORS:
+      return {
+        ...state,
+        error: undefined
+      };
+
     default:
       return state;
   }

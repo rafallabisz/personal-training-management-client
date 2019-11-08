@@ -17,6 +17,7 @@ export interface UserData {
   };
 }
 
+/*===== Action Interfaces ===== */
 export interface SignInRequestAction {
   type: AuthActionTypes.SIGN_IN_REQUEST;
 }
@@ -31,8 +32,13 @@ export interface SignInFailureAction {
   payload: string;
 }
 
-export type AuthActions = SignInRequestAction | SignInSuccessAction | SignInFailureAction;
+export interface ClearErrorsAction {
+  type: AuthActionTypes.CLEAR_ERRORS;
+}
 
+export type AuthActions = SignInRequestAction | SignInSuccessAction | SignInFailureAction | ClearErrorsAction;
+
+/*====== Reducer Interface ====== */
 export interface AuthReducerState {
   currentUser?: UserData;
   isFetching: boolean;
