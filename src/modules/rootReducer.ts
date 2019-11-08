@@ -1,9 +1,9 @@
 import { Reducer, combineReducers } from "redux";
 import { Store } from "./auth/duck/auth.interfaces";
-import { userReducer } from "./auth/duck/auth.reducers";
+import { authReducer } from "./auth/duck/auth.reducers";
 
 const rootReducer: Reducer<Store> = combineReducers<Store>({
-  user: userReducer
+  user: authReducer
 });
 
 export default rootReducer;

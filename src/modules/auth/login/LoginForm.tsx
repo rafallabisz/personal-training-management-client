@@ -3,10 +3,9 @@ import { TextField, Button, Grid, CircularProgress } from "@material-ui/core";
 import useStyles from "../AuthPage.styles";
 import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
-import { LoginData } from "../AuthPage.interfaces";
 import { useSelector, useDispatch } from "react-redux";
-import { Store } from "../duck/auth.interfaces";
-import { authLogIn } from "../duck/auth.operations";
+import { Store, SignInCredentials } from "../duck/auth.interfaces";
+import { authSignInActionCreator } from "../duck/auth.operations";
 
 interface LoginFormProps {}
 
@@ -14,7 +13,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
   const dispatch = useDispatch();
   const { isFetching, error, isLoggedIn } = useSelector((state: Store) => state.user);
 
-  const [loginData, setLoginData] = useState<LoginData>({ email: "", password: "" });
+  const [loginData, setLoginData] = useState<SignInCredentials>({ email: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const name = e.target.name;
@@ -24,7 +23,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
 
   const authSignIn = (e: React.SyntheticEvent<any, Event>) => {
     e.preventDefault();
-    dispatch(authLogIn(loginData));
+    dispatch(authSignInActionCreator(loginData));
   };
 
   const classes = useStyles();

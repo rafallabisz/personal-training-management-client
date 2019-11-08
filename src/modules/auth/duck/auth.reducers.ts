@@ -1,27 +1,27 @@
-import { UserReducerState, UserActions } from "./auth.interfaces";
+import { AuthReducerState, AuthActions } from "./auth.interfaces";
 import { Reducer } from "redux";
-import { UserActionTypes } from "./auth.types";
+import { AuthActionTypes } from "./auth.types";
 
-const initState: UserReducerState = {
+const initState: AuthReducerState = {
   isFetching: false,
   isLoggedIn: false
 };
 
-export const userReducer: Reducer<UserReducerState, UserActions> = (state = initState, action) => {
+export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = initState, action) => {
   switch (action.type) {
-    case UserActionTypes.SIGN_IN_REQUEST:
+    case AuthActionTypes.SIGN_IN_REQUEST:
       return {
         ...state,
         isFetching: true
       };
-    case UserActionTypes.SIGN_IN_SUCCESS:
+    case AuthActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
         isFetching: false,
         isLoggedIn: true
       };
-    case UserActionTypes.SIGN_IN_FAILURE:
+    case AuthActionTypes.SIGN_IN_FAILURE:
       return {
         ...state,
         error: action.payload,

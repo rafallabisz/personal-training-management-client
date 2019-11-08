@@ -1,4 +1,4 @@
-import { UserActionTypes } from "./auth.types";
+import { AuthActionTypes } from "./auth.types";
 
 export interface SignInCredentials {
   email: string;
@@ -18,22 +18,22 @@ export interface UserData {
 }
 
 export interface SignInRequestAction {
-  type: UserActionTypes.SIGN_IN_REQUEST;
+  type: AuthActionTypes.SIGN_IN_REQUEST;
 }
 
 export interface SignInSuccessAction {
-  type: UserActionTypes.SIGN_IN_SUCCESS;
+  type: AuthActionTypes.SIGN_IN_SUCCESS;
   payload: UserData;
 }
 
 export interface SignInFailureAction {
-  type: UserActionTypes.SIGN_IN_FAILURE;
+  type: AuthActionTypes.SIGN_IN_FAILURE;
   payload: string;
 }
 
-export type UserActions = SignInRequestAction | SignInSuccessAction | SignInFailureAction;
+export type AuthActions = SignInRequestAction | SignInSuccessAction | SignInFailureAction;
 
-export interface UserReducerState {
+export interface AuthReducerState {
   currentUser?: UserData;
   isFetching: boolean;
   error?: string;
@@ -41,5 +41,5 @@ export interface UserReducerState {
 }
 
 export interface Store {
-  user: UserReducerState;
+  user: AuthReducerState;
 }
