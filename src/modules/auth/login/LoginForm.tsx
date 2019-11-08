@@ -27,7 +27,9 @@ const LoginForm: React.FC<LoginFormProps> = props => {
   };
 
   const handleClearErrors = () => {
-    dispatch(authClearErrors());
+    if (error) {
+      dispatch(authClearErrors());
+    }
   };
 
   const classes = useStyles();
