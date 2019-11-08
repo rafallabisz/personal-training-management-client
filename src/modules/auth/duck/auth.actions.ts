@@ -3,7 +3,10 @@ import {
   UserData,
   SignInSuccessAction,
   SignInFailureAction,
-  ClearErrorsAction
+  ClearErrorsAction,
+  SignUpRequestAction,
+  SignUpSuccessAction,
+  SignUpFailureAction
 } from "./auth.interfaces";
 import { AuthActionTypes } from "./auth.types";
 
@@ -18,6 +21,20 @@ export const signInSuccess = (userData: UserData): SignInSuccessAction => ({
 
 export const signInFailure = (error: string): SignInFailureAction => ({
   type: AuthActionTypes.SIGN_IN_FAILURE,
+  payload: error
+});
+
+export const signUpRequest = (): SignUpRequestAction => ({
+  type: AuthActionTypes.SIGN_UP_REQUEST
+});
+
+export const signUpSuccess = (userData: UserData): SignUpSuccessAction => ({
+  type: AuthActionTypes.SIGN_UP_SUCCESS,
+  payload: userData
+});
+
+export const signUpFailure = (error: string): SignUpFailureAction => ({
+  type: AuthActionTypes.SIGN_UP_FAILURE,
   payload: error
 });
 

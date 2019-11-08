@@ -5,6 +5,14 @@ export interface SignInCredentials {
   password: string;
 }
 
+export interface SignUpCredentials {
+  firstName: string;
+  lastName: string;
+  email: string;
+  isTrainer: boolean;
+  password: string;
+}
+
 export interface UserData {
   firstName: string;
   lastName: string;
@@ -32,18 +40,39 @@ export interface SignInFailureAction {
   payload: string;
 }
 
+export interface SignUpRequestAction {
+  type: AuthActionTypes.SIGN_UP_REQUEST;
+}
+
+export interface SignUpSuccessAction {
+  type: AuthActionTypes.SIGN_UP_SUCCESS;
+  payload: UserData;
+}
+
+export interface SignUpFailureAction {
+  type: AuthActionTypes.SIGN_UP_FAILURE;
+  payload: string;
+}
+
 export interface ClearErrorsAction {
   type: AuthActionTypes.CLEAR_ERRORS;
 }
 
-export type AuthActions = SignInRequestAction | SignInSuccessAction | SignInFailureAction | ClearErrorsAction;
+export type AuthActions =
+  | SignInRequestAction
+  | SignInSuccessAction
+  | SignInFailureAction
+  | SignUpRequestAction
+  | SignUpSuccessAction
+  | SignUpFailureAction
+  | ClearErrorsAction;
 
 /*====== Reducer Interface ====== */
 export interface AuthReducerState {
   currentUser?: UserData;
   isFetching: boolean;
   error?: string;
-  isLoggedIn: boolean;
+  isAuth: boolean;
 }
 
 export interface Store {

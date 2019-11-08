@@ -11,7 +11,7 @@ interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = props => {
   const dispatch = useDispatch();
-  const { isFetching, error, isLoggedIn } = useSelector((state: Store) => state.user);
+  const { isFetching, error, isAuth } = useSelector((state: Store) => state.user);
 
   const [loginData, setLoginData] = useState<SignInCredentials>({ email: "", password: "" });
 
@@ -34,7 +34,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
 
   const classes = useStyles();
 
-  if (isLoggedIn) {
+  if (isAuth) {
     return <Redirect to={routes.main} />;
   }
   return (
