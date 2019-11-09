@@ -47,6 +47,7 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
       };
 
     case PanelActionTypes.ADD_OFFER_REQUEST:
+    case PanelActionTypes.DELETE_OFFER_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -59,10 +60,17 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
         isFetching: false
       };
     case PanelActionTypes.ADD_OFFER_FAILURE:
+    case PanelActionTypes.DELETE_OFFER_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.payload
+      };
+
+    case PanelActionTypes.DELETE_OFFER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false
       };
 
     default:

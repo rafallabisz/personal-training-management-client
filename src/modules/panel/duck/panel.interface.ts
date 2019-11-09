@@ -19,3 +19,17 @@ export interface AddOfferFailureAction {
   type: PanelActionTypes.ADD_OFFER_FAILURE;
   payload: string;
 }
+
+export interface DeleteOfferRequestAction {
+  type: PanelActionTypes.DELETE_OFFER_REQUEST;
+}
+
+export interface DeleteOfferSuccessAction {
+  type: PanelActionTypes.DELETE_OFFER_SUCCESS;
+  payload: string;
+}
+
+export interface DeleteOfferFailureAction {
+  type: PanelActionTypes.DELETE_OFFER_FAILURE;
+  payload: string;
+}

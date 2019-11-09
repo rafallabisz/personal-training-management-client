@@ -1,5 +1,12 @@
 import { AuthActionTypes } from "./auth.types";
-import { AddOfferRequestAction, AddOfferFailureAction, AddOfferSuccessAction } from "../../panel/duck/panel.interface";
+import {
+  AddOfferRequestAction,
+  AddOfferFailureAction,
+  AddOfferSuccessAction,
+  DeleteOfferRequestAction,
+  DeleteOfferSuccessAction,
+  DeleteOfferFailureAction
+} from "../../panel/duck/panel.interface";
 
 export interface SignInCredentials {
   email: string;
@@ -82,7 +89,10 @@ export type AuthActions =
   | ClearErrorsAction
   | AddOfferRequestAction
   | AddOfferSuccessAction
-  | AddOfferFailureAction;
+  | AddOfferFailureAction
+  | DeleteOfferRequestAction
+  | DeleteOfferSuccessAction
+  | DeleteOfferFailureAction;
 
 /*====== Reducer Interface ====== */
 export interface AuthReducerState {
