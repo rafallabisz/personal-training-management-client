@@ -3,6 +3,9 @@ import { Tabs, Tab, Button, Typography } from "@material-ui/core";
 import useStyles from "./PanelTemplate.styles";
 import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Store } from "../modules/auth/duck/auth.interfaces";
+import { authSignOut } from "../modules/auth/duck/auth.operations";
 
 interface TopMenuProps {
   value: number;
@@ -11,8 +14,14 @@ interface TopMenuProps {
 }
 
 const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
+  const dispatch = useDispatch();
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleSignOut = (): void => {
+    dispatch(authSignOut());
   };
   const classes = useStyles();
   return (
@@ -23,7 +32,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
         ))}
 
         <Typography className={classes.typographyHello}>Hello, Raf</Typography>
-        <Button component={NavLink} to={routes.loginPage} color="inherit">
+        <Button onClick={() => handleSignOut()} component={NavLink} to={routes.loginPage} color="inherit">
           Sign out
         </Button>
       </Tabs>
