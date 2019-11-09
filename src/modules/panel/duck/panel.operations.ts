@@ -26,14 +26,14 @@ export const panelAddOfferActionCreator: ActionCreator<ThunkAction<Promise<Actio
   }
 };
 
-export const panelDeleteOfferActionCreator: ActionCreator<ThunkAction<Promise<Action>, void, any, AnyAction>> = (
+export const panelDeleteOfferActionCreator: ActionCreator<ThunkAction<Promise<Action>, UserData, any, AnyAction>> = (
   userId: string,
   offerId: string
 ) => async (dispatch: Dispatch) => {
   dispatch(deleteOfferRequest());
   try {
-    const response = await panelDeleteOffer(userId, offerId).then(unwrapResponseData);
-    return dispatch(deleteOfferSuccess(response));
+    const userData = await panelDeleteOffer(userId, offerId).then(unwrapResponseData);
+    return dispatch(deleteOfferSuccess(userData));
   } catch (error) {
     return dispatch(deleteOfferFailure(error.message));
   }

@@ -16,7 +16,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { OfferDescription } from "../duck/panel.interface";
-import { panelAddOfferActionCreator } from "../duck/panel.operations";
+import { panelAddOfferActionCreator, panelDeleteOfferActionCreator } from "../duck/panel.operations";
 
 interface OfferPanelProps {}
 
@@ -34,6 +34,10 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
     setOfferDescription({ ...offerDescription, description });
   };
 
+  const handleDeleteOffer = (offerId: string) => {
+    const userId = _id;
+    dispatch(panelDeleteOfferActionCreator(userId, offerId));
+  };
   const classes = useStyles();
 
   return (
@@ -67,7 +71,7 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
             <ListItem>
               <ListItemText primary={offer.description} className={classes.listItem} />
               <Tooltip title="Delete">
-                <DeleteForeverIcon className={classes.iconExit} />
+                <DeleteForeverIcon className={classes.iconExit} onClick={() => handleDeleteOffer(offer._id)} />
               </Tooltip>
             </ListItem>
           ))}

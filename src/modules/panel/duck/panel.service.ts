@@ -8,6 +8,6 @@ export const panelAddOffer = (offerDescription: OfferDescription, id: string): A
   });
 };
 
-export const panelDeleteOffer = (userId: string, offerId: string): AxiosPromise<string> => {
-  return axios.post<string>(`http://localhost:5000/user/offer/${userId}/${offerId}`);
+export const panelDeleteOffer = (userId: string, offerId: string): AxiosPromise<UserData> => {
+  return axios.delete<UserData>(`http://localhost:5000/user/offer/${userId}/${offerId}`);
 };

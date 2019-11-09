@@ -27,9 +27,9 @@ export const deleteOfferRequest = (): DeleteOfferRequestAction => ({
   type: PanelActionTypes.DELETE_OFFER_REQUEST
 });
 
-export const deleteOfferSuccess = (message: string): DeleteOfferSuccessAction => ({
+export const deleteOfferSuccess = (userData: UserData): DeleteOfferSuccessAction => ({
   type: PanelActionTypes.DELETE_OFFER_SUCCESS,
-  payload: message
+  payload: userData
 });
 
 export const deleteOfferFailure = (error: string): DeleteOfferFailureAction => ({

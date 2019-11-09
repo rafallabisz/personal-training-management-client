@@ -12,6 +12,8 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
   switch (action.type) {
     case AuthActionTypes.SIGN_IN_REQUEST:
     case AuthActionTypes.SIGN_UP_REQUEST:
+    case PanelActionTypes.ADD_OFFER_REQUEST:
+    case PanelActionTypes.DELETE_OFFER_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -26,6 +28,8 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
       };
     case AuthActionTypes.SIGN_IN_FAILURE:
     case AuthActionTypes.SIGN_UP_FAILURE:
+    case PanelActionTypes.ADD_OFFER_FAILURE:
+    case PanelActionTypes.DELETE_OFFER_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -46,30 +50,11 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
         error: undefined
       };
 
-    case PanelActionTypes.ADD_OFFER_REQUEST:
-    case PanelActionTypes.DELETE_OFFER_REQUEST:
-      return {
-        ...state,
-        isFetching: true
-      };
-
     case PanelActionTypes.ADD_OFFER_SUCCESS:
-      return {
-        ...state,
-        currentUser: action.payload,
-        isFetching: false
-      };
-    case PanelActionTypes.ADD_OFFER_FAILURE:
-    case PanelActionTypes.DELETE_OFFER_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload
-      };
-
     case PanelActionTypes.DELETE_OFFER_SUCCESS:
       return {
         ...state,
+        currentUser: action.payload,
         isFetching: false
       };
 

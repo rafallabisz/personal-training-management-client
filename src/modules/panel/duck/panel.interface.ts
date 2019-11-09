@@ -26,7 +26,7 @@ export interface DeleteOfferRequestAction {
 
 export interface DeleteOfferSuccessAction {
   type: PanelActionTypes.DELETE_OFFER_SUCCESS;
-  payload: string;
+  payload: UserData;
 }
 
 export interface DeleteOfferFailureAction {
