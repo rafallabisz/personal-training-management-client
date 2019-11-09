@@ -54,6 +54,10 @@ export interface SignUpFailureAction {
   payload: string;
 }
 
+export interface SignOutAction {
+  type: AuthActionTypes.SIGN_OUT;
+}
+
 export interface ClearErrorsAction {
   type: AuthActionTypes.CLEAR_ERRORS;
 }
@@ -65,6 +69,7 @@ export type AuthActions =
   | SignUpRequestAction
   | SignUpSuccessAction
   | SignUpFailureAction
+  | SignOutAction
   | ClearErrorsAction;
 
 /*====== Reducer Interface ====== */

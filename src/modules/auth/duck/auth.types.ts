@@ -7,5 +7,6 @@ export enum AuthActionTypes {
   SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS",
   SIGN_UP_FAILURE = "SIGN_UP_FAILURE",
 
+  SIGN_OUT = "SIGN_OUT",
   CLEAR_ERRORS = "CLEAR_ERRORS"
 }

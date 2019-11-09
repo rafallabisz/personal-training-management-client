@@ -8,7 +8,8 @@ import {
   clearErrors,
   signUpFailure,
   signUpRequest,
-  signUpSuccess
+  signUpSuccess,
+  signOut
 } from "./auth.actions";
 import { authSignIn, authSignUp } from "./auth.service";
 import { unwrapResponseData } from "../../../utils/unwrapResponseData";
@@ -35,6 +36,10 @@ export const authSignUpActionCreator: ActionCreator<
   } catch (error) {
     return dispatch(signUpFailure(error.message));
   }
+};
+
+export const authSignOut = () => (dispatch: Dispatch<AuthActions>) => {
+  dispatch(signOut());
 };
 
 export const authClearErrors = () => (dispatch: Dispatch<AuthActions>) => {

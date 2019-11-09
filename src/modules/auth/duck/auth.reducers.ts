@@ -31,6 +31,14 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
         isFetching: false
       };
 
+    case AuthActionTypes.SIGN_OUT:
+      return {
+        ...state,
+        isAuth: false,
+        currentUser: undefined,
+        error: undefined
+      };
+
     case AuthActionTypes.CLEAR_ERRORS:
       return {
         ...state,

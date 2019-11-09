@@ -32,9 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
       dispatch(authClearErrors());
     }
   };
-
   const classes = useStyles();
-
   if (isAuth) {
     return <Redirect to={routes.main} />;
   }
