@@ -12,12 +12,14 @@ import {
 } from "@material-ui/core";
 import useStyles from "./OfferPanel.styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import SaveIcon from "@material-ui/icons/Save";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { useSelector } from "react-redux";
+import { Store } from "../../auth/duck/auth.interfaces";
 
 interface OfferPanelProps {}
 
 const OfferPanel: React.FC<OfferPanelProps> = props => {
+  const { offers } = useSelector((state: Store) => state.user.currentUser!);
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -38,26 +40,16 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
       </div>
       <CardContent>
         <List>
-          <ListItem>
-            <ListItemText primary="Trening personalny 1 na 1" className={classes.listItem} />
-            <Tooltip title="Delete">
-              <DeleteForeverIcon className={classes.iconExit} />
-            </Tooltip>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Plan treningowy " />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Plan dietetyczny" />
-          </ListItem>
+          {offers.map(offer => (
+            <ListItem>
+              <ListItemText primary={offer.description} className={classes.listItem} />
+              <Tooltip title="Delete">
+                <DeleteForeverIcon className={classes.iconExit} />
+              </Tooltip>
+            </ListItem>
+          ))}
         </List>
       </CardContent>
-
-      <CardActions>
-        <Button variant="contained" color="primary" size="small" className={classes.btnSave} startIcon={<SaveIcon />}>
-          Save
-        </Button>
-      </CardActions>
     </Card>
   );
 };

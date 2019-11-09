@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "90%",
       marginTop: 0
     },
-    btnSave: {
-      marginLeft: "8px"
-    },
     iconExit: {
       color: theme.palette.error.main,
       transition: ".1s linear",

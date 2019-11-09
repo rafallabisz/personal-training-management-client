@@ -13,15 +13,22 @@ export interface SignUpCredentials {
   password: string;
 }
 
+export interface OfferDescription {
+  _id: string;
+  description: string;
+}
+
 export interface UserData {
   firstName: string;
   lastName: string;
   email: string;
   isTrainer: boolean;
   password: string;
+  offers: OfferDescription[];
   data: {
     age: number;
     city: string;
+    phone: number;
   };
 }
 
