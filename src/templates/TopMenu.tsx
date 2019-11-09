@@ -4,7 +4,6 @@ import useStyles from "./PanelTemplate.styles";
 import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Store } from "../modules/auth/duck/auth.interfaces";
 import { authSignOut } from "../modules/auth/duck/auth.operations";
 
 interface TopMenuProps {
