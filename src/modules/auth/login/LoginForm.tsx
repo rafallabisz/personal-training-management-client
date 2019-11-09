@@ -33,6 +33,8 @@ const LoginForm: React.FC<LoginFormProps> = props => {
     }
   };
   const classes = useStyles();
+  const isError = error !== undefined;
+
   if (isAuth) {
     return <Redirect to={routes.main} />;
   }
@@ -51,7 +53,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           autoFocus
           value={loginData.email}
           onChange={handleChange}
-          error={error !== undefined}
+          error={isError}
           onFocus={() => handleClearErrors()}
         />
         <TextField
@@ -66,8 +68,8 @@ const LoginForm: React.FC<LoginFormProps> = props => {
           autoComplete="current-password"
           value={loginData.password}
           onChange={handleChange}
-          error={error !== undefined}
-          helperText={error !== undefined && "Incorrect email or password!"}
+          error={isError}
+          helperText={isError && "Incorrect email or password!"}
           onFocus={() => handleClearErrors()}
         />
         <SpinnerButton isFetching={isFetching}>Sign In</SpinnerButton>

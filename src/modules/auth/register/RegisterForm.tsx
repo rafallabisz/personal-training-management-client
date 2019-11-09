@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useStyles from "../AuthPage.styles";
-import { Grid, TextField, FormControlLabel, Checkbox, Button } from "@material-ui/core";
+import { Grid, TextField, FormControlLabel, Checkbox } from "@material-ui/core";
 import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
 import { SignUpCredentials, Store } from "../duck/auth.interfaces";
