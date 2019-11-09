@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -13,14 +13,29 @@ import {
 import useStyles from "./OfferPanel.styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
+import { OfferDescription } from "../duck/panel.interface";
+import { panelAddOfferActionCreator } from "../duck/panel.operations";
 
 interface OfferPanelProps {}
 
 const OfferPanel: React.FC<OfferPanelProps> = props => {
-  const { offers } = useSelector((state: Store) => state.user.currentUser!);
+  const [offerDescription, setOfferDescription] = useState<OfferDescription>({ description: "" });
+
+  const { offers, _id } = useSelector((state: Store) => state.user.currentUser!);
+  const dispatch = useDispatch();
+  const handleAddOffer = () => {
+    dispatch(panelAddOfferActionCreator(offerDescription, _id));
+  };
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const description = e.target.value;
+    setOfferDescription({ ...offerDescription, description });
+  };
+
   const classes = useStyles();
+
   return (
     <Card className={classes.card}>
       <div className={classes.wrapper}>
@@ -32,8 +47,16 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
             type="search"
             className={classes.textField}
             margin="normal"
+            value={offerDescription.description}
+            onChange={handleChangeInput}
           />
-          <Button variant="contained" color="primary" size="small" startIcon={<AddCircleIcon />}>
+          <Button
+            onClick={() => handleAddOffer()}
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<AddCircleIcon />}
+          >
             Add
           </Button>
         </CardActions>

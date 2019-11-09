@@ -1,6 +1,7 @@
 import { AuthReducerState, AuthActions } from "./auth.interfaces";
 import { Reducer } from "redux";
 import { AuthActionTypes } from "./auth.types";
+import { PanelActionTypes } from "../../panel/duck/panel.types";
 
 const initState: AuthReducerState = {
   isFetching: false,
@@ -43,6 +44,25 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
       return {
         ...state,
         error: undefined
+      };
+
+    case PanelActionTypes.ADD_OFFER_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+
+    case PanelActionTypes.ADD_OFFER_SUCCESS:
+      return {
+        ...state,
+        currentUser: action.payload,
+        isFetching: false
+      };
+    case PanelActionTypes.ADD_OFFER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
       };
 
     default:
