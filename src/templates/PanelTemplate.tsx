@@ -12,7 +12,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Tooltip,
+  Tooltip
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -23,6 +23,8 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PhoneIcon from "@material-ui/icons/Phone";
 import clsx from "clsx";
 import TopMenu from "./TopMenu";
+import { useSelector } from "react-redux";
+import { Store } from "../modules/auth/duck/auth.interfaces";
 
 interface PanelTemplateProps {
   value: number;
@@ -32,6 +34,7 @@ interface PanelTemplateProps {
 }
 
 const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children, listMenu }) => {
+  const currentUser = useSelector((state: Store) => state.user.currentUser!);
   const classes = useStyles();
   const [open, setOpen] = React.useState<boolean>(false);
 
@@ -102,21 +105,21 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
             <Tooltip title="Name">
               <ListItemIcon>{<AccountCircleIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="Rafał Labisz" />
+            <ListItemText primary={`${currentUser.firstName} ${currentUser.lastName}`} />
           </ListItem>
 
           <ListItem>
             <Tooltip title="City">
               <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="Wrocław" />
+            <ListItemText primary={currentUser.data ? currentUser.data.city : "-"} />
           </ListItem>
 
           <ListItem>
             <Tooltip title="Age">
               <ListItemIcon>{<DateRangeIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="22" />
+            <ListItemText primary={currentUser.data ? currentUser.data.age : "-"} />
           </ListItem>
 
           <ListItem>
@@ -130,7 +133,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
             <Tooltip title="Email">
               <ListItemIcon>{<EmailIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="rafal@gmail.com" />
+            <ListItemText primary={currentUser.email} />
           </ListItem>
         </List>
         <Divider />
