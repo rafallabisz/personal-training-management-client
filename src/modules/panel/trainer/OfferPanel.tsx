@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { OfferDescription } from "../duck/panel.interface";
 import { panelAddOfferActionCreator, panelDeleteOfferActionCreator } from "../duck/panel.operations";
+import { KeyCodes } from "../../../utils/keyCodes";
 
 interface OfferPanelProps {}
 
@@ -25,6 +26,7 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
 
   const { offers, _id } = useSelector((state: Store) => state.user.currentUser!);
   const dispatch = useDispatch();
+
   const handleAddOffer = () => {
     dispatch(panelAddOfferActionCreator(offerDescription, _id));
     setOfferDescription({ description: "" });
@@ -39,6 +41,13 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
     const userId = _id;
     dispatch(panelDeleteOfferActionCreator(userId, offerId));
   };
+
+  const submitOnEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.keyCode === KeyCodes.enter) {
+      handleAddOffer();
+    }
+  };
+
   const classes = useStyles();
 
   return (
@@ -54,6 +63,7 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
             margin="normal"
             value={offerDescription.description}
             onChange={handleChangeInput}
+            onKeyDown={e => submitOnEnter(e)}
           />
           <Button
             onClick={() => handleAddOffer()}
