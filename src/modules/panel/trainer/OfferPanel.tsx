@@ -68,7 +68,7 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
       <CardContent>
         <List>
           {offers.map(offer => (
-            <ListItem>
+            <ListItem key={offer._id}>
               <ListItemText primary={offer.description} className={classes.listItem} />
               <Tooltip title="Delete">
                 <DeleteForeverIcon className={classes.iconExit} onClick={() => handleDeleteOffer(offer._id)} />

@@ -3,12 +3,19 @@ import TrainerPanelView from "./trainer/TrainerPanelView";
 import UserPanelView from "./user/UserPanelView";
 import { useSelector } from "react-redux";
 import { Store } from "../auth/duck/auth.interfaces";
+import LoadingContainer from "../../utils/LoadingContainer";
 
 interface PanelViewProps {}
 
 const PanelView: React.FC<PanelViewProps> = props => {
-  const { currentUser } = useSelector((state: Store) => state.user);
+  const { currentUser, isFetching } = useSelector((state: Store) => state.user);
   const isTrainer = currentUser!.isTrainer;
-  return <>{isTrainer ? <TrainerPanelView /> : <UserPanelView />}</>;
+  return (
+    <>
+      <LoadingContainer isFetching={isFetching}>
+        {isTrainer ? <TrainerPanelView /> : <UserPanelView />}
+      </LoadingContainer>
+    </>
+  );
 };
 export default PanelView;
