@@ -126,7 +126,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
             <Tooltip title="Phone">
               <ListItemIcon>{<PhoneIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary="500 500 500" />
+            <ListItemText primary={currentUser.data ? currentUser.data.phone : "-"} />
           </ListItem>
 
           <ListItem>
