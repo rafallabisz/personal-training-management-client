@@ -12,7 +12,7 @@ const PanelView: React.FC<PanelViewProps> = props => {
   const isTrainer = currentUser!.isTrainer;
   return (
     <>
-      <LoadingContainer isFetching={isFetching}>
+      <LoadingContainer isFetching={isFetching} errorTxt="ERROR">
         {isTrainer ? <TrainerPanelView /> : <UserPanelView />}
       </LoadingContainer>
     </>
