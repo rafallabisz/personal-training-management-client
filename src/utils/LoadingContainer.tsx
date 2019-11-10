@@ -8,17 +8,20 @@ interface LoadingContainerProps {
   errorTxt?: string;
 }
 
-const LoadingSpinner: React.FC<LoadingContainerProps> = ({ children, isFetching, errorTxt }) => {
+const LoadingContainer: React.FC<LoadingContainerProps> = ({ children, isFetching, errorTxt }) => {
   const classes = useStyles();
-
-  const [openAlert, setOpenAlert] = useState<boolean>(true);
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  useEffect(() => {
+    if (errorTxt) {
+      setOpenAlert(true);
+    }
+  }, [errorTxt]);
 
   const handleCloseAlert = (event?: SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       setOpenAlert(false);
     }
   };
-
   return (
     <>
       {isFetching && <CircularProgress className={classes.root} color="secondary" />}
@@ -38,8 +41,9 @@ const LoadingSpinner: React.FC<LoadingContainerProps> = ({ children, isFetching,
     </>
   );
 };
-export default LoadingSpinner;
+export default LoadingContainer;
 
+/**=== Styles ==== */
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

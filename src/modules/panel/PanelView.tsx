@@ -8,11 +8,11 @@ import LoadingContainer from "../../utils/LoadingContainer";
 interface PanelViewProps {}
 
 const PanelView: React.FC<PanelViewProps> = props => {
-  const { currentUser, isFetching } = useSelector((state: Store) => state.user);
+  const { currentUser, isFetching, error } = useSelector((state: Store) => state.user);
   const isTrainer = currentUser!.isTrainer;
   return (
     <>
-      <LoadingContainer isFetching={isFetching} errorTxt="ERROR">
+      <LoadingContainer isFetching={isFetching} errorTxt={error}>
         {isTrainer ? <TrainerPanelView /> : <UserPanelView />}
       </LoadingContainer>
     </>
