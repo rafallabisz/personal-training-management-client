@@ -27,6 +27,7 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
   const dispatch = useDispatch();
   const handleAddOffer = () => {
     dispatch(panelAddOfferActionCreator(offerDescription, _id));
+    setOfferDescription({ description: "" });
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
