@@ -16,7 +16,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
     firstName,
     lastName,
     email,
-    password: password ? password : undefined,
     data: {
       age: data ? data.age : undefined,
       city: data ? data.city : undefined,
