@@ -3,13 +3,15 @@ import { CardActions, CardContent, TextField, Card, Grid, Button } from "@materi
 import useStyles from "./SettingsPanel.styles";
 import SaveIcon from "@material-ui/icons/Save";
 import { SettingsData } from "../duck/panel.interface";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
+import { panelUpdateUserActionCreator } from "../duck/panel.operations";
 
 interface SettingsPanelProps {}
 
 const SettingsPanel: React.FC<SettingsPanelProps> = props => {
-  const { firstName, lastName, email, password, data } = useSelector((state: Store) => state.user.currentUser!);
+  const dispatch = useDispatch();
+  const { _id, firstName, lastName, email, password, data } = useSelector((state: Store) => state.user.currentUser!);
   const initSettingsData = {
     firstName,
     lastName,
@@ -133,7 +135,14 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
               />
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" size="small" startIcon={<SaveIcon />} className={classes.btnSave}>
+          <Button
+            onClick={() => dispatch(panelUpdateUserActionCreator(_id, settingsData))}
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<SaveIcon />}
+            className={classes.btnSave}
+          >
             Save
           </Button>
         </form>
