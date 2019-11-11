@@ -130,7 +130,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
                 className={classes.textField}
                 margin="normal"
                 autoComplete="current-password"
-                defaultValue={password ? password : undefined}
                 onChange={handleChangeInput}
               />
             </Grid>
