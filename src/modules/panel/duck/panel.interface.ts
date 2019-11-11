@@ -4,6 +4,18 @@ export interface OfferDescription {
   description: string;
 }
 
+export interface SettingsData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password?: string;
+  data: {
+    age?: number;
+    city?: string;
+    phone?: number;
+  };
+}
+
 /*====Action Interfaces ====== */
 
 export interface AddOfferRequestAction {
