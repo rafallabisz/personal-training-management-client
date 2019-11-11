@@ -5,7 +5,10 @@ import {
   AddOfferFailureAction,
   DeleteOfferRequestAction,
   DeleteOfferSuccessAction,
-  DeleteOfferFailureAction
+  DeleteOfferFailureAction,
+  UpdateUserRequestAction,
+  UpdateUserFailureAction,
+  UpdateUserSuccessAction
 } from "./panel.interface";
 import { UserData } from "../../auth/duck/auth.interfaces";
 
@@ -34,5 +37,21 @@ export const deleteOfferSuccess = (userData: UserData): DeleteOfferSuccessAction
 
 export const deleteOfferFailure = (error: string): DeleteOfferFailureAction => ({
   type: PanelActionTypes.DELETE_OFFER_FAILURE,
+  payload: error
+});
+
+/**===update user */
+
+export const updateUserRequest = (): UpdateUserRequestAction => ({
+  type: PanelActionTypes.UPDATE_USER_REQUEST
+});
+
+export const updateUserSuccess = (userData: UserData): UpdateUserSuccessAction => ({
+  type: PanelActionTypes.UPDATE_USER_SUCCESS,
+  payload: userData
+});
+
+export const updateUserFailure = (error: string): UpdateUserFailureAction => ({
+  type: PanelActionTypes.UPDATE_USER_FAILURE,
   payload: error
 });

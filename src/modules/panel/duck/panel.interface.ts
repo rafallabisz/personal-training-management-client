@@ -45,3 +45,17 @@ export interface DeleteOfferFailureAction {
   type: PanelActionTypes.DELETE_OFFER_FAILURE;
   payload: string;
 }
+
+export interface UpdateUserRequestAction {
+  type: PanelActionTypes.UPDATE_USER_REQUEST;
+}
+
+export interface UpdateUserSuccessAction {
+  type: PanelActionTypes.UPDATE_USER_SUCCESS;
+  payload: UserData;
+}
+
+export interface UpdateUserFailureAction {
+  type: PanelActionTypes.UPDATE_USER_FAILURE;
+  payload: string;
+}

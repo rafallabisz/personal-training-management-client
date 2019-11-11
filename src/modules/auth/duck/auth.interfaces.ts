@@ -5,7 +5,10 @@ import {
   AddOfferSuccessAction,
   DeleteOfferRequestAction,
   DeleteOfferSuccessAction,
-  DeleteOfferFailureAction
+  DeleteOfferFailureAction,
+  UpdateUserRequestAction,
+  UpdateUserSuccessAction,
+  UpdateUserFailureAction
 } from "../../panel/duck/panel.interface";
 
 export interface SignInCredentials {
@@ -92,7 +95,10 @@ export type AuthActions =
   | AddOfferFailureAction
   | DeleteOfferRequestAction
   | DeleteOfferSuccessAction
-  | DeleteOfferFailureAction;
+  | DeleteOfferFailureAction
+  | UpdateUserRequestAction
+  | UpdateUserSuccessAction
+  | UpdateUserFailureAction;
 
 /*====== Reducer Interface ====== */
 export interface AuthReducerState {

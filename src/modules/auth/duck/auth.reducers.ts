@@ -14,6 +14,7 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
     case AuthActionTypes.SIGN_UP_REQUEST:
     case PanelActionTypes.ADD_OFFER_REQUEST:
     case PanelActionTypes.DELETE_OFFER_REQUEST:
+    case PanelActionTypes.UPDATE_USER_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -30,6 +31,7 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
     case AuthActionTypes.SIGN_UP_FAILURE:
     case PanelActionTypes.ADD_OFFER_FAILURE:
     case PanelActionTypes.DELETE_OFFER_FAILURE:
+    case PanelActionTypes.UPDATE_USER_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -52,6 +54,7 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
 
     case PanelActionTypes.ADD_OFFER_SUCCESS:
     case PanelActionTypes.DELETE_OFFER_SUCCESS:
+    case PanelActionTypes.UPDATE_USER_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
