@@ -31,7 +31,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   }, []);
 
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
-
+  const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
   console.log(trainersList, "trainersList");
 
   return (
@@ -42,7 +42,10 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
         }}
       >
         {isActiveBtnMoreDetails ? (
-          <TrainerDetails setBtnMoreDetails={setBtnMoreDetails} />
+          <TrainerDetails
+            setBtnMoreDetails={setBtnMoreDetails}
+            selectedTrainer={selectedTrainer}
+          />
         ) : (
           <div className={classes.container}>
             <Card className={classes.cardSearch}>
@@ -66,7 +69,10 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
             </Card>
 
             <div className={classes.containerCardTrainers}>
-              <TrainerCard setBtnMoreDetails={setBtnMoreDetails} />
+              <TrainerCard
+                setBtnMoreDetails={setBtnMoreDetails}
+                setSelectedTrainer={setSelectedTrainer}
+              />
             </div>
           </div>
         )}

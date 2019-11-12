@@ -21,13 +21,18 @@ import { UserData } from "../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedTrainer: React.Dispatch<
+    React.SetStateAction<UserData | undefined>
+  >;
 }
 
-const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails }) => {
+const TrainerCard: React.FC<TrainerCardProps> = ({
+  setBtnMoreDetails,
+  setSelectedTrainer
+}) => {
   const trainersPanel = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const classes = useStyles();
-  console.log();
 
   return (
     <>
@@ -68,7 +73,10 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails }) => {
               size="small"
               className={classes.btnMoreDetails}
               startIcon={<MoreVertIcon />}
-              onClick={() => setBtnMoreDetails(true)}
+              onClick={() => {
+                setBtnMoreDetails(true);
+                setSelectedTrainer(trainerData);
+              }}
             >
               More details
             </Button>
