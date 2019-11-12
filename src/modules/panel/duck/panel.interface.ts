@@ -16,6 +16,12 @@ export interface SettingsData {
   };
 }
 
+export interface CommentsForm {
+  author: string;
+  comment: string;
+  rating: number;
+}
+
 /*====Action Interfaces ====== */
 
 export interface AddOfferRequestAction {
