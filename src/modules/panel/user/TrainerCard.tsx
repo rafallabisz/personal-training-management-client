@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import useStyles from "./TrainerCard.styles";
 import {
   Card,
@@ -16,48 +16,66 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { TrainersPanelContext } from "./TrainersPanel";
+import { UserData } from "../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails }) => {
-  const classes = useStyles();
-  return (
-    <Card className={classes.card}>
-      <CardHeader
-        avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
-        // action={}
-        title="Rafal Labisz, 22"
-        subheader="Wroclaw"
-        className={classes.cardHeader}
-      />
-      <CardContent className={classes.cardContent}>
-        <List className={classes.list}>
-          <ListItem>
-            <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
-            <ListItemText primary={"500500500"} />
-          </ListItem>
+  const trainersPanel = useContext<TrainersPanelContext>(TrainersPanelContext);
 
-          <ListItem>
-            <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
-            <ListItemText primary={"rafal@gmail.com"} />
-          </ListItem>
-        </List>
-      </CardContent>
-      <CardActions>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          className={classes.btnMoreDetails}
-          startIcon={<MoreVertIcon />}
-          onClick={() => setBtnMoreDetails(true)}
-        >
-          More details
-        </Button>
-      </CardActions>
-    </Card>
+  const classes = useStyles();
+  console.log();
+
+  return (
+    <>
+      {trainersPanel.trainersList.map(trainerData => (
+        <Card className={classes.card}>
+          <CardHeader
+            avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
+            // action={}
+            title={`${trainerData.firstName} ${trainerData.lastName}, ${
+              trainerData.data ? trainerData.data.age : "-"
+            }`}
+            subheader={trainerData.data ? trainerData.data.city : "-"}
+            className={classes.cardHeader}
+          />
+          <CardContent className={classes.cardContent}>
+            <List className={classes.list}>
+              <ListItem>
+                <ListItemIcon className={classes.listItemIcon}>
+                  {<PhoneIcon />}
+                </ListItemIcon>
+                <ListItemText
+                  primary={trainerData.data ? trainerData.data.phone : "-"}
+                />
+              </ListItem>
+
+              <ListItem>
+                <ListItemIcon className={classes.listItemIcon}>
+                  {<EmailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={trainerData.email} />
+              </ListItem>
+            </List>
+          </CardContent>
+          <CardActions>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              className={classes.btnMoreDetails}
+              startIcon={<MoreVertIcon />}
+              onClick={() => setBtnMoreDetails(true)}
+            >
+              More details
+            </Button>
+          </CardActions>
+        </Card>
+      ))}
+    </>
   );
 };
 export default TrainerCard;

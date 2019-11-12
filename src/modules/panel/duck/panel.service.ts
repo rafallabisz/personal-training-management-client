@@ -1,7 +1,6 @@
 import { UserData } from "../../auth/duck/auth.interfaces";
 import axios, { AxiosPromise } from "axios";
 import { OfferDescription, SettingsData } from "./panel.interface";
-import { settings } from "cluster";
 
 export const panelAddOffer = (offerDescription: OfferDescription, id: string): AxiosPromise<UserData> => {
   return axios.post<UserData>(`http://localhost:5000/user/offer/${id}`, {

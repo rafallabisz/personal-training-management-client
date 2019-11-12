@@ -15,6 +15,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
   const initSettingsData = {
     firstName,
     lastName,
+    password: undefined,
     email,
     data: {
       age: data ? data.age : undefined,
@@ -37,8 +38,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
       });
     }
   };
-
-  console.log(settingsData);
 
   const classes = useStyles();
   return (
