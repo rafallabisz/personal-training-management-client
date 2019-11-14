@@ -10,7 +10,7 @@ import {
 import useStyles from "./FormAddComment.styles";
 import Rating from "@material-ui/lab/Rating";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { CommentsForm } from "../duck/panel.interface";
+import { CommentsForm } from "../../../panel/duck/panel.interface";
 
 interface FormAddCommentProps {}
 

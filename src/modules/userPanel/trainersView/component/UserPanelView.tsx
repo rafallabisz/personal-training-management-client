@@ -1,8 +1,8 @@
 import React from "react";
-import useStyles from "../trainer/TrainerPanelView.styles";
-import TabPanel from "../../../utils/TabPanel";
-import PanelTemplate from "../../../templates/PanelTemplate";
-import SettingsPanel from "../trainer/SettingsPanel";
+import useStyles from "../../../trainerPanel/TrainerPanelView.styles";
+import TabPanel from "../../../../utils/TabPanel";
+import PanelTemplate from "../../../../templates/PanelTemplate";
+import SettingsPanel from "../../../trainerPanel/settingsView/SettingsPanel";
 import TrainersPanel from "./TrainersPanel";
 
 interface UserPanelViewProps {}

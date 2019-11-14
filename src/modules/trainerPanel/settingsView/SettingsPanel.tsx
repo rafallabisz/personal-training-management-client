@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { CardActions, CardContent, TextField, Card, Grid, Button } from "@material-ui/core";
 import useStyles from "./SettingsPanel.styles";
 import SaveIcon from "@material-ui/icons/Save";
-import { SettingsData } from "../duck/panel.interface";
+import { SettingsData } from "../../panel/duck/panel.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
-import { panelUpdateUserActionCreator } from "../duck/panel.operations";
+import { panelUpdateUserActionCreator } from "../../panel/duck/panel.operations";
 
 interface SettingsPanelProps {}
 

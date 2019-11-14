@@ -15,8 +15,8 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
-import { OfferDescription } from "../duck/panel.interface";
-import { panelAddOfferActionCreator, panelDeleteOfferActionCreator } from "../duck/panel.operations";
+import { OfferDescription } from "../../panel/duck/panel.interface";
+import { panelAddOfferActionCreator, panelDeleteOfferActionCreator } from "../../panel/duck/panel.operations";
 import { KeyCodes } from "../../../utils/keyCodes";
 
 interface OfferPanelProps {}

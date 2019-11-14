@@ -1,6 +1,6 @@
 import React from "react";
-import TrainerPanelView from "./trainer/TrainerPanelView";
-import UserPanelView from "./user/UserPanelView";
+import TrainerPanelView from "../trainerPanel/TrainerPanelView";
+import UserPanelView from "../userPanel/trainersView/component/UserPanelView";
 import { useSelector } from "react-redux";
 import { Store } from "../auth/duck/auth.interfaces";
 import LoadingContainer from "../../utils/LoadingContainer";

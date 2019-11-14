@@ -5,7 +5,7 @@ import TrainerDetails from "./TrainerDetails";
 import SearchIcon from "@material-ui/icons/Search";
 import TrainerCard from "./TrainerCard";
 import axios from "axios";
-import { UserData } from "../../auth/duck/auth.interfaces";
+import { UserData } from "../../../auth/duck/auth.interfaces";
 
 interface TrainersPanelProps {}
 

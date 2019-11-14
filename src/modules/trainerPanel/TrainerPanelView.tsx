@@ -1,10 +1,10 @@
 import React from "react";
 import useStyles from "./TrainerPanelView.styles";
-import PanelTemplate from "../../../templates/PanelTemplate";
-import OfferPanel from "./OfferPanel";
-import CommentsPanel from "./CommentsPanel";
-import SettingsPanel from "./SettingsPanel";
-import TabPanel from "../../../utils/TabPanel";
+import PanelTemplate from "../../templates/PanelTemplate";
+import OfferPanel from "./offerView/OfferPanel";
+import CommentsPanel from "./commentsView/CommentsPanel";
+import SettingsPanel from "./settingsView/SettingsPanel";
+import TabPanel from "../../utils/TabPanel";
 
 interface TrainerPanelViewProps {}
 

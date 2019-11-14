@@ -1,8 +1,8 @@
 import React from "react";
 import useStyles from "./TrainerDetails.styles";
-import FormAddComment from "./FormAddComment";
+import FormAddComment from "../../comments/component/FormAddComment";
 import TrainerCardDetails from "./TrainerCardDetails";
-import { UserData } from "../../auth/duck/auth.interfaces";
+import { UserData } from "../../../auth/duck/auth.interfaces";
 
 interface TrainerDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;

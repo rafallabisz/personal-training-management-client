@@ -10,6 +10,7 @@ import {
   UpdateUserSuccessAction,
   UpdateUserFailureAction
 } from "../../panel/duck/panel.interface";
+import { CommentReducerState } from "../../userPanel/comments/duck/comments.interfaces";
 
 export interface SignInCredentials {
   email: string;
@@ -110,4 +111,5 @@ export interface AuthReducerState {
 
 export interface Store {
   user: AuthReducerState;
+  trainerComments:CommentReducerState
 }

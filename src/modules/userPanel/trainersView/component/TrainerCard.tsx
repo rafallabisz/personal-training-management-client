@@ -17,7 +17,7 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { TrainersPanelContext } from "./TrainersPanel";
-import { UserData } from "../../auth/duck/auth.interfaces";
+import { UserData } from "../../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
