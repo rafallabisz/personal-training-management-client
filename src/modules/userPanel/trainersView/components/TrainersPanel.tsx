@@ -6,6 +6,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import TrainerCard from "./TrainerCard";
 import axios from "axios";
 import { UserData } from "../../../auth/duck/auth.interfaces";
+import LoadingContainer from "../../../../utils/LoadingContainer";
+import { useSelector } from "react-redux";
+import { Store } from "../../../auth/duck/auth.interfaces";
 
 interface TrainersPanelProps {}
 
@@ -20,6 +23,7 @@ export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   const [isActiveBtnMoreDetails, setBtnMoreDetails] = useState<boolean>(false);
   const classes = useStyles();
+  const { isFetching, error } = useSelector((state: Store) => state.trainerComments);
 
   useEffect(() => {
     const fetchTrainers = async () => {
@@ -36,37 +40,39 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
 
   return (
     <>
-      <TrainersPanelContext.Provider
-        value={{
-          trainersList,
-          selectedTrainer
-        }}
-      >
-        {isActiveBtnMoreDetails ? (
-          <TrainerDetails setBtnMoreDetails={setBtnMoreDetails} />
-        ) : (
-          <div className={classes.container}>
-            <Card className={classes.cardSearch}>
-              <CardActions>
-                <TextField
-                  id="filled-search"
-                  label="Enter city"
-                  type="search"
-                  className={classes.textField}
-                  margin="normal"
-                />
-                <Button variant="contained" color="primary" size="small" startIcon={<SearchIcon />}>
-                  Search
-                </Button>
-              </CardActions>
-            </Card>
+      <LoadingContainer isFetching={isFetching} errorTxt={error}>
+        <TrainersPanelContext.Provider
+          value={{
+            trainersList,
+            selectedTrainer
+          }}
+        >
+          {isActiveBtnMoreDetails ? (
+            <TrainerDetails setBtnMoreDetails={setBtnMoreDetails} />
+          ) : (
+            <div className={classes.container}>
+              <Card className={classes.cardSearch}>
+                <CardActions>
+                  <TextField
+                    id="filled-search"
+                    label="Enter city"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                  />
+                  <Button variant="contained" color="primary" size="small" startIcon={<SearchIcon />}>
+                    Search
+                  </Button>
+                </CardActions>
+              </Card>
 
-            <div className={classes.containerCardTrainers}>
-              <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
+              <div className={classes.containerCardTrainers}>
+                <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
+              </div>
             </div>
-          </div>
-        )}
-      </TrainersPanelContext.Provider>
+          )}
+        </TrainersPanelContext.Provider>
+      </LoadingContainer>
     </>
   );
 };
