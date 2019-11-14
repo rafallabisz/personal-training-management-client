@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, CardActions, Grid, Typography, TextField, Button } from "@material-ui/core";
 import useStyles from "./FormAddComment.styles";
 import Rating from "@material-ui/lab/Rating";
@@ -6,12 +6,14 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { AddComment } from "../duck/comments.interfaces";
 import { useDispatch } from "react-redux";
 import { addCommentActionCreator } from "../duck/comments.operations";
+import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
 
 interface FormAddCommentProps {}
 
 const FormAddComment: React.FC<FormAddCommentProps> = props => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const [valueRating, setValueRating] = useState<number>(5);
 
   const initCommentsForm = {
@@ -33,7 +35,8 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
   };
 
   const handleAddComment = () => {
-    // dispatch(addCommentActionCreator(trainerId='',commentsForm))
+    const trainerId = selectedTrainer!._id;
+    dispatch(addCommentActionCreator(trainerId, commentsForm));
   };
   return (
     <Card className={classes.card}>

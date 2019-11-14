@@ -21,47 +21,34 @@ import { UserData } from "../../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedTrainer: React.Dispatch<
-    React.SetStateAction<UserData | undefined>
-  >;
+  setSelectedTrainer: React.Dispatch<React.SetStateAction<UserData | undefined>>;
 }
 
-const TrainerCard: React.FC<TrainerCardProps> = ({
-  setBtnMoreDetails,
-  setSelectedTrainer
-}) => {
-  const trainersPanel = useContext<TrainersPanelContext>(TrainersPanelContext);
+const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelectedTrainer }) => {
+  const { trainersList } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const classes = useStyles();
 
   return (
     <>
-      {trainersPanel.trainersList.map(trainerData => (
-        <Card className={classes.card}>
+      {trainersList.map(trainerData => (
+        <Card className={classes.card} key={trainerData._id}>
           <CardHeader
             avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
             // action={}
-            title={`${trainerData.firstName} ${trainerData.lastName}, ${
-              trainerData.data ? trainerData.data.age : "-"
-            }`}
+            title={`${trainerData.firstName} ${trainerData.lastName}, ${trainerData.data ? trainerData.data.age : "-"}`}
             subheader={trainerData.data ? trainerData.data.city : "-"}
             className={classes.cardHeader}
           />
           <CardContent className={classes.cardContent}>
             <List className={classes.list}>
               <ListItem>
-                <ListItemIcon className={classes.listItemIcon}>
-                  {<PhoneIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={trainerData.data ? trainerData.data.phone : "-"}
-                />
+                <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
+                <ListItemText primary={trainerData.data ? trainerData.data.phone : "-"} />
               </ListItem>
 
               <ListItem>
-                <ListItemIcon className={classes.listItemIcon}>
-                  {<EmailIcon />}
-                </ListItemIcon>
+                <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
                 <ListItemText primary={trainerData.email} />
               </ListItem>
             </List>

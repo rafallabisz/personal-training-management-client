@@ -11,6 +11,7 @@ interface TrainersPanelProps {}
 
 export interface TrainersPanelContext {
   trainersList: UserData[];
+  selectedTrainer?: UserData;
 }
 export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
   trainersList: []
@@ -22,15 +23,14 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
 
   useEffect(() => {
     const fetchTrainers = async () => {
-      const response = await axios.get<UserData[]>(
-        "http://localhost:5000/user/trainers"
-      );
+      const response = await axios.get<UserData[]>("http://localhost:5000/user/trainers");
       setTrainersList(response.data);
     };
     fetchTrainers();
   }, []);
 
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
+
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
   console.log(trainersList, "trainersList");
 
@@ -38,14 +38,12 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     <>
       <TrainersPanelContext.Provider
         value={{
-          trainersList
+          trainersList,
+          selectedTrainer
         }}
       >
         {isActiveBtnMoreDetails ? (
-          <TrainerDetails
-            setBtnMoreDetails={setBtnMoreDetails}
-            selectedTrainer={selectedTrainer}
-          />
+          <TrainerDetails setBtnMoreDetails={setBtnMoreDetails} />
         ) : (
           <div className={classes.container}>
             <Card className={classes.cardSearch}>
@@ -57,22 +55,14 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                   className={classes.textField}
                   margin="normal"
                 />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  startIcon={<SearchIcon />}
-                >
+                <Button variant="contained" color="primary" size="small" startIcon={<SearchIcon />}>
                   Search
                 </Button>
               </CardActions>
             </Card>
 
             <div className={classes.containerCardTrainers}>
-              <TrainerCard
-                setBtnMoreDetails={setBtnMoreDetails}
-                setSelectedTrainer={setSelectedTrainer}
-              />
+              <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
             </div>
           </div>
         )}
