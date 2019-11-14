@@ -1,6 +1,6 @@
 import React from "react";
 import useStyles from "./TrainerDetails.styles";
-import FormAddComment from "../../comments/component/FormAddComment";
+import FormAddComment from "../../comments/components/FormAddComment";
 import TrainerCardDetails from "./TrainerCardDetails";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 
@@ -9,18 +9,12 @@ interface TrainerDetailsProps {
   selectedTrainer: UserData | undefined;
 }
 
-const TrainerDetails: React.FC<TrainerDetailsProps> = ({
-  setBtnMoreDetails,
-  selectedTrainer
-}) => {
+const TrainerDetails: React.FC<TrainerDetailsProps> = ({ setBtnMoreDetails, selectedTrainer }) => {
   const classes = useStyles();
   return (
     <>
       <div className={classes.container}>
-        <TrainerCardDetails
-          setBtnMoreDetails={setBtnMoreDetails}
-          selectedTrainer={selectedTrainer}
-        />
+        <TrainerCardDetails setBtnMoreDetails={setBtnMoreDetails} selectedTrainer={selectedTrainer} />
         <FormAddComment />
       </div>
     </>

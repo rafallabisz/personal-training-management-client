@@ -1,32 +1,26 @@
 import React, { useState } from "react";
-import {
-  Card,
-  CardActions,
-  Grid,
-  Typography,
-  TextField,
-  Button
-} from "@material-ui/core";
+import { Card, CardActions, Grid, Typography, TextField, Button } from "@material-ui/core";
 import useStyles from "./FormAddComment.styles";
 import Rating from "@material-ui/lab/Rating";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { CommentsForm } from "../../../panel/duck/panel.interface";
+import { AddComment } from "../duck/comments.interfaces";
+import { useDispatch } from "react-redux";
+import { addCommentActionCreator } from "../duck/comments.operations";
 
 interface FormAddCommentProps {}
 
 const FormAddComment: React.FC<FormAddCommentProps> = props => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [valueRating, setValueRating] = useState<number>(5);
 
   const initCommentsForm = {
     author: "",
-    comment: "",
+    content: "",
     rating: 5
   };
 
-  const [commentsForm, setCommentsForm] = useState<CommentsForm>(
-    initCommentsForm
-  );
+  const [commentsForm, setCommentsForm] = useState<AddComment>(initCommentsForm);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -37,17 +31,14 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
       rating: valueRating
     });
   };
-  console.log(commentsForm, "--commentsForm");
 
+  const handleAddComment = () => {
+    // dispatch(addCommentActionCreator(trainerId='',commentsForm))
+  };
   return (
     <Card className={classes.card}>
       <CardActions>
-        <Grid
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="flex-start"
-        >
+        <Grid container direction="column" justify="flex-start" alignItems="flex-start">
           <Typography>Your rating</Typography>
           <Rating
             name="simple-controlled"
@@ -69,7 +60,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
           <TextField
             id="standard-multiline-static"
             label="Comment"
-            name="comment"
+            name="content"
             multiline
             rows="3"
             className={classes.textField}
@@ -80,6 +71,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
             variant="contained"
             color="primary"
             size="small"
+            onClick={() => handleAddComment()}
             startIcon={<AddCircleIcon />}
           >
             Add comment
