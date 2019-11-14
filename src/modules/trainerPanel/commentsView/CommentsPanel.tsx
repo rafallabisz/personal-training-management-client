@@ -1,56 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CardContent, Card, CardHeader, Avatar, IconButton, Typography } from "@material-ui/core";
 import useStyles from "./CommentsPanel.styles";
 import ChatIcon from "@material-ui/icons/Chat";
+import { useDispatch, useSelector } from "react-redux";
+import { getTrainerCommentsActionCreator } from "../../userPanel/comments/duck/comments.operations";
+import { Store } from "../../auth/duck/auth.interfaces";
+
 interface CommentsPanelProps {}
 
 const CommentsPanel: React.FC<CommentsPanelProps> = props => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { user, trainerComments } = useSelector((state: Store) => state);
+
+  useEffect(() => {
+    const fetchTrainerComments = () => {
+      const trainerId = user.currentUser!._id;
+      dispatch(getTrainerCommentsActionCreator(trainerId));
+    };
+    fetchTrainerComments();
+  }, []);
+
+  console.log(trainerComments.comments !== undefined && trainerComments.comments.map(x => x.author));
+
   return (
-    <div className={classes.container}>
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={<Avatar>{<ChatIcon />}</Avatar>}
-          action={<span className={classes.rating}>4.7</span>}
-          title="Author Undefined"
-          subheader="September 14, 2016"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup
-            of frozen peas along with the mussels, if you like.
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={<Avatar>{<ChatIcon />}</Avatar>}
-          action={<span className={classes.rating}>5.0</span>}
-          title="Author Undefined"
-          subheader="September 14, 2016"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish h the mussels, if you like.
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={<Avatar>{<ChatIcon />}</Avatar>}
-          action={<span className={classes.rating}>3.5</span>}
-          title="Author Undefined"
-          subheader="September 14, 2016"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup
-            of frozen peas along with the mussels, if you like. This impressive paella is a perfect party dish and a fun
-            meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
-          </Typography>
-        </CardContent>
-      </Card>
-    </div>
+    <>
+      <div className={classes.container}>
+        {trainerComments.comments !== undefined ? (
+          <>
+            {trainerComments.comments.map(comment => (
+              <Card className={classes.card}>
+                <CardHeader
+                  avatar={<Avatar>{<ChatIcon />}</Avatar>}
+                  action={<span className={classes.rating}>{comment.rating}</span>}
+                  title={comment.author}
+                  subheader={comment.createdAt}
+                />
+                <CardContent>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {comment.content}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}
+          </>
+        ) : (
+          <div>Brak komentarzy</div>
+        )}
+      </div>
+    </>
   );
 };
 export default CommentsPanel;

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "35vw"
     },
     rating: {
+      width: "37px",
+      height: "37px",
+      textAlign: "center",
       display: "inline-block",
       padding: "5px",
       margin: "4px 6px 0 0",

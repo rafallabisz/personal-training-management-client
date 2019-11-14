@@ -1,20 +1,19 @@
-import {CommentActionTypes} from './comments.types'
-import { UserData } from '../../../auth/duck/auth.interfaces';
+import { CommentActionTypes } from "./comments.types";
+import { UserData } from "../../../auth/duck/auth.interfaces";
 
-export interface AddComment{
-  author:string,
-  content:string,
-  rating:number,
+export interface AddComment {
+  author: string;
+  content: string;
+  rating: number;
 }
 
-export interface CommentsResponse{
-  author:string,
-  content:string,
-  rating:number,
-  createdAt:Date,
-  trainer:UserData
+export interface CommentsResponse {
+  author: string;
+  content: string;
+  rating: number;
+  createdAt: Date;
+  trainer: UserData;
 }
-
 
 /**====Action Comments Interfaces ==== */
 
@@ -37,7 +36,7 @@ export interface GetTrainerCommentsRequestAction {
 
 export interface GetTrainerCommentsSuccessAction {
   type: CommentActionTypes.GET_TRAINER_COMMENTS_SUCCESS;
-  payload:CommentsResponse
+  payload: CommentsResponse[];
 }
 
 export interface GetTrainerCommentsFailureAction {
@@ -45,19 +44,18 @@ export interface GetTrainerCommentsFailureAction {
   payload: string;
 }
 
-export type CommentActions = 
-| AddCommentRequestAction
-|AddCommentSuccessAction
-|AddCommentFailureAction
-|GetTrainerCommentsRequestAction
-|GetTrainerCommentsSuccessAction
-|GetTrainerCommentsFailureAction
+export type CommentActions =
+  | AddCommentRequestAction
+  | AddCommentSuccessAction
+  | AddCommentFailureAction
+  | GetTrainerCommentsRequestAction
+  | GetTrainerCommentsSuccessAction
+  | GetTrainerCommentsFailureAction;
 
 /* === Reducer Interface ==== */
 
-export interface CommentReducerState{
-  comments?:CommentsResponse,
-  isFetching:boolean;
-  error?:string;
+export interface CommentReducerState {
+  comments?: CommentsResponse[];
+  isFetching: boolean;
+  error?: string;
 }
-

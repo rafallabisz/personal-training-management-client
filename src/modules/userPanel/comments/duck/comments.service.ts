@@ -9,6 +9,6 @@ export const sendNewComment = (trainerId: string, addComment: AddComment) => {
   });
 };
 
-export const fetchTrainerComments = (trainerId: string):AxiosPromise<CommentsResponse> => {
-  return axios.get<CommentsResponse>(`http://localhost:5000/trainer/${trainerId}/comments`);
+export const fetchTrainerComments = (trainerId: string): AxiosPromise<CommentsResponse[]> => {
+  return axios.get<CommentsResponse[]>(`http://localhost:5000/trainer/${trainerId}/comments`);
 };

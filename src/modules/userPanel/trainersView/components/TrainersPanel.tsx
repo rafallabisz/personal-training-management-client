@@ -38,7 +38,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
 
   return (
     <>
-      <LoadingContainer isFetching={isFetching} errorTxt={error}>
+      <LoadingContainer isFetching={isFetching}>
         <TrainersPanelContext.Provider
           value={{
             trainersList,
