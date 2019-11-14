@@ -16,7 +16,7 @@ export interface CommentsResponse{
 }
 
 
-/**====Action Interfaces ==== */
+/**====Action Comments Interfaces ==== */
 
 export interface AddCommentRequestAction {
   type: CommentActionTypes.ADD_COMMENT_REQUEST;
@@ -24,7 +24,6 @@ export interface AddCommentRequestAction {
 
 export interface AddCommentSuccessAction {
   type: CommentActionTypes.ADD_COMMENT_SUCCESS;
-  // payload: UserData;
 }
 
 export interface AddCommentFailureAction {
@@ -32,10 +31,27 @@ export interface AddCommentFailureAction {
   payload: string;
 }
 
+export interface GetTrainerCommentsRequestAction {
+  type: CommentActionTypes.GET_TRAINER_COMMENTS_REQUEST;
+}
+
+export interface GetTrainerCommentsSuccessAction {
+  type: CommentActionTypes.GET_TRAINER_COMMENTS_SUCCESS;
+  payload:CommentsResponse
+}
+
+export interface GetTrainerCommentsFailureAction {
+  type: CommentActionTypes.GET_TRAINER_COMMENTS_FAILURE;
+  payload: string;
+}
+
 export type CommentActions = 
 | AddCommentRequestAction
 |AddCommentSuccessAction
 |AddCommentFailureAction
+|GetTrainerCommentsRequestAction
+|GetTrainerCommentsSuccessAction
+|GetTrainerCommentsFailureAction
 
 /* === Reducer Interface ==== */
 

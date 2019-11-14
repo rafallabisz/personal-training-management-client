@@ -34,9 +34,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   }, []);
 
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
-
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
-  console.log(trainersList, "trainersList");
 
   return (
     <>

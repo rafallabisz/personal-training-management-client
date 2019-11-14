@@ -10,6 +10,7 @@ const initState:CommentReducerState={
 export const commentReducer:Reducer<CommentReducerState,CommentActions>=(state=initState,action)=>{
   switch(action.type){
     case CommentActionTypes.ADD_COMMENT_REQUEST:
+    case CommentActionTypes.GET_TRAINER_COMMENTS_REQUEST:
       return{
         ...state,
         isFetching:true
@@ -20,7 +21,17 @@ export const commentReducer:Reducer<CommentReducerState,CommentActions>=(state=i
         isFetching:false,
         error:undefined,
       }
+
+    case CommentActionTypes.GET_TRAINER_COMMENTS_SUCCESS:
+      return{
+        ...state,
+        isFetching:false,
+        error:undefined,
+        comments:action.payload
+      }
+
     case CommentActionTypes.ADD_COMMENT_FAILURE:
+    case CommentActionTypes.GET_TRAINER_COMMENTS_FAILURE:
       return{
         ...state,
         isFetching:false,

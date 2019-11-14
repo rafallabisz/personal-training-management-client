@@ -25,7 +25,8 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
         ...state,
         currentUser: action.payload,
         isFetching: false,
-        isAuth: true
+        isAuth: true,
+        error: undefined
       };
     case AuthActionTypes.SIGN_IN_FAILURE:
     case AuthActionTypes.SIGN_UP_FAILURE:
