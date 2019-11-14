@@ -5,6 +5,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrainerCommentsActionCreator } from "../../userPanel/comments/duck/comments.operations";
 import { Store } from "../../auth/duck/auth.interfaces";
+import { formatDate } from "../../../utils/formatDate";
 
 interface CommentsPanelProps {}
 
@@ -34,7 +35,7 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
                   avatar={<Avatar>{<ChatIcon />}</Avatar>}
                   action={<span className={classes.rating}>{comment.rating}</span>}
                   title={comment.author}
-                  subheader={comment.createdAt}
+                  subheader={formatDate(comment.createdAt)}
                 />
                 <CardContent>
                   <Typography variant="body2" color="textSecondary" component="p">
