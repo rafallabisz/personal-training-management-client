@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -14,21 +14,31 @@ import useStyles from "./OfferPanel.styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
-import { Store } from "../../auth/duck/auth.interfaces";
-import { OfferDescription } from "../../panel/duck/panel.interface";
-import { panelAddOfferActionCreator, panelDeleteOfferActionCreator } from "../../panel/duck/panel.operations";
-import { KeyCodes } from "../../../utils/keyCodes";
+import { Store } from "../../../auth/duck/auth.interfaces";
+import { KeyCodes } from "../../../../utils/keyCodes";
+import { AddOffer } from "../duck/offers.interfaces";
+import { addOfferActionCreator, getOfferActionCreator } from "../duck/offers.operations";
+import LoadingContainer from "../../../../utils/LoadingContainer";
 
 interface OfferPanelProps {}
 
 const OfferPanel: React.FC<OfferPanelProps> = props => {
-  const [offerDescription, setOfferDescription] = useState<OfferDescription>({ description: "" });
-
-  const { offers, _id } = useSelector((state: Store) => state.user.currentUser!);
+  const { _id } = useSelector((state: Store) => state.user.currentUser!);
+  const { offers, isFetching, error } = useSelector((state: Store) => state.trainerOffers);
   const dispatch = useDispatch();
+  const [offerDescription, setOfferDescription] = useState<AddOffer>({ description: "" });
+
+  useEffect(() => {
+    const fetchTrainerOffers = () => {
+      const trainerId = _id;
+      dispatch(getOfferActionCreator(trainerId));
+    };
+    fetchTrainerOffers();
+  }, []);
 
   const handleAddOffer = () => {
-    dispatch(panelAddOfferActionCreator(offerDescription, _id));
+    const trainerId = _id;
+    dispatch(addOfferActionCreator(trainerId, offerDescription));
     setOfferDescription({ description: "" });
   };
 
@@ -38,8 +48,8 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
   };
 
   const handleDeleteOffer = (offerId: string) => {
-    const userId = _id;
-    dispatch(panelDeleteOfferActionCreator(userId, offerId));
+    // const userId = _id;
+    // dispatch(panelDeleteOfferActionCreator(userId, offerId));
   };
 
   const submitOnEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -51,44 +61,46 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <div className={classes.wrapper}>
-        <CardContent className={classes.title}>Offer:</CardContent>
-        <CardActions>
-          <TextField
-            id="filled-search"
-            label="Add training type"
-            type="search"
-            className={classes.textField}
-            margin="normal"
-            value={offerDescription.description}
-            onChange={handleChangeInput}
-            onKeyDown={e => submitOnEnter(e)}
-          />
-          <Button
-            onClick={() => handleAddOffer()}
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<AddCircleIcon />}
-          >
-            Add
-          </Button>
-        </CardActions>
-      </div>
-      <CardContent>
-        <List>
-          {offers.map(offer => (
-            <ListItem key={offer._id}>
-              <ListItemText primary={offer.description} className={classes.listItem} />
-              <Tooltip title="Delete">
-                <DeleteForeverIcon className={classes.iconExit} onClick={() => handleDeleteOffer(offer._id)} />
-              </Tooltip>
-            </ListItem>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
+    <LoadingContainer isFetching={isFetching} errorTxt={error}>
+      <Card className={classes.card}>
+        <div className={classes.wrapper}>
+          <CardContent className={classes.title}>Offer:</CardContent>
+          <CardActions>
+            <TextField
+              id="filled-search"
+              label="Add training type"
+              type="search"
+              className={classes.textField}
+              margin="normal"
+              value={offerDescription.description}
+              onChange={handleChangeInput}
+              onKeyDown={e => submitOnEnter(e)}
+            />
+            <Button
+              onClick={() => handleAddOffer()}
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<AddCircleIcon />}
+            >
+              Add
+            </Button>
+          </CardActions>
+        </div>
+        <CardContent>
+          <List>
+            {offers.map(offer => (
+              <ListItem key={offer._id}>
+                <ListItemText primary={offer.description} className={classes.listItem} />
+                <Tooltip title="Delete">
+                  <DeleteForeverIcon className={classes.iconExit} onClick={() => handleDeleteOffer(offer._id)} />
+                </Tooltip>
+              </ListItem>
+            ))}
+          </List>
+        </CardContent>
+      </Card>
+    </LoadingContainer>
   );
 };
 export default OfferPanel;

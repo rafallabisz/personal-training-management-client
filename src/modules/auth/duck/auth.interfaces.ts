@@ -1,16 +1,11 @@
 import { AuthActionTypes } from "./auth.types";
 import {
-  AddOfferRequestAction,
-  AddOfferFailureAction,
-  AddOfferSuccessAction,
-  DeleteOfferRequestAction,
-  DeleteOfferSuccessAction,
-  DeleteOfferFailureAction,
   UpdateUserRequestAction,
   UpdateUserSuccessAction,
   UpdateUserFailureAction
 } from "../../panel/duck/panel.interface";
 import { CommentReducerState } from "../../userPanel/comments/duck/comments.interfaces";
+import { OfferReducerState } from "../../trainerPanel/offerView/duck/offers.interfaces";
 
 export interface SignInCredentials {
   email: string;
@@ -25,11 +20,6 @@ export interface SignUpCredentials {
   password: string;
 }
 
-export interface OfferDescriptionResponse {
-  _id: string;
-  description: string;
-}
-
 export interface UserData {
   _id: string;
   firstName: string;
@@ -37,7 +27,6 @@ export interface UserData {
   email: string;
   isTrainer: boolean;
   password: string;
-  offers: OfferDescriptionResponse[];
   data: {
     age: number;
     city: string;
@@ -91,12 +80,6 @@ export type AuthActions =
   | SignUpFailureAction
   | SignOutAction
   | ClearErrorsAction
-  | AddOfferRequestAction
-  | AddOfferSuccessAction
-  | AddOfferFailureAction
-  | DeleteOfferRequestAction
-  | DeleteOfferSuccessAction
-  | DeleteOfferFailureAction
   | UpdateUserRequestAction
   | UpdateUserSuccessAction
   | UpdateUserFailureAction;
@@ -111,5 +94,6 @@ export interface AuthReducerState {
 
 export interface Store {
   user: AuthReducerState;
-  trainerComments:CommentReducerState
+  trainerComments: CommentReducerState;
+  trainerOffers: OfferReducerState;
 }

@@ -12,8 +12,6 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
   switch (action.type) {
     case AuthActionTypes.SIGN_IN_REQUEST:
     case AuthActionTypes.SIGN_UP_REQUEST:
-    case PanelActionTypes.ADD_OFFER_REQUEST:
-    case PanelActionTypes.DELETE_OFFER_REQUEST:
     case PanelActionTypes.UPDATE_USER_REQUEST:
       return {
         ...state,
@@ -30,8 +28,6 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
       };
     case AuthActionTypes.SIGN_IN_FAILURE:
     case AuthActionTypes.SIGN_UP_FAILURE:
-    case PanelActionTypes.ADD_OFFER_FAILURE:
-    case PanelActionTypes.DELETE_OFFER_FAILURE:
     case PanelActionTypes.UPDATE_USER_FAILURE:
       return {
         ...state,
@@ -53,8 +49,6 @@ export const authReducer: Reducer<AuthReducerState, AuthActions> = (state = init
         error: undefined
       };
 
-    case PanelActionTypes.ADD_OFFER_SUCCESS:
-    case PanelActionTypes.DELETE_OFFER_SUCCESS:
     case PanelActionTypes.UPDATE_USER_SUCCESS:
       return {
         ...state,

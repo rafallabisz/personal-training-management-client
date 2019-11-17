@@ -17,8 +17,8 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-import { OfferDescriptionResponse } from "../../../auth/duck/auth.interfaces";
 import { TrainersPanelContext } from "./TrainersPanel";
+import { OfferResponse } from "../../../trainerPanel/offerView/duck/offers.interfaces";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,10 +54,10 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
           </List>
         </CardContent>
 
-        <CardContent className={classes.cardContent}>
+        {/* <CardContent className={classes.cardContent}>
           <List className={classes.list}>
             {trainer.offers ? (
-              trainer.offers.map((offer: OfferDescriptionResponse) => (
+              trainer.offers.map((offer: OfferResponse) => (
                 <ListItem key={offer._id}>
                   <ListItemText primary={offer.description} />
                 </ListItem>
@@ -68,7 +68,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
               </ListItem>
             )}
           </List>
-        </CardContent>
+        </CardContent> */}
       </div>
       <CardActions>
         <Button
