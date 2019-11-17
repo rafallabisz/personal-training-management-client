@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useStyles from "./TrainerCardDetails.styles";
 import {
   Card,
@@ -10,7 +10,13 @@ import {
   ListItemIcon,
   ListItemText,
   CardActions,
-  Button
+  Button,
+  Dialog,
+  DialogContent,
+  Typography,
+  DialogTitle,
+  DialogActions,
+  Grid
 } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -18,7 +24,8 @@ import EmailIcon from "@material-ui/icons/Email";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import { TrainersPanelContext } from "./TrainersPanel";
-import { OfferResponse } from "../../../trainerPanel/offerView/duck/offers.interfaces";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,8 +34,16 @@ interface TrainerCardDetailsProps {
 const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetails }) => {
   const classes = useStyles();
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  const [openComments, setOpenComments] = useState<boolean>(false);
 
-  // const trainer = selectedTrainer!;
+  const handleClickOpenComments = () => {
+    setOpenComments(true);
+  };
+
+  const handleClickCloseComments = () => {
+    setOpenComments(false);
+  };
+
   return (
     <>
       {selectedTrainer !== undefined && (
@@ -80,6 +95,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
               Back
             </Button>
             <Button
+              onClick={() => handleClickOpenComments()}
               variant="contained"
               color="primary"
               size="small"
@@ -91,6 +107,27 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
           </CardActions>
         </Card>
       )}
+      {/* ======================= */}
+      <Dialog onClose={handleClickCloseComments} aria-labelledby="customized-dialog-title" open={openComments}>
+        <Grid container>
+          <Grid item xs={11}>
+            <DialogTitle id="customized-dialog-title">Comments</DialogTitle>
+          </Grid>
+          <Grid item xs={1}>
+            <DialogActions>
+              <IconButton aria-label="close" onClick={handleClickCloseComments}>
+                <CloseIcon />
+              </IconButton>
+            </DialogActions>
+          </Grid>
+        </Grid>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+          </Typography>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
