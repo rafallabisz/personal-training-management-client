@@ -7,9 +7,6 @@ import TrainerCard from "./TrainerCard";
 import axios from "axios";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
-import { useSelector } from "react-redux";
-import { Store } from "../../../auth/duck/auth.interfaces";
-
 interface TrainersPanelProps {}
 
 export interface TrainersPanelContext {
@@ -36,7 +33,6 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
-  console.log(isFetching);
 
   return (
     <>
