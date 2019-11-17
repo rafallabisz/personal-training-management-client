@@ -1,21 +1,7 @@
 import React, { useContext } from "react";
 import useStyles from "./TrainerCard.styles";
-import {
-  Card,
-  CardHeader,
-  Avatar,
-  CardContent,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  CardActions,
-  Button
-} from "@material-ui/core";
+import { Card, CardHeader, Avatar, CardContent } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PhoneIcon from "@material-ui/icons/Phone";
-import EmailIcon from "@material-ui/icons/Email";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { TrainersPanelContext } from "./TrainersPanel";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 
@@ -32,7 +18,14 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
   return (
     <>
       {trainersList.map(trainerData => (
-        <Card className={classes.card} key={trainerData._id}>
+        <Card
+          className={classes.card}
+          key={trainerData._id}
+          onClick={() => {
+            setBtnMoreDetails(true);
+            setSelectedTrainer(trainerData);
+          }}
+        >
           <CardHeader
             avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
             // action={}
@@ -41,33 +34,14 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
             className={classes.cardHeader}
           />
           <CardContent className={classes.cardContent}>
-            <List className={classes.list}>
-              <ListItem>
-                <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
-                <ListItemText primary={trainerData.data ? trainerData.data.phone : "-"} />
-              </ListItem>
-
-              <ListItem>
-                <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
-                <ListItemText primary={trainerData.email} />
-              </ListItem>
-            </List>
+            <ul className={classes.offerList}>
+              {trainerData.offers.map(offer => (
+                <li key={offer._id} className={classes.offerListItem}>
+                  {offer.description}
+                </li>
+              ))}
+            </ul>
           </CardContent>
-          <CardActions>
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              className={classes.btnMoreDetails}
-              startIcon={<MoreVertIcon />}
-              onClick={() => {
-                setBtnMoreDetails(true);
-                setSelectedTrainer(trainerData);
-              }}
-            >
-              More details
-            </Button>
-          </CardActions>
         </Card>
       ))}
     </>

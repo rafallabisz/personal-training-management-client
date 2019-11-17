@@ -32,6 +32,19 @@ export interface UserData {
     city: string;
     phone: number;
   };
+  offers: [
+    {
+      _id: string;
+      description: string;
+    }
+  ];
+  comments: [
+    {
+      author: string;
+      content: string;
+      rating: number;
+    }
+  ];
 }
 
 /*===== Action Interfaces ===== */

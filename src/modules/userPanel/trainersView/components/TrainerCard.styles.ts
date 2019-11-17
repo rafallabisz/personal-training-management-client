@@ -6,7 +6,12 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       backgroundColor: theme.palette.primary.light,
       paddingBottom: "10px",
-      width: "35vw"
+      width: "35vw",
+      transition: ".1s linear",
+      "&:hover": {
+        cursor: "pointer",
+        backgroundColor: theme.palette.primary.contrastText
+      }
     },
     cardHeader: {
       paddingBottom: 0
@@ -14,12 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
     cardContent: {
       padding: 0
     },
-    list: {
-      padding: 0
+    offerList: {
+      display: "flex",
+      listStyleType: "square"
     },
-    listItemIcon: {
-      minWidth: "auto",
-      paddingRight: "10px"
+
+    offerListItem: {
+      marginLeft: "30px"
     },
 
     btnMoreDetails: {

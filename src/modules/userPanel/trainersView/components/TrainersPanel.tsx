@@ -19,22 +19,24 @@ export interface TrainersPanelContext {
 export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
   trainersList: []
 });
-
+////////////////////////
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   const [isActiveBtnMoreDetails, setBtnMoreDetails] = useState<boolean>(false);
   const classes = useStyles();
-  const { isFetching, error } = useSelector((state: Store) => state.trainerComments);
 
   useEffect(() => {
     const fetchTrainers = async () => {
+      setIsFetching(true);
       const response = await axios.get<UserData[]>("http://localhost:5000/user/trainers");
       setTrainersList(response.data);
+      setIsFetching(false);
     };
     fetchTrainers();
   }, []);
-
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
+  console.log(isFetching);
 
   return (
     <>
