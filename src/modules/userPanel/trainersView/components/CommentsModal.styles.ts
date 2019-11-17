@@ -3,10 +3,6 @@ import { Theme, createStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    dialogWrapper: {
-      backgroundColor: "#dee4f1"
-    },
-
     dialogCard: {
       marginBottom: "20px"
     },
