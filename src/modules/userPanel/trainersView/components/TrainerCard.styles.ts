@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     offerList: {
       display: "flex",
+      flexWrap: "wrap",
       listStyleType: "square"
     },
 
