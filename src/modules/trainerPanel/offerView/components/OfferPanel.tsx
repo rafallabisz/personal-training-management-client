@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
 import { KeyCodes } from "../../../../utils/keyCodes";
 import { AddOffer } from "../duck/offers.interfaces";
-import { addOfferActionCreator, getOfferActionCreator } from "../duck/offers.operations";
+import { addOfferActionCreator, getOfferActionCreator, deleteOfferActionCreator } from "../duck/offers.operations";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 
 interface OfferPanelProps {}
@@ -48,8 +48,8 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
   };
 
   const handleDeleteOffer = (offerId: string) => {
-    // const userId = _id;
-    // dispatch(panelDeleteOfferActionCreator(userId, offerId));
+    const trainerId = _id;
+    dispatch(deleteOfferActionCreator(trainerId, offerId));
   };
 
   const submitOnEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {

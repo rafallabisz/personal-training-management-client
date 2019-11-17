@@ -8,5 +8,9 @@ export const postNewOffer = (trainerId: string, addOffer: AddOffer): AxiosPromis
 };
 
 export const getTrainerOffers = (trainerId: string): AxiosPromise<OfferResponse[]> => {
-  return axios.post<OfferResponse[]>(`http://localhost:5000/trainer/${trainerId}/offers`);
+  return axios.get<OfferResponse[]>(`http://localhost:5000/trainer/${trainerId}/offers`);
+};
+
+export const deleteTrainerOffer = (trainerId: string, offerId: string): AxiosPromise<OfferResponse[]> => {
+  return axios.delete<OfferResponse[]>(`http://localhost:5000/trainer/${trainerId}/${offerId}/offers`);
 };

@@ -7,10 +7,13 @@ import {
   addOfferFailure,
   getOfferRequest,
   getOfferSuccess,
-  getOfferFailure
+  getOfferFailure,
+  deleteOfferRequest,
+  deleteOfferSuccess,
+  deleteOfferFailure
 } from "./offers.actions";
 import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
-import { postNewOffer, getTrainerOffers } from "./offers.service";
+import { postNewOffer, getTrainerOffers, deleteTrainerOffer } from "./offers.service";
 
 export const addOfferActionCreator: ActionCreator<ThunkAction<Promise<Action>, OfferResponse[], any, AnyAction>> = (
   trainerId: string,
@@ -34,5 +37,20 @@ export const getOfferActionCreator: ActionCreator<ThunkAction<Promise<Action>, O
     return dispatch(getOfferSuccess(offers));
   } catch (error) {
     return dispatch(getOfferFailure(error.message));
+  }
+};
+
+export const deleteOfferActionCreator: ActionCreator<ThunkAction<
+  Promise<Action>,
+  OfferResponse[],
+  string,
+  AnyAction
+>> = (trainerId: string, offerId: string) => async (dispatch: Dispatch) => {
+  dispatch(deleteOfferRequest());
+  try {
+    const offers = await deleteTrainerOffer(trainerId, offerId).then(unwrapResponseData);
+    return dispatch(deleteOfferSuccess(offers));
+  } catch (error) {
+    return dispatch(deleteOfferFailure(error.message));
   }
 };
