@@ -39,6 +39,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
     }
   };
 
+  const handleSaveSettingsData = () => {
+    dispatch(panelUpdateUserActionCreator(_id, settingsData));
+  };
+
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -133,12 +137,13 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
             </Grid>
           </Grid>
           <Button
-            onClick={() => dispatch(panelUpdateUserActionCreator(_id, settingsData))}
+            onClick={() => handleSaveSettingsData()}
             variant="contained"
             color="primary"
             size="small"
             startIcon={<SaveIcon />}
             className={classes.btnSave}
+            disabled={settingsData.password ? false : true}
           >
             Save
           </Button>

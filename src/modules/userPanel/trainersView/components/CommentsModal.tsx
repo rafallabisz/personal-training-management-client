@@ -19,6 +19,7 @@ import { TrainersPanelContext } from "./TrainersPanel";
 import useStyles from "./CommentsModal.styles";
 import axios from "axios";
 import { CommentsResponse } from "../../comments/duck/comments.interfaces";
+import LoadingContainer from "../../../../utils/LoadingContainer";
 
 interface CommentsModalProps {
   openComments: boolean;
@@ -46,50 +47,52 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
 
   return (
     <>
-      <Dialog
-        onClose={handleClickCloseComments}
-        aria-labelledby="customized-dialog-title"
-        open={openComments}
-        fullWidth
-        maxWidth="sm"
-        PaperProps={{
-          style: {
-            backgroundColor: "#dee4f1"
-          }
-        }}
-      >
-        <Grid container>
-          <Grid item xs={11}>
-            <DialogTitle id="customized-dialog-title">Comments</DialogTitle>
+      <LoadingContainer isFetching={isFetching}>
+        <Dialog
+          onClose={handleClickCloseComments}
+          aria-labelledby="customized-dialog-title"
+          open={openComments}
+          fullWidth
+          maxWidth="sm"
+          PaperProps={{
+            style: {
+              backgroundColor: "#dee4f1"
+            }
+          }}
+        >
+          <Grid container>
+            <Grid item xs={11}>
+              <DialogTitle id="customized-dialog-title">Comments</DialogTitle>
+            </Grid>
+            <Grid item xs={1}>
+              <DialogActions>
+                <IconButton aria-label="close" onClick={handleClickCloseComments}>
+                  <CloseIcon />
+                </IconButton>
+              </DialogActions>
+            </Grid>
           </Grid>
-          <Grid item xs={1}>
-            <DialogActions>
-              <IconButton aria-label="close" onClick={handleClickCloseComments}>
-                <CloseIcon />
-              </IconButton>
-            </DialogActions>
-          </Grid>
-        </Grid>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            {commentsList.map((comment: CommentsResponse) => (
-              <Card className={classes.dialogCard}>
-                <CardHeader
-                  avatar={<Avatar>{<ChatIcon />}</Avatar>}
-                  action={<span className={classes.rating}>{comment.rating}</span>}
-                  title={comment.author}
-                  subheader={formatDate(comment.createdAt)}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {comment.content}
-                  </Typography>
-                </CardContent>
-              </Card>
-            ))}
-          </Typography>
-        </DialogContent>
-      </Dialog>
+          <DialogContent dividers>
+            <Typography gutterBottom>
+              {commentsList.map((comment: CommentsResponse) => (
+                <Card className={classes.dialogCard}>
+                  <CardHeader
+                    avatar={<Avatar>{<ChatIcon />}</Avatar>}
+                    action={<span className={classes.rating}>{comment.rating}</span>}
+                    title={comment.author}
+                    subheader={formatDate(comment.createdAt)}
+                  />
+                  <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {comment.content}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
+            </Typography>
+          </DialogContent>
+        </Dialog>
+      </LoadingContainer>
     </>
   );
 };
