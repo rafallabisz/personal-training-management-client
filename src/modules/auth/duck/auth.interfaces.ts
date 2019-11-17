@@ -43,6 +43,7 @@ export interface UserData {
       author: string;
       content: string;
       rating: number;
+      createdAt: Date;
     }
   ];
 }
