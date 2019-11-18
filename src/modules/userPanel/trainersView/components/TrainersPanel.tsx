@@ -15,9 +15,11 @@ interface TrainersPanelProps {}
 export interface TrainersPanelContext {
   trainersList: UserData[];
   selectedTrainer?: UserData;
+  trainersListVisible: UserData[];
 }
 export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
-  trainersList: []
+  trainersList: [],
+  trainersListVisible: []
 });
 ////////////////////////
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
@@ -88,7 +90,8 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
         <TrainersPanelContext.Provider
           value={{
             trainersList,
-            selectedTrainer
+            selectedTrainer,
+            trainersListVisible
           }}
         >
           <div className={classes.container}>
@@ -113,7 +116,11 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                 </Card>
 
                 <div className={classes.containerCardTrainers}>
-                  <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
+                  <TrainerCard
+                    setBtnMoreDetails={setBtnMoreDetails}
+                    setSelectedTrainer={setSelectedTrainer}
+                    searchValue={searchValue}
+                  />
                 </div>
               </>
             )}
