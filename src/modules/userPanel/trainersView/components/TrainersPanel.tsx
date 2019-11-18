@@ -1,5 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { CardActions, Card, TextField, Button } from "@material-ui/core";
+import React, { useState, useEffect, FormEvent } from "react";
 import useStyles from "./TrainersPanel.styles";
 import SearchIcon from "@material-ui/icons/Search";
 import TrainerCard from "./TrainerCard";
@@ -8,7 +7,8 @@ import { UserData } from "../../../auth/duck/auth.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
-import Autosuggest, { SuggestionsFetchRequestedParams, InputProps } from "react-autosuggest";
+import Autosuggest, { SuggestionsFetchRequestedParams } from "react-autosuggest";
+import * as theme from "./themeAutosuggest.module.css";
 
 interface TrainersPanelProps {}
 
@@ -102,18 +102,19 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
               </>
             ) : (
               <>
-                <Card className={classes.cardSearch}>
-                  <CardActions>
-                    <Autosuggest
-                      suggestions={suggestions}
-                      onSuggestionsFetchRequested={suggestionsParams => onSuggestionsFetchRequested(suggestionsParams)}
-                      onSuggestionsClearRequested={() => onSuggestionsClearRequested()}
-                      getSuggestionValue={suggestion => getSuggestionValue(suggestion)}
-                      renderSuggestion={suggestion => renderSuggestion(suggestion)}
-                      inputProps={inputProps}
-                    />
-                  </CardActions>
-                </Card>
+                {/* <Card className={classes.cardSearch}>
+                  <CardActions> */}
+                <Autosuggest
+                  suggestions={suggestions}
+                  onSuggestionsFetchRequested={suggestionsParams => onSuggestionsFetchRequested(suggestionsParams)}
+                  onSuggestionsClearRequested={() => onSuggestionsClearRequested()}
+                  getSuggestionValue={suggestion => getSuggestionValue(suggestion)}
+                  renderSuggestion={suggestion => renderSuggestion(suggestion)}
+                  inputProps={inputProps}
+                  theme={theme}
+                />
+                {/* </CardActions>
+                </Card> */}
 
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard

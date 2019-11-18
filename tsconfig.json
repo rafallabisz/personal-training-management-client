@@ -16,7 +16,20 @@
     "jsx": "react",
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "classnameTransform": "dashes",
+          "customMatcher": "\\.m\\.css$",
+          "customRenderer": "./myRenderer.js",
+          "dotenvOptions": {},
+          "postCssOptions": {},
+          "rendererOptions": {}
+        }
+      }
+    ]
   },
   "include": ["src"]
 }
