@@ -36,7 +36,7 @@ interface PanelTemplateProps {
 const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children, listMenu }) => {
   const currentUser = useSelector((state: Store) => state.user.currentUser!);
   const classes = useStyles();
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [open, setOpen] = React.useState<boolean>(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
