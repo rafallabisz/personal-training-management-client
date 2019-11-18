@@ -23,6 +23,7 @@ export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   const [isActiveBtnMoreDetails, setBtnMoreDetails] = useState<boolean>(false);
   const classes = useStyles();
+  const [searchValue, setSearchValue] = useState<string>("");
 
   useEffect(() => {
     const fetchTrainers = async () => {
@@ -32,12 +33,13 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
       setIsFetching(false);
     };
     fetchTrainers();
-  }, []);
+  }, [searchValue]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
-  const [searchValue, setSearchValue] = useState<string>("");
   const [suggestions, setSuggestions] = useState<UserData[]>([]);
+
+  const [trainersListVisible, setTrainersListVisible] = useState<UserData[]>([]);
 
   const getSuggestions = (value: string) => {
     const inputValue = value.trim().toLowerCase();
@@ -52,6 +54,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
 
   const onChange = (event: FormEvent<any>, { newValue, method }: Autosuggest.ChangeEvent) => {
     setSearchValue(newValue);
+    filterList(newValue);
   };
   const onSuggestionsFetchRequested = (suggestionsParams: SuggestionsFetchRequestedParams) => {
     setSuggestions(getSuggestions(suggestionsParams.value));
@@ -67,6 +70,17 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     onChange
   };
   console.log(searchValue, "--searchValue");
+
+  //////////////////////
+  const filterList = (newValue: string) => {
+    // if (!newValue) return;
+    const updatedList = trainersList.filter(trainer => {
+      return trainer.firstName.toLowerCase().includes(newValue.toLowerCase());
+    });
+    setTrainersListVisible(updatedList);
+  };
+
+  console.log(trainersListVisible, "--visibleList");
 
   return (
     <>
