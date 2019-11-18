@@ -7,8 +7,7 @@ import { UserData } from "../../../auth/duck/auth.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
-import Autosuggest, { SuggestionsFetchRequestedParams } from "react-autosuggest";
-import * as theme from "./themeAutosuggest.module.css";
+import FilterCard from "./FilterCard";
 
 interface TrainersPanelProps {}
 
@@ -16,17 +15,17 @@ export interface TrainersPanelContext {
   trainersList: UserData[];
   selectedTrainer?: UserData;
   trainersListVisible: UserData[];
+  searchValue: string;
 }
 export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
   trainersList: [],
-  trainersListVisible: []
+  trainersListVisible: [],
+  searchValue: ""
 });
 ////////////////////////
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   const [isActiveBtnMoreDetails, setBtnMoreDetails] = useState<boolean>(false);
   const classes = useStyles();
-  const [searchValue, setSearchValue] = useState<string>("");
-
   useEffect(() => {
     const fetchTrainers = async () => {
       setIsFetching(true);
@@ -35,55 +34,21 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
       setIsFetching(false);
     };
     fetchTrainers();
-  }, [searchValue]);
+  }, []);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
-  const [suggestions, setSuggestions] = useState<UserData[]>([]);
 
+  const [searchValue, setSearchValue] = useState<string>("");
   const [trainersListVisible, setTrainersListVisible] = useState<UserData[]>([]);
 
-  const getSuggestions = (value: string) => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-    return inputLength === 0
-      ? []
-      : trainersList.filter(trainer => trainer.firstName.toLowerCase().slice(0, inputLength) === inputValue);
-  };
-  const getSuggestionValue = (suggestion: UserData) => suggestion.firstName;
-
-  const renderSuggestion = (suggestion: UserData) => <div>{suggestion.firstName}</div>;
-
-  const onChange = (event: FormEvent<any>, { newValue, method }: Autosuggest.ChangeEvent) => {
-    setSearchValue(newValue);
-    filterList(newValue);
-  };
-  const onSuggestionsFetchRequested = (suggestionsParams: SuggestionsFetchRequestedParams) => {
-    setSuggestions(getSuggestions(suggestionsParams.value));
-  };
-
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
-  };
-
-  const inputProps = {
-    placeholder: "name",
-    value: searchValue,
-    onChange
-  };
-  console.log(searchValue, "--searchValue");
-
-  //////////////////////
-  const filterList = (newValue: string) => {
-    // if (!newValue) return;
-    const updatedList = trainersList.filter(trainer => {
-      return trainer.firstName.toLowerCase().includes(newValue.toLowerCase());
-    });
+  const handleTrainersListVisible = (updatedList: UserData[]) => {
     setTrainersListVisible(updatedList);
   };
 
-  console.log(trainersListVisible, "--visibleList");
-
+  const handleSearchValue = (value: string) => {
+    setSearchValue(value);
+  };
   return (
     <>
       <LoadingContainer isFetching={isFetching}>
@@ -91,7 +56,8 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
           value={{
             trainersList,
             selectedTrainer,
-            trainersListVisible
+            trainersListVisible,
+            searchValue
           }}
         >
           <div className={classes.container}>
@@ -102,26 +68,13 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
               </>
             ) : (
               <>
-                {/* <Card className={classes.cardSearch}>
-                  <CardActions> */}
-                <Autosuggest
-                  suggestions={suggestions}
-                  onSuggestionsFetchRequested={suggestionsParams => onSuggestionsFetchRequested(suggestionsParams)}
-                  onSuggestionsClearRequested={() => onSuggestionsClearRequested()}
-                  getSuggestionValue={suggestion => getSuggestionValue(suggestion)}
-                  renderSuggestion={suggestion => renderSuggestion(suggestion)}
-                  inputProps={inputProps}
-                  theme={theme}
+                <FilterCard
+                  handleTrainersListVisible={handleTrainersListVisible}
+                  handleSearchValue={handleSearchValue}
                 />
-                {/* </CardActions>
-                </Card> */}
 
                 <div className={classes.containerCardTrainers}>
-                  <TrainerCard
-                    setBtnMoreDetails={setBtnMoreDetails}
-                    setSelectedTrainer={setSelectedTrainer}
-                    searchValue={searchValue}
-                  />
+                  <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
                 </div>
               </>
             )}

@@ -8,11 +8,10 @@ import { UserData } from "../../../auth/duck/auth.interfaces";
 interface TrainerCardProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTrainer: React.Dispatch<React.SetStateAction<UserData | undefined>>;
-  searchValue: string;
 }
 
-const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelectedTrainer, searchValue }) => {
-  const { trainersList, trainersListVisible } = useContext<TrainersPanelContext>(TrainersPanelContext);
+const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelectedTrainer }) => {
+  const { trainersList, trainersListVisible, searchValue } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const classes = useStyles();
   const filterTrainerList = searchValue ? trainersListVisible : trainersList;
