@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useStyles from "../AuthPage.styles";
-import { Grid, TextField, FormControlLabel, Checkbox } from "@material-ui/core";
+import { Grid, TextField, FormControlLabel, Checkbox, FormControl, RadioGroup, Radio } from "@material-ui/core";
 import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
 import { SignUpCredentials, Store } from "../duck/auth.interfaces";
@@ -11,6 +11,7 @@ import SpinnerButton from "../../../utils/SpinnerButton";
 interface RegisterFormProps {}
 
 const RegisterForm: React.FC<RegisterFormProps> = props => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { isFetching, error, isAuth } = useSelector((state: Store) => state.user);
   const initRegisterData = {
@@ -18,9 +19,11 @@ const RegisterForm: React.FC<RegisterFormProps> = props => {
     lastName: "",
     email: "",
     isTrainer: false,
-    password: ""
+    password: "",
+    gender: "male"
   };
   const [registerData, setRegisterData] = useState<SignUpCredentials>(initRegisterData);
+  const [selectedGender, setGender] = useState<string>("male");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const name = e.target.name;
@@ -36,8 +39,11 @@ const RegisterForm: React.FC<RegisterFormProps> = props => {
     e.preventDefault();
     dispatch(authSignUpActionCreator(registerData));
   };
-  console.log(registerData);
-  const classes = useStyles();
+
+  const handleSetGender = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGender(e.target.value);
+    setRegisterData({ ...registerData, gender: e.target.value });
+  };
 
   if (isAuth) {
     return <Redirect to={routes.main} />;
@@ -99,6 +105,22 @@ const RegisterForm: React.FC<RegisterFormProps> = props => {
             onChange={handleChange}
           />
         </Grid>
+
+        <Grid item xs={12}>
+          <FormControl component="fieldset">
+            <RadioGroup
+              aria-label="gender"
+              name="gender"
+              value={selectedGender}
+              onChange={handleSetGender}
+              className={classes.radioGroupGender}
+            >
+              <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" />
+              <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox value="allowExtraEmails" color="primary" />}

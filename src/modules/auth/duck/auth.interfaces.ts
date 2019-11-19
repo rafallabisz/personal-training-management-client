@@ -18,6 +18,7 @@ export interface SignUpCredentials {
   email: string;
   isTrainer: boolean;
   password: string;
+  gender: string;
 }
 
 export interface UserData {
@@ -27,6 +28,7 @@ export interface UserData {
   email: string;
   isTrainer: boolean;
   password: string;
+  gender: string;
   data: {
     age: number;
     city: string;

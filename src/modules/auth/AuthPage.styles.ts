@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "80px auto 0"
     },
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: "30px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center"
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     linkToSign: {
       textDecoration: "none"
+    },
+    radioGroupGender: {
+      flexDirection: "row"
     }
   })
 );
