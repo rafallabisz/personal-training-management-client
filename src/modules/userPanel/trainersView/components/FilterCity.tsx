@@ -4,12 +4,12 @@ import * as theme from "./themeAutosuggest.module.css";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 import { TrainersPanelContext } from "./TrainersPanel";
 
-interface FilterCardProps {
+interface FilterCityProps {
   handleTrainersListVisible: (updatedList: UserData[]) => void;
   handleSearchValue: (value: string) => void;
 }
 
-const FilterCard: React.FC<FilterCardProps> = ({ handleTrainersListVisible, handleSearchValue }) => {
+const FilterCity: React.FC<FilterCityProps> = ({ handleTrainersListVisible, handleSearchValue }) => {
   const { trainersList, searchValue } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const trainersListWithFieldCity = trainersList.filter(
@@ -21,11 +21,17 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleTrainersListVisible, hand
   const getSuggestions = (value: string) => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    return inputLength === 0
-      ? []
-      : trainersListWithFieldCity.filter(
-          trainer => trainer.data.city.toLowerCase().slice(0, inputLength) === inputValue
-        );
+    const findMatchCity = trainersListWithFieldCity.filter(
+      trainer => trainer.data.city.toLowerCase().slice(0, inputLength) === inputValue
+    );
+    const seen = new Set();
+    const filteredArrWithoutDuplicates = findMatchCity.filter(el => {
+      const duplicate = seen.has(el.data.city);
+      seen.add(el.data.city);
+      return !duplicate;
+    });
+
+    return inputLength === 0 ? [] : filteredArrWithoutDuplicates;
   };
   const getSuggestionValue = (suggestion: UserData) => suggestion.data.city;
 
@@ -70,4 +76,4 @@ const FilterCard: React.FC<FilterCardProps> = ({ handleTrainersListVisible, hand
     </div>
   );
 };
-export default FilterCard;
+export default FilterCity;

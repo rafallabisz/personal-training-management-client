@@ -1,13 +1,12 @@
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./TrainersPanel.styles";
-import SearchIcon from "@material-ui/icons/Search";
 import TrainerCard from "./TrainerCard";
 import axios from "axios";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
-import FilterCard from "./FilterCard";
+import FilterCity from "./FilterCity";
 
 interface TrainersPanelProps {}
 
@@ -68,7 +67,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
               </>
             ) : (
               <>
-                <FilterCard
+                <FilterCity
                   handleTrainersListVisible={handleTrainersListVisible}
                   handleSearchValue={handleSearchValue}
                 />
