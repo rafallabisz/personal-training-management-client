@@ -22,8 +22,6 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
     fetchTrainerComments();
   }, []);
 
-  console.log(trainerComments.comments !== undefined && trainerComments.comments.map(x => x.author));
-
   return (
     <>
       <div className={classes.container}>

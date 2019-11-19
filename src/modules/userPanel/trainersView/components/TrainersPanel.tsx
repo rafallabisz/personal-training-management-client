@@ -7,6 +7,7 @@ import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
+import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 
 interface TrainersPanelProps {}
 
@@ -48,6 +49,14 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
   const handleSearchValue = (value: string) => {
     setSearchValue(value);
   };
+
+  //////////
+  const [gender, setGender] = React.useState("all");
+  const handleChangeGender = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setGender(event.target.value as string);
+  };
+  console.log(gender);
+
   return (
     <>
       <LoadingContainer isFetching={isFetching}>
@@ -71,6 +80,20 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                   handleTrainersListVisible={handleTrainersListVisible}
                   handleSearchValue={handleSearchValue}
                 />
+
+                <FormControl variant="filled">
+                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={gender}
+                    onChange={e => handleChangeGender(e)}
+                  >
+                    <MenuItem value={"all"}>All</MenuItem>
+                    <MenuItem value={"male"}>Male</MenuItem>
+                    <MenuItem value={"female"}>Female</MenuItem>
+                  </Select>
+                </FormControl>
 
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />

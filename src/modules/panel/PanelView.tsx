@@ -12,7 +12,7 @@ interface PanelViewProps {}
 const PanelView: React.FC<PanelViewProps> = props => {
   const { currentUser, isFetching, error } = useSelector((state: Store) => state.user);
   if (currentUser === undefined) return <Redirect to={routes.loginPage} />;
-  const isTrainer = currentUser!.isTrainer;
+  const isTrainer = currentUser.isTrainer;
   return (
     <>
       <LoadingContainer isFetching={isFetching} errorTxt={error}>
