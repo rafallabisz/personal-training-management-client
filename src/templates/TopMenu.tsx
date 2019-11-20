@@ -27,16 +27,27 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
   const classes = useStyles();
   return (
     <>
-      <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-        {listMenu.map((content, i) => (
-          <Tab label={content} {...a11yProps(i)} key={i} className={classes.tabTopMenu} />
-        ))}
-
-        <Typography className={classes.typographyHello}>Hello, {currentUser!.firstName}</Typography>
-        <Button onClick={() => handleSignOut()} component={NavLink} to={routes.loginPage} color="inherit">
-          Sign out
-        </Button>
-      </Tabs>
+      <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+            {listMenu.map((content, i) => (
+              <Tab label={content} {...a11yProps(i)} key={i} className={classes.tabTopMenu} />
+            ))}
+          </Tabs>
+        </div>
+        <div style={{ display: "flex" }}>
+          <Typography className={classes.typographyHello}>Hello, {currentUser!.firstName}</Typography>
+          <Button
+            style={{ padding: "6px 20px" }}
+            onClick={() => handleSignOut()}
+            component={NavLink}
+            to={routes.loginPage}
+            color="inherit"
+          >
+            Sign out
+          </Button>
+        </div>
+      </div>
     </>
   );
 };

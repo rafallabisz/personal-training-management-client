@@ -4,8 +4,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Grid,
-  Typography,
   Drawer,
   Divider,
   List,
@@ -34,14 +32,12 @@ interface PanelTemplateProps {
 }
 
 const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children, listMenu }) => {
-  const currentUser = useSelector((state: Store) => state.user.currentUser!);
   const classes = useStyles();
+  const currentUser = useSelector((state: Store) => state.user.currentUser!);
   const [open, setOpen] = React.useState<boolean>(true);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -54,7 +50,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           [classes.appBarShift]: open
         })}
       >
-        <Toolbar>
+        <Toolbar style={{ minHeight: "50px" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -66,20 +62,9 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           >
             <MenuIcon />
           </IconButton>
-
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography variant="h6" noWrap className={classes.typographyNameApp}>
-                Personal training management
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <TopMenu value={value} setValue={setValue} listMenu={listMenu} />
-            </Grid>
-          </Grid>
+          <TopMenu value={value} setValue={setValue} listMenu={listMenu} />
         </Toolbar>
       </AppBar>
-
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -94,8 +79,9 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
         }}
         open={open}
       >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
+        <div className={classes.toolbar} style={{ minHeight: "50px" }}>
+          <span style={{ letterSpacing: "2px" }}>Training Management</span>
+          <IconButton style={{ padding: "7px" }} onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>

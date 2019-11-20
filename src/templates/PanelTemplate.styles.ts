@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/styles";
 import { Theme, createStyles } from "@material-ui/core";
-import bgcImage from "../assets/img/bgc2.jpg";
+import bgcImage from "../assets/img/bgc6.jpg";
+//#cccbcbd9 -color card trainer
 
 const drawerWidth = 240;
 
@@ -10,7 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       backgroundImage: `url(${bgcImage})`,
       height: "100vh",
-      overflowY: "hidden"
+      overflowY: "hidden",
+      backgroundSize: "cover",
+      backgroundPosition: "center"
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -64,7 +67,8 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "flex-end",
       padding: theme.spacing(0, 1),
       ...theme.mixins.toolbar,
-      marginBottom: "16px"
+      marginBottom: "0px",
+      minHeight: "50px"
     },
     listDrawer: {
       paddingLeft: "8px"
