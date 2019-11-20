@@ -56,6 +56,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     setGender(event.target.value as string);
   };
   console.log(gender);
+  ///////
 
   return (
     <>
@@ -76,25 +77,48 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
               </>
             ) : (
               <>
-                <FilterCity
-                  handleTrainersListVisible={handleTrainersListVisible}
-                  handleSearchValue={handleSearchValue}
-                />
+                <div style={{ display: "flex", marginBottom: "30px" }}>
+                  <FilterCity
+                    handleTrainersListVisible={handleTrainersListVisible}
+                    handleSearchValue={handleSearchValue}
+                  />
 
-                <FormControl variant="filled">
-                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={gender}
-                    onChange={e => handleChangeGender(e)}
+                  <FormControl
+                    style={{
+                      width: "100px",
+                      height: "30px",
+                      marginLeft: "5px",
+                      backgroundColor: "white",
+                      border: "1px solid #999797",
+                      borderRadius: "5px"
+                    }}
                   >
-                    <MenuItem value={"all"}>All</MenuItem>
-                    <MenuItem value={"male"}>Male</MenuItem>
-                    <MenuItem value={"female"}>Female</MenuItem>
-                  </Select>
-                </FormControl>
-
+                    {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
+                    <Select
+                      disableUnderline
+                      style={{ height: "30px", color: "#343232" }}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={gender}
+                      onChange={e => handleChangeGender(e)}
+                      SelectDisplayProps={{
+                        style: {
+                          backgroundColor: "transparent",
+                          paddingLeft: "10px"
+                        }
+                      }}
+                      MenuProps={{
+                        style: {
+                          top: "40px"
+                        }
+                      }}
+                    >
+                      <MenuItem value={"all"}>All</MenuItem>
+                      <MenuItem value={"male"}>Male</MenuItem>
+                      <MenuItem value={"female"}>Female</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
                 </div>
