@@ -27,7 +27,7 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
   const classes = useStyles();
   return (
     <>
-      <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+      <div className={classes.wrapTopMenu}>
         <div>
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
             {listMenu.map((content, i) => (
@@ -35,10 +35,10 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
             ))}
           </Tabs>
         </div>
-        <div style={{ display: "flex" }}>
+        <div className={classes.containerRightElementsTopMenu}>
           <Typography className={classes.typographyHello}>Hello, {currentUser!.firstName}</Typography>
           <Button
-            style={{ padding: "6px 20px" }}
+            className={classes.btnSignOut}
             onClick={() => handleSignOut()}
             component={NavLink}
             to={routes.loginPage}

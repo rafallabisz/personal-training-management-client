@@ -80,8 +80,8 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
         open={open}
       >
         <div className={classes.toolbar} style={{ minHeight: "50px" }}>
-          <span style={{ letterSpacing: "2px" }}>Training Management</span>
-          <IconButton style={{ padding: "7px" }} onClick={handleDrawerClose}>
+          <span className={classes.titleToolbar}>Training Management</span>
+          <IconButton className={classes.iconButtonToolbar} onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>

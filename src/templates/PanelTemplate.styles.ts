@@ -80,13 +80,30 @@ const useStyles = makeStyles((theme: Theme) =>
     tabTopMenu: {
       transition: ".1s linear",
       "&:hover": {
-        backgroundColor: "#3A4BA7"
+        backgroundColor: "#135DB1"
       }
     },
     typographyHello: {
       padding: "12px",
       marginRight: "25px",
       marginLeft: "auto"
+    },
+    titleToolbar: {
+      letterSpacing: "2px"
+    },
+    iconButtonToolbar: {
+      padding: "7px"
+    },
+    wrapTopMenu: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "space-between"
+    },
+    containerRightElementsTopMenu: {
+      display: "flex"
+    },
+    btnSignOut: {
+      padding: "6px 20px"
     }
   })
 );
