@@ -5,11 +5,11 @@ import { UserData } from "../../../auth/duck/auth.interfaces";
 import { TrainersPanelContext } from "./TrainersPanel";
 
 interface FilterCityProps {
-  handleTrainersListVisible: (updatedList: UserData[]) => void;
+  handleTrainersListWithFilterCity: (filteredList: UserData[]) => void;
   handleSearchValue: (value: string) => void;
 }
 
-const FilterCity: React.FC<FilterCityProps> = ({ handleTrainersListVisible, handleSearchValue }) => {
+const FilterCity: React.FC<FilterCityProps> = ({ handleTrainersListWithFilterCity, handleSearchValue }) => {
   const { trainersList, searchValue } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const trainersListWithFieldCity = trainersList.filter(
@@ -59,7 +59,7 @@ const FilterCity: React.FC<FilterCityProps> = ({ handleTrainersListVisible, hand
     const updatedList = trainersListWithFieldCity.filter(trainer => {
       return trainer.data.city.toLowerCase().includes(newValue.toLowerCase());
     });
-    handleTrainersListVisible(updatedList);
+    handleTrainersListWithFilterCity(updatedList);
   };
 
   return (

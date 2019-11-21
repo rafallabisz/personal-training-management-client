@@ -7,17 +7,17 @@ const options = [
   { value: "female", label: "Female" }
 ];
 
-interface SelectGender {
+export interface SelectGender {
   label: string;
   value: string;
 }
 
-interface SelectGenderProps {
+interface FilterGenderProps {
   handleSelectGender: (e: ValueType<SelectGender>, actionMeta: ActionMeta) => void;
   valueGender: ValueType<SelectGender>;
 }
 
-const SelectGender: React.FC<SelectGenderProps> = ({ handleSelectGender, valueGender }) => {
+const FilterGender: React.FC<FilterGenderProps> = ({ handleSelectGender, valueGender }) => {
   // const [valueGender, setValueGender] = useState<ValueType<SelectGender>>({
   //   label: "All",
   //   value: "all"
@@ -42,7 +42,7 @@ const SelectGender: React.FC<SelectGenderProps> = ({ handleSelectGender, valueGe
     />
   );
 };
-export default SelectGender;
+export default FilterGender;
 
 const customStyles = {
   control: (styles: any) => ({

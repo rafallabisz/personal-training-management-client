@@ -7,7 +7,7 @@ import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
-import SelectGender from "./SelectGender";
+import FilterGender, { SelectGender } from "./FilterGender";
 import { ValueType, ActionMeta } from "react-select";
 
 interface TrainersPanelProps {}
@@ -15,13 +15,13 @@ interface TrainersPanelProps {}
 export interface TrainersPanelContext {
   trainersList: UserData[];
   selectedTrainer?: UserData;
-  trainersListVisible: UserData[];
+  trainersListWithFilterCity: UserData[];
   searchValue: string;
   mergeFilters: () => UserData[];
 }
 export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
   trainersList: [],
-  trainersListVisible: [],
+  trainersListWithFilterCity: [],
   searchValue: "",
   mergeFilters: () => []
 });
@@ -35,19 +35,19 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
       const response = await axios.get<UserData[]>("http://localhost:5000/user/trainers");
       setTrainersList(response.data);
       setIsFetching(false);
-      // handleTrainersListVisible(response.data);
     };
     fetchTrainers();
   }, []);
+
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [trainersList, setTrainersList] = useState<UserData[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
 
   const [searchValue, setSearchValue] = useState<string>("");
-  const [trainersListVisible, setTrainersListVisible] = useState<UserData[]>([]);
+  const [trainersListWithFilterCity, setTrainersListWithFilterCity] = useState<UserData[]>([]);
 
-  const handleTrainersListVisible = (updatedList: UserData[]) => {
-    setTrainersListVisible(updatedList);
+  const handleTrainersListWithFilterCity = (filteredList: UserData[]) => {
+    setTrainersListWithFilterCity(filteredList);
   };
 
   const handleSearchValue = (value: string) => {
@@ -74,10 +74,10 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     const selectedGender = (valueGender as SelectGender).value;
 
     if (!searchValue && selectedGender === "all") return trainersList;
-    const trainers = searchValue ? trainersListVisible : trainersList;
+    const trainers = searchValue ? trainersListWithFilterCity : trainersList;
     switch (selectedGender) {
       case "all":
-        return trainersListVisible;
+        return trainersListWithFilterCity;
       case "male":
         const selectedMale = trainers.filter(trainer => trainer.gender === selectedGender);
         return selectedMale;
@@ -95,7 +95,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
           value={{
             trainersList,
             selectedTrainer,
-            trainersListVisible,
+            trainersListWithFilterCity,
             searchValue,
             mergeFilters
           }}
@@ -110,10 +110,10 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
               <>
                 <div style={{ display: "flex", marginBottom: "30px" }}>
                   <FilterCity
-                    handleTrainersListVisible={handleTrainersListVisible}
+                    handleTrainersListWithFilterCity={handleTrainersListWithFilterCity}
                     handleSearchValue={handleSearchValue}
                   />
-                  <SelectGender handleSelectGender={handleSelectGender} valueGender={valueGender} />
+                  <FilterGender handleSelectGender={handleSelectGender} valueGender={valueGender} />
                 </div>
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
