@@ -7,7 +7,7 @@ import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
-import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import SelectGender from "./SelectGender";
 
 interface TrainersPanelProps {}
 
@@ -50,14 +50,6 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     setSearchValue(value);
   };
 
-  //////////
-  const [gender, setGender] = React.useState("all");
-  const handleChangeGender = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setGender(event.target.value as string);
-  };
-  console.log(gender);
-  ///////
-
   return (
     <>
       <LoadingContainer isFetching={isFetching}>
@@ -82,42 +74,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                     handleTrainersListVisible={handleTrainersListVisible}
                     handleSearchValue={handleSearchValue}
                   />
-
-                  <FormControl
-                    style={{
-                      width: "100px",
-                      height: "30px",
-                      marginLeft: "5px",
-                      backgroundColor: "white",
-                      border: "1px solid #999797",
-                      borderRadius: "5px"
-                    }}
-                  >
-                    {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
-                    <Select
-                      disableUnderline
-                      style={{ height: "30px", color: "#343232" }}
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={gender}
-                      onChange={e => handleChangeGender(e)}
-                      SelectDisplayProps={{
-                        style: {
-                          backgroundColor: "transparent",
-                          paddingLeft: "10px"
-                        }
-                      }}
-                      MenuProps={{
-                        style: {
-                          top: "40px"
-                        }
-                      }}
-                    >
-                      <MenuItem value={"all"}>All</MenuItem>
-                      <MenuItem value={"male"}>Male</MenuItem>
-                      <MenuItem value={"female"}>Female</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <SelectGender />
                 </div>
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
