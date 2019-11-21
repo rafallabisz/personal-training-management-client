@@ -35,6 +35,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
       const response = await axios.get<UserData[]>("http://localhost:5000/user/trainers");
       setTrainersList(response.data);
       setIsFetching(false);
+      // handleTrainersListVisible(response.data);
     };
     fetchTrainers();
   }, []);
@@ -73,15 +74,15 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     const selectedGender = (valueGender as SelectGender).value;
 
     if (!searchValue && selectedGender === "all") return trainersList;
-
+    const trainers = searchValue ? trainersListVisible : trainersList;
     switch (selectedGender) {
       case "all":
         return trainersListVisible;
       case "male":
-        const selectedMale = trainersListVisible.filter(trainer => trainer.gender === selectedGender);
+        const selectedMale = trainers.filter(trainer => trainer.gender === selectedGender);
         return selectedMale;
       case "female":
-        return trainersListVisible.filter(trainer => trainer.gender === selectedGender);
+        return trainers.filter(trainer => trainer.gender === selectedGender);
       default:
         return trainersList;
     }
