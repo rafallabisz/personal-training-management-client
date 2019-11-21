@@ -11,39 +11,43 @@ interface TrainerCardProps {
 }
 
 const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelectedTrainer }) => {
-  const { trainersList, trainersListVisible, searchValue } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  const { trainersList, trainersListVisible, searchValue, mergeFilters } = useContext<TrainersPanelContext>(
+    TrainersPanelContext
+  );
 
   const classes = useStyles();
-  const filterTrainerList = searchValue ? trainersListVisible : trainersList;
   return (
     <>
-      {filterTrainerList.map(trainerData => (
-        <Card
-          className={classes.card}
-          key={trainerData._id}
-          onClick={() => {
-            setBtnMoreDetails(true);
-            setSelectedTrainer(trainerData);
-          }}
-        >
-          <CardHeader
-            avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
-            // action={}
-            title={`${trainerData.firstName} ${trainerData.lastName}, ${trainerData.data ? trainerData.data.age : "-"}`}
-            subheader={trainerData.data ? trainerData.data.city : "-"}
-            className={classes.cardHeader}
-          />
-          <CardContent className={classes.cardContent}>
-            <ul className={classes.offerList}>
-              {trainerData.offers.map(offer => (
-                <li key={offer._id} className={classes.offerListItem}>
-                  {offer.description}
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      ))}
+      {mergeFilters() &&
+        mergeFilters().map(trainerData => (
+          <Card
+            className={classes.card}
+            key={trainerData._id}
+            onClick={() => {
+              setBtnMoreDetails(true);
+              setSelectedTrainer(trainerData);
+            }}
+          >
+            <CardHeader
+              avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
+              // action={}
+              title={`${trainerData.firstName} ${trainerData.lastName}, ${
+                trainerData.data ? trainerData.data.age : "-"
+              }`}
+              subheader={trainerData.data ? trainerData.data.city : "-"}
+              className={classes.cardHeader}
+            />
+            <CardContent className={classes.cardContent}>
+              <ul className={classes.offerList}>
+                {trainerData.offers.map(offer => (
+                  <li key={offer._id} className={classes.offerListItem}>
+                    {offer.description}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        ))}
     </>
   );
 };

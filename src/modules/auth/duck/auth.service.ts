@@ -14,6 +14,7 @@ export const authSignUp = (registerData: SignUpCredentials): AxiosPromise<UserDa
     lastName: registerData.lastName,
     email: registerData.email,
     isTrainer: registerData.isTrainer,
-    password: registerData.password
+    password: registerData.password,
+    gender: registerData.gender
   });
 };

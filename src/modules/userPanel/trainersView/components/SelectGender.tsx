@@ -12,21 +12,24 @@ interface SelectGender {
   value: string;
 }
 
-interface SelectGenderProps {}
+interface SelectGenderProps {
+  handleSelectGender: (e: ValueType<SelectGender>, actionMeta: ActionMeta) => void;
+  valueGender: ValueType<SelectGender>;
+}
 
-const SelectGender: React.FC<SelectGenderProps> = props => {
-  const [valueGender, setValueGender] = useState<ValueType<SelectGender>>({
-    label: "All",
-    value: "all"
-  });
-  const handleSelectGender = (e: ValueType<SelectGender>, actionMeta: ActionMeta) => {
-    const value = (e as SelectGender).value;
-    const label = (e as SelectGender).label;
-    setValueGender({
-      label,
-      value
-    });
-  };
+const SelectGender: React.FC<SelectGenderProps> = ({ handleSelectGender, valueGender }) => {
+  // const [valueGender, setValueGender] = useState<ValueType<SelectGender>>({
+  //   label: "All",
+  //   value: "all"
+  // });
+  // const handleSelectGender = (e: ValueType<SelectGender>, actionMeta: ActionMeta) => {
+  //   const value = (e as SelectGender).value;
+  //   const label = (e as SelectGender).label;
+  //   setValueGender({
+  //     label,
+  //     value
+  //   });
+  // };
 
   return (
     <Select

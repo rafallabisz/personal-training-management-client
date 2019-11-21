@@ -8,6 +8,7 @@ import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
 import SelectGender from "./SelectGender";
+import { ValueType, ActionMeta } from "react-select";
 
 interface TrainersPanelProps {}
 
@@ -16,11 +17,13 @@ export interface TrainersPanelContext {
   selectedTrainer?: UserData;
   trainersListVisible: UserData[];
   searchValue: string;
+  mergeFilters: () => UserData[];
 }
 export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
   trainersList: [],
   trainersListVisible: [],
-  searchValue: ""
+  searchValue: "",
+  mergeFilters: () => []
 });
 ////////////////////////
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
@@ -48,6 +51,40 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
 
   const handleSearchValue = (value: string) => {
     setSearchValue(value);
+    mergeFilters();
+  };
+
+  ////////////select gender
+  const [valueGender, setValueGender] = useState<ValueType<SelectGender>>({
+    label: "All",
+    value: "all"
+  });
+  const handleSelectGender = (e: ValueType<SelectGender>, actionMeta: ActionMeta) => {
+    const value = (e as SelectGender).value;
+    const label = (e as SelectGender).label;
+    setValueGender({
+      label,
+      value
+    });
+    mergeFilters();
+  };
+
+  const mergeFilters = () => {
+    const selectedGender = (valueGender as SelectGender).value;
+
+    if (!searchValue && selectedGender === "all") return trainersList;
+
+    switch (selectedGender) {
+      case "all":
+        return trainersListVisible;
+      case "male":
+        const selectedMale = trainersListVisible.filter(trainer => trainer.gender === selectedGender);
+        return selectedMale;
+      case "female":
+        return trainersListVisible.filter(trainer => trainer.gender === selectedGender);
+      default:
+        return trainersList;
+    }
   };
 
   return (
@@ -58,7 +95,8 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
             trainersList,
             selectedTrainer,
             trainersListVisible,
-            searchValue
+            searchValue,
+            mergeFilters
           }}
         >
           <div className={classes.container}>
@@ -74,7 +112,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                     handleTrainersListVisible={handleTrainersListVisible}
                     handleSearchValue={handleSearchValue}
                   />
-                  <SelectGender />
+                  <SelectGender handleSelectGender={handleSelectGender} valueGender={valueGender} />
                 </div>
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
