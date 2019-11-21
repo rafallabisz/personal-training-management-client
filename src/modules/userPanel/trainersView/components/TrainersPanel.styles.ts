@@ -5,8 +5,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       maxHeight: "70vh",
-      overflowY: "auto",
-      marginTop: "30px"
+      overflowY: "auto"
+      // marginTop: "30px"
     },
     containerCardTrainers: {
       display: "grid",

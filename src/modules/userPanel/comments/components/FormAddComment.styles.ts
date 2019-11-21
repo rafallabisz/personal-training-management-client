@@ -4,7 +4,8 @@ import { Theme, createStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.secondary.light,
+      border: "1px solid #949494d9",
       paddingBottom: "10px",
       marginBottom: "15px"
     },

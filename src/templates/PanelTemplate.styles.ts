@@ -67,8 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "flex-end",
       padding: theme.spacing(0, 1),
       ...theme.mixins.toolbar,
-      marginBottom: "0px",
-      minHeight: "50px"
+      marginBottom: "0px"
     },
     listDrawer: {
       paddingLeft: "8px"
