@@ -7,8 +7,8 @@ import LoadingContainer from "../../../../utils/LoadingContainer";
 import TrainerCardDetails from "./TrainerCardDetails";
 import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
-import FilterGender, { SelectGender } from "./FilterGender";
-import { ValueType, ActionMeta } from "react-select";
+import FilterGender, { GenderValue } from "./FilterGender";
+import { ValueType } from "react-select";
 
 interface TrainersPanelProps {}
 
@@ -55,24 +55,13 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
     mergeFilters();
   };
 
-  ////////////select gender
-  const [valueGender, setValueGender] = useState<ValueType<SelectGender>>({
+  const [genderValue, setGenderValue] = useState<ValueType<GenderValue>>({
     label: "All",
     value: "all"
   });
-  const handleSelectGender = (e: ValueType<SelectGender>, actionMeta: ActionMeta) => {
-    const value = (e as SelectGender).value;
-    const label = (e as SelectGender).label;
-    setValueGender({
-      label,
-      value
-    });
-    mergeFilters();
-  };
 
   const mergeFilters = () => {
-    const selectedGender = (valueGender as SelectGender).value;
-
+    const selectedGender = (genderValue as GenderValue).value;
     if (!searchValue && selectedGender === "all") return trainersList;
     const trainers = searchValue ? trainersListWithFilterCity : trainersList;
     switch (selectedGender) {
@@ -113,7 +102,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                     handleTrainersListWithFilterCity={handleTrainersListWithFilterCity}
                     handleSearchValue={handleSearchValue}
                   />
-                  <FilterGender handleSelectGender={handleSelectGender} valueGender={valueGender} />
+                  <FilterGender valueGender={genderValue} setGenderValue={setGenderValue} />
                 </div>
                 <div className={classes.containerCardTrainers}>
                   <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />

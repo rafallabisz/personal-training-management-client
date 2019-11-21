@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Select, { ValueType, ActionMeta } from "react-select";
+import { TrainersPanelContext } from "./TrainersPanel";
 
 const options = [
   { value: "all", label: "All" },
@@ -7,29 +8,27 @@ const options = [
   { value: "female", label: "Female" }
 ];
 
-export interface SelectGender {
+export interface GenderValue {
   label: string;
   value: string;
 }
 
 interface FilterGenderProps {
-  handleSelectGender: (e: ValueType<SelectGender>, actionMeta: ActionMeta) => void;
-  valueGender: ValueType<SelectGender>;
+  valueGender: ValueType<GenderValue>;
+  setGenderValue: React.Dispatch<React.SetStateAction<ValueType<GenderValue>>>;
 }
 
-const FilterGender: React.FC<FilterGenderProps> = ({ handleSelectGender, valueGender }) => {
-  // const [valueGender, setValueGender] = useState<ValueType<SelectGender>>({
-  //   label: "All",
-  //   value: "all"
-  // });
-  // const handleSelectGender = (e: ValueType<SelectGender>, actionMeta: ActionMeta) => {
-  //   const value = (e as SelectGender).value;
-  //   const label = (e as SelectGender).label;
-  //   setValueGender({
-  //     label,
-  //     value
-  //   });
-  // };
+const FilterGender: React.FC<FilterGenderProps> = ({ setGenderValue, valueGender }) => {
+  const { mergeFilters } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  const handleGenderValue = (e: ValueType<GenderValue>, actionMeta: ActionMeta) => {
+    const value = (e as GenderValue).value;
+    const label = (e as GenderValue).label;
+    setGenderValue({
+      label,
+      value
+    });
+    mergeFilters();
+  };
 
   return (
     <Select
@@ -37,7 +36,7 @@ const FilterGender: React.FC<FilterGenderProps> = ({ handleSelectGender, valueGe
       options={options}
       styles={customStyles}
       defaultValue={options[0]}
-      onChange={handleSelectGender}
+      onChange={handleGenderValue}
       value={valueGender}
     />
   );

@@ -11,9 +11,7 @@ interface TrainerCardProps {
 }
 
 const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelectedTrainer }) => {
-  const { trainersList, trainersListWithFilterCity, searchValue, mergeFilters } = useContext<TrainersPanelContext>(
-    TrainersPanelContext
-  );
+  const { mergeFilters } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const classes = useStyles();
   return (
