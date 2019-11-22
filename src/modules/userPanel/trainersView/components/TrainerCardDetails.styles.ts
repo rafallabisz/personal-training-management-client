@@ -28,6 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     btnBack: {
       marginLeft: "8px"
+    },
+    datePickerInput: {
+      height: "30px",
+      minWidth: "180px",
+      borderRadius: "5px",
+      border: "1px solid gray",
+      paddingLeft: "5px"
     }
   })
 );

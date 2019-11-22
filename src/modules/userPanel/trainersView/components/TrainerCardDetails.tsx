@@ -18,8 +18,10 @@ import EmailIcon from "@material-ui/icons/Email";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import { TrainersPanelContext } from "./TrainersPanel";
-
 import CommentsModal from "./CommentsModal";
+import DatePicker from "react-datepicker";
+import { setHours, setMinutes } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,6 +39,8 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
   const handleClickCloseComments = () => {
     setOpenComments(false);
   };
+
+  const [startDate, setStartDate] = useState<Date | null>(setHours(setMinutes(new Date(), 30), 16));
 
   return (
     <>
@@ -99,6 +103,19 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
               >
                 Show comments
               </Button>
+              <DatePicker
+                className={classes.datePickerInput}
+                selected={startDate}
+                onChange={date => setStartDate(date)}
+                showTimeSelect
+                excludeTimes={[
+                  setHours(setMinutes(new Date(), 0), 17),
+                  setHours(setMinutes(new Date(), 30), 18),
+                  setHours(setMinutes(new Date(), 30), 19),
+                  setHours(setMinutes(new Date(), 30), 17)
+                ]}
+                dateFormat="MMMM d, yyyy h:mm aa"
+              />
             </CardActions>
           </Card>
           <CommentsModal handleClickCloseComments={handleClickCloseComments} openComments={openComments} />
