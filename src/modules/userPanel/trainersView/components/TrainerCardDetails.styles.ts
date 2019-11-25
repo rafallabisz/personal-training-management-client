@@ -31,10 +31,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     datePickerInput: {
       height: "30px",
-      minWidth: "180px",
+      minWidth: "220px",
       borderRadius: "5px",
       border: "1px solid gray",
-      paddingLeft: "5px"
+      padding: "4px 10px",
+      fontWeight: 500,
+      textTransform: "uppercase",
+      // color: theme.palette.primary.contrastText,
+      color: "#ffffffde",
+      backgroundColor: theme.palette.primary.main,
+      fontSize: "0.84rem",
+      letterSpacing: "0.02857em",
+      fontFamily: "Roboto",
+      transition: ".2s linear",
+      "&:hover": {
+        backgroundColor: "#0E4686",
+        cursor: "pointer"
+      }
     }
   })
 );

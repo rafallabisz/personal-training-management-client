@@ -116,6 +116,17 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
                 ]}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
+
+              <Button
+                // onClick={() => handleClickOpenComments()}
+                variant="contained"
+                color="primary"
+                size="small"
+                className={classes.btnBack}
+                startIcon={<OpenInNewIcon />}
+              >
+                Reserve
+              </Button>
             </CardActions>
           </Card>
           <CommentsModal handleClickCloseComments={handleClickCloseComments} openComments={openComments} />
