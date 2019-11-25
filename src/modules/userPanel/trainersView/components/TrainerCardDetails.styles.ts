@@ -42,11 +42,15 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
       fontSize: "0.84rem",
       letterSpacing: "0.02857em",
+      textAlign: "center",
       fontFamily: "Roboto",
       transition: ".2s linear",
       "&:hover": {
         backgroundColor: "#0E4686",
         cursor: "pointer"
+      },
+      "&::placeholder": {
+        color: "#ffffffde"
       }
     },
     selectTypeTraining: {

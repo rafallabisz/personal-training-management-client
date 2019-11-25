@@ -26,7 +26,7 @@ import { FormGroup, Input } from "reactstrap";
 import { ReserveData } from "./userPanelTypes";
 import { useSelector } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
-import { roundedDate, roundedDateForward } from "../../../../utils/roundedDate";
+import { roundedDateForward } from "../../../../utils/roundedDate";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,14 +37,14 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { firstName, lastName } = useSelector((state: Store) => state.user.currentUser!);
   const [openComments, setOpenComments] = useState<boolean>(false);
-  const [selectDate, setSelectDate] = useState<Date | null>(roundedDateForward(60));
-  const [selectTypeTraining, setSelectTypeTraining] = useState<string>("");
+  const [selectDate, setSelectDate] = useState<Date | null>(null);
+  const [selectTrainingType, setSelectTrainingType] = useState<string>("");
 
   const defaultReserveData = {
     firstName,
     lastName,
     selectTrainingType: "",
-    reserveDate: roundedDateForward(60)
+    reserveDate: new Date()
   };
 
   const [reserveData, setReserveData] = useState<ReserveData>(defaultReserveData);
@@ -60,7 +60,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
   const handleChangeSelectInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setSelectTypeTraining(value);
+    setSelectTrainingType(value);
     setReserveData({
       ...reserveData,
       [name]: value
@@ -146,6 +146,9 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
                 selected={selectDate}
                 onChange={date => handleDatePicker(date, "reserveDate")}
                 showTimeSelect
+                timeIntervals={60}
+                placeholderText="Select training date"
+                minDate={new Date()}
                 // excludeTimes={[
                 //   // setHours(setMinutes(new Date(), 0), 17),
                 //   // setHours(setMinutes(new Date(), 30), 18),
@@ -162,7 +165,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
                   className={classes.selectTypeTraining}
                   onChange={e => handleChangeSelectInput(e)}
                 >
-                  <option value="">Select type training</option>
+                  <option value="">Select training type</option>
                   {selectedTrainer.offers.map(offer => (
                     <option key={offer._id}>{offer.description}</option>
                   ))}
@@ -175,7 +178,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
                 color="primary"
                 size="small"
                 className={classes.btnBack}
-                disabled={selectTypeTraining === ""}
+                disabled={selectTrainingType === "" || selectDate === null}
                 startIcon={<OpenInNewIcon />}
               >
                 Reserve
