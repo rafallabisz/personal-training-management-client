@@ -22,6 +22,8 @@ import CommentsModal from "./CommentsModal";
 import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+import Select from "react-select/src/Select";
+import { FormGroup, Input } from "reactstrap";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,7 +42,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
     setOpenComments(false);
   };
 
-  const [startDate, setStartDate] = useState<Date | null>(setHours(setMinutes(new Date(), 30), 16));
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
 
   return (
     <>
@@ -116,6 +118,15 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
                 ]}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
+
+              <FormGroup>
+                <Input type="select" name="select" className={classes.selectTypeTraining}>
+                  <option value="0">Select type training</option>
+                  {selectedTrainer.offers.map(offer => (
+                    <option key={offer._id}>{offer.description}</option>
+                  ))}
+                </Input>
+              </FormGroup>
 
               <Button
                 // onClick={() => handleClickOpenComments()}

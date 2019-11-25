@@ -48,6 +48,23 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#0E4686",
         cursor: "pointer"
       }
+    },
+    selectTypeTraining: {
+      height: "30px",
+      padding: "4px 10px",
+      fontWeight: 500,
+      textTransform: "uppercase",
+      borderRadius: "5px",
+      color: "#ffffffde",
+      backgroundColor: theme.palette.primary.main,
+      fontSize: "0.84rem",
+      letterSpacing: "0.02857em",
+      fontFamily: "Roboto",
+      transition: ".2s linear",
+      "&:hover": {
+        backgroundColor: "#0E4686",
+        cursor: "pointer"
+      }
     }
   })
 );
