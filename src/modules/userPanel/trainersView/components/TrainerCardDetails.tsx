@@ -26,6 +26,7 @@ import { FormGroup, Input } from "reactstrap";
 import { ReserveData } from "./userPanelTypes";
 import { useSelector } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
+import { roundedDate, roundedDateForward } from "../../../../utils/roundedDate";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,14 +37,14 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { firstName, lastName } = useSelector((state: Store) => state.user.currentUser!);
   const [openComments, setOpenComments] = useState<boolean>(false);
-  const [selectDate, setSelectDate] = useState<Date | null>(new Date());
+  const [selectDate, setSelectDate] = useState<Date | null>(roundedDateForward(60));
   const [selectTypeTraining, setSelectTypeTraining] = useState<string>("");
 
   const defaultReserveData = {
     firstName,
     lastName,
     selectTrainingType: "",
-    reserveDate: new Date()
+    reserveDate: roundedDateForward(60)
   };
 
   const [reserveData, setReserveData] = useState<ReserveData>(defaultReserveData);
