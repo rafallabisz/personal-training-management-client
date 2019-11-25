@@ -22,8 +22,10 @@ import CommentsModal from "./CommentsModal";
 import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select/src/Select";
 import { FormGroup, Input } from "reactstrap";
+import { ReserveData } from "./userPanelTypes";
+import { useSelector } from "react-redux";
+import { Store } from "../../../auth/duck/auth.interfaces";
 
 interface TrainerCardDetailsProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +34,19 @@ interface TrainerCardDetailsProps {
 const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetails }) => {
   const classes = useStyles();
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  const { firstName, lastName } = useSelector((state: Store) => state.user.currentUser!);
   const [openComments, setOpenComments] = useState<boolean>(false);
+  const [selectDate, setSelectDate] = useState<Date | null>(new Date());
+  const [selectTypeTraining, setSelectTypeTraining] = useState<string>("");
+
+  const defaultReserveData = {
+    firstName,
+    lastName,
+    selectTrainingType: "",
+    reserveDate: new Date()
+  };
+
+  const [reserveData, setReserveData] = useState<ReserveData>(defaultReserveData);
 
   const handleClickOpenComments = () => {
     setOpenComments(true);
@@ -42,7 +56,27 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
     setOpenComments(false);
   };
 
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const handleChangeSelectInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setSelectTypeTraining(value);
+    setReserveData({
+      ...reserveData,
+      [name]: value
+    });
+  };
+
+  const handleDatePicker = (date: Date | null, name: string) => {
+    if (date) {
+      setSelectDate(date);
+      setReserveData({
+        ...reserveData,
+        [name]: date
+      });
+    }
+  };
+
+  console.log(reserveData, "=--reserveData");
 
   return (
     <>
@@ -105,23 +139,29 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
               >
                 Show comments
               </Button>
+
               <DatePicker
                 className={classes.datePickerInput}
-                selected={startDate}
-                onChange={date => setStartDate(date)}
+                selected={selectDate}
+                onChange={date => handleDatePicker(date, "reserveDate")}
                 showTimeSelect
-                excludeTimes={[
-                  setHours(setMinutes(new Date(), 0), 17),
-                  setHours(setMinutes(new Date(), 30), 18),
-                  setHours(setMinutes(new Date(), 30), 19),
-                  setHours(setMinutes(new Date(), 30), 17)
-                ]}
+                // excludeTimes={[
+                //   // setHours(setMinutes(new Date(), 0), 17),
+                //   // setHours(setMinutes(new Date(), 30), 18),
+                //   // setHours(setMinutes(new Date(), 30), 19),
+                //   // setHours(setMinutes(new Date(), 30), 17)
+                // ]}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
 
               <FormGroup>
-                <Input type="select" name="select" className={classes.selectTypeTraining}>
-                  <option value="0">Select type training</option>
+                <Input
+                  type="select"
+                  name="selectTrainingType"
+                  className={classes.selectTypeTraining}
+                  onChange={e => handleChangeSelectInput(e)}
+                >
+                  <option value="">Select type training</option>
                   {selectedTrainer.offers.map(offer => (
                     <option key={offer._id}>{offer.description}</option>
                   ))}
@@ -134,6 +174,7 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
                 color="primary"
                 size="small"
                 className={classes.btnBack}
+                disabled={selectTypeTraining === ""}
                 startIcon={<OpenInNewIcon />}
               >
                 Reserve
