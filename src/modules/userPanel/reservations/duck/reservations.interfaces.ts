@@ -6,6 +6,13 @@ export interface Reservation {
   lastName: string;
   selectTrainingType: string;
   reserveDate: Date;
+}
+
+export interface ReservationResponse {
+  firstName: string;
+  lastName: string;
+  selectTrainingType: string;
+  reserveDate: Date;
   trainer: UserData;
 }
 
@@ -30,7 +37,7 @@ export interface GetReservationsRequestAction {
 
 export interface GetReservationsSuccessAction {
   type: ReservationActionTypes.GET_RESERVATIONS_SUCCESS;
-  payload: Reservation[];
+  payload: ReservationResponse[];
 }
 export interface GetReservationsFailureAction {
   type: ReservationActionTypes.GET_RESERVATIONS_FAILURE;
@@ -48,7 +55,7 @@ export type ReservationActions =
 /**=== Reducer Reservation Interface */
 
 export interface ReservationReducerState {
-  reservations: Reservation[];
+  reservations: ReservationResponse[];
   isFetching: boolean;
   error?: string;
 }

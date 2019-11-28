@@ -15,10 +15,10 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { formatDate } from "../../../../utils/formatDate";
 import ChatIcon from "@material-ui/icons/Chat";
-import { TrainersPanelContext } from "./TrainersPanel";
+import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
 import useStyles from "./CommentsModal.styles";
 import axios from "axios";
-import { CommentsResponse } from "../../comments/duck/comments.interfaces";
+import { CommentsResponse } from "../duck/comments.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 
 interface CommentsModalProps {

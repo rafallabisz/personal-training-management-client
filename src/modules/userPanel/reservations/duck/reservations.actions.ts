@@ -2,7 +2,7 @@ import {
   AddReservationRequestAction,
   AddReservationSuccessAction,
   AddReservationFailureAction,
-  Reservation,
+  ReservationResponse,
   GetReservationsRequestAction,
   GetReservationsSuccessAction,
   GetReservationsFailureAction
@@ -26,7 +26,7 @@ export const getReservationsRequest = (): GetReservationsRequestAction => ({
   type: ReservationActionTypes.GET_RESERVATIONS_REQUEST
 });
 
-export const getReservationsSuccess = (reservations: Reservation[]): GetReservationsSuccessAction => ({
+export const getReservationsSuccess = (reservations: ReservationResponse[]): GetReservationsSuccessAction => ({
   type: ReservationActionTypes.GET_RESERVATIONS_SUCCESS,
   payload: reservations
 });

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import useStyles from "./TrainerCardDetails.styles";
+import useStyles from "./TrainerReservation.styles";
 import {
   Card,
   CardHeader,
@@ -17,22 +17,22 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-import { TrainersPanelContext } from "./TrainersPanel";
-import CommentsModal from "./CommentsModal";
+import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
+import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { FormGroup, Input } from "reactstrap";
-import { ReserveData } from "./userPanelTypes";
+import { ReserveData } from "../../trainersView/components/userPanelTypes";
 import { useSelector } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
 import { roundedDateForward } from "../../../../utils/roundedDate";
 
-interface TrainerCardDetailsProps {
+interface TrainerReservationProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetails }) => {
+const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetails }) => {
   const classes = useStyles();
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { firstName, lastName } = useSelector((state: Store) => state.user.currentUser!);
@@ -191,4 +191,4 @@ const TrainerCardDetails: React.FC<TrainerCardDetailsProps> = ({ setBtnMoreDetai
     </>
   );
 };
-export default TrainerCardDetails;
+export default TrainerReservation;

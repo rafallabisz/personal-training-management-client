@@ -4,7 +4,7 @@ import TrainerCard from "./TrainerCard";
 import axios from "axios";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
-import TrainerCardDetails from "./TrainerCardDetails";
+import TrainerReservation from "../../reservations/components/TrainerReservation";
 import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
 import FilterGender, { GenderValue } from "./FilterGender";
@@ -92,7 +92,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
           <div className={classes.container}>
             {isActiveBtnMoreDetails ? (
               <>
-                <TrainerCardDetails setBtnMoreDetails={setBtnMoreDetails} />
+                <TrainerReservation setBtnMoreDetails={setBtnMoreDetails} />
                 <FormAddComment />
               </>
             ) : (

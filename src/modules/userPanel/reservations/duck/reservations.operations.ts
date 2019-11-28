@@ -1,6 +1,6 @@
 import { ActionCreator, Action, AnyAction, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { Reservation } from "./reservations.interfaces";
+import { ReservationResponse, Reservation } from "./reservations.interfaces";
 import {
   addReservationRequest,
   addReservationSuccess,
@@ -27,7 +27,7 @@ export const addReservationActionCreator: ActionCreator<ThunkAction<Promise<Acti
 
 export const getReservationsActionCreator: ActionCreator<ThunkAction<
   Promise<Action>,
-  Reservation[],
+  ReservationResponse[],
   string,
   AnyAction
 >> = (id: string) => async (dispatch: Dispatch) => {
