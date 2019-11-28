@@ -10,8 +10,7 @@ const initState: ReservationReducerState = {
 export const reservationReducer: Reducer<ReservationReducerState, ReservationActions> = (state = initState, action) => {
   switch (action.type) {
     case ReservationActionTypes.ADD_RESERVATION_REQUEST:
-    case ReservationActionTypes.GET_TRAINER_RESERVATIONS_REQUEST:
-    case ReservationActionTypes.GET_USER_RESERVATIONS_REQUEST:
+    case ReservationActionTypes.GET_RESERVATIONS_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -24,8 +23,7 @@ export const reservationReducer: Reducer<ReservationReducerState, ReservationAct
         error: undefined
       };
 
-    case ReservationActionTypes.GET_TRAINER_RESERVATIONS_SUCCESS:
-    case ReservationActionTypes.GET_USER_RESERVATIONS_SUCCESS:
+    case ReservationActionTypes.GET_RESERVATIONS_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -34,8 +32,7 @@ export const reservationReducer: Reducer<ReservationReducerState, ReservationAct
       };
 
     case ReservationActionTypes.ADD_RESERVATION_FAILURE:
-    case ReservationActionTypes.GET_TRAINER_RESERVATIONS_FAILURE:
-    case ReservationActionTypes.GET_USER_RESERVATIONS_FAILURE:
+    case ReservationActionTypes.GET_RESERVATIONS_FAILURE:
       return {
         ...state,
         isFetching: false,

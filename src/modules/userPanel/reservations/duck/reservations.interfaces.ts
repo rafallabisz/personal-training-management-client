@@ -24,29 +24,16 @@ export interface AddReservationFailureAction {
   payload: string;
 }
 
-export interface GetTrainerReservationsRequestAction {
-  type: ReservationActionTypes.GET_TRAINER_RESERVATIONS_REQUEST;
+export interface GetReservationsRequestAction {
+  type: ReservationActionTypes.GET_RESERVATIONS_REQUEST;
 }
 
-export interface GetTrainerReservationsSuccessAction {
-  type: ReservationActionTypes.GET_TRAINER_RESERVATIONS_SUCCESS;
+export interface GetReservationsSuccessAction {
+  type: ReservationActionTypes.GET_RESERVATIONS_SUCCESS;
   payload: Reservation[];
 }
-export interface GetTrainerReservationsFailureAction {
-  type: ReservationActionTypes.GET_TRAINER_RESERVATIONS_FAILURE;
-  payload: string;
-}
-
-export interface GetUserReservationsRequestAction {
-  type: ReservationActionTypes.GET_USER_RESERVATIONS_REQUEST;
-}
-
-export interface GetUserReservationsSuccessAction {
-  type: ReservationActionTypes.GET_USER_RESERVATIONS_SUCCESS;
-  payload: Reservation[];
-}
-export interface GetUserReservationsFailureAction {
-  type: ReservationActionTypes.GET_USER_RESERVATIONS_FAILURE;
+export interface GetReservationsFailureAction {
+  type: ReservationActionTypes.GET_RESERVATIONS_FAILURE;
   payload: string;
 }
 
@@ -54,12 +41,9 @@ export type ReservationActions =
   | AddReservationRequestAction
   | AddReservationSuccessAction
   | AddReservationFailureAction
-  | GetTrainerReservationsRequestAction
-  | GetTrainerReservationsSuccessAction
-  | GetTrainerReservationsFailureAction
-  | GetUserReservationsRequestAction
-  | GetUserReservationsSuccessAction
-  | GetUserReservationsFailureAction;
+  | GetReservationsRequestAction
+  | GetReservationsSuccessAction
+  | GetReservationsFailureAction;
 
 /**=== Reducer Reservation Interface */
 
