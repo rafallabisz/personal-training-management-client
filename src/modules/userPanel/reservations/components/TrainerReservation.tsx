@@ -22,11 +22,13 @@ import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import { FormGroup, Input } from "reactstrap";
-import { ReserveData } from "../../trainersView/components/userPanelTypes";
-import { useSelector } from "react-redux";
+import { FormGroup, Input, Alert } from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
-import { roundedDateForward } from "../../../../utils/roundedDate";
+import { addReservationActionCreator } from "../duck/reservations.operations";
+import { Reservation } from "../duck/reservations.interfaces";
+import useDidMount from "../../../../hooks/useDidMount";
+import AlertMessage from "../../../../utils/AlertMessage";
 
 interface TrainerReservationProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,8 +36,10 @@ interface TrainerReservationProps {
 
 const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetails }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { firstName, lastName } = useSelector((state: Store) => state.user.currentUser!);
+  const { isFetching, error } = useSelector((state: Store) => state.reservations);
   const [openComments, setOpenComments] = useState<boolean>(false);
   const [selectDate, setSelectDate] = useState<Date | null>(null);
   const [selectTrainingType, setSelectTrainingType] = useState<string>("");
@@ -47,7 +51,9 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
     reserveDate: new Date()
   };
 
-  const [reserveData, setReserveData] = useState<ReserveData>(defaultReserveData);
+  const [reserveData, setReserveData] = useState<Reservation>(defaultReserveData);
+
+  //do dispatcha w action creator podac userid i trainerid i zobaczyc czy da sie to tak wysylac na raz
 
   const handleClickOpenComments = () => {
     setOpenComments(true);
@@ -77,7 +83,12 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
     }
   };
 
-  console.log(reserveData, "=--reserveData");
+  const handleAddReservation = () => {
+    if (selectedTrainer) {
+      const trainerId = selectedTrainer._id;
+      dispatch(addReservationActionCreator(trainerId, reserveData));
+    }
+  };
 
   return (
     <>
@@ -173,7 +184,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
               </FormGroup>
 
               <Button
-                // onClick={() => handleClickOpenComments()}
+                onClick={() => handleAddReservation()}
                 variant="contained"
                 color="primary"
                 size="small"
@@ -186,6 +197,9 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
             </CardActions>
           </Card>
           <CommentsModal handleClickCloseComments={handleClickCloseComments} openComments={openComments} />
+          <AlertMessage isFetching={isFetching} errorTxt="Error occured!" error={error}>
+            Reservation added successfully!
+          </AlertMessage>
         </>
       )}
     </>

@@ -6,6 +6,7 @@ import {
 } from "../../panel/duck/panel.interface";
 import { CommentReducerState } from "../../userPanel/comments/duck/comments.interfaces";
 import { OfferReducerState } from "../../trainerPanel/offerView/duck/offers.interfaces";
+import { ReservationReducerState } from "../../userPanel/reservations/duck/reservations.interfaces";
 
 export interface SignInCredentials {
   email: string;
@@ -112,4 +113,5 @@ export interface Store {
   user: AuthReducerState;
   trainerComments: CommentReducerState;
   trainerOffers: OfferReducerState;
+  reservations:ReservationReducerState
 }
