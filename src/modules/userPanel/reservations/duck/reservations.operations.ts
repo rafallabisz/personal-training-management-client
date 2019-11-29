@@ -13,12 +13,14 @@ import { sendNewReservation, fetchReservations } from "./reservations.service";
 import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
 
 export const addReservationActionCreator: ActionCreator<ThunkAction<Promise<Action>, any, any, AnyAction>> = (
-  id: string,
+  trainerId: string,
+  userId: string,
   reservation: Reservation
 ) => async (dispatch: Dispatch) => {
   dispatch(addReservationRequest());
   try {
-    await sendNewReservation(id, reservation);
+    await sendNewReservation(trainerId, reservation);
+    await sendNewReservation(userId, reservation);
     return dispatch(addReservationSuccess());
   } catch (error) {
     return dispatch(addReservationFailure(error.message));

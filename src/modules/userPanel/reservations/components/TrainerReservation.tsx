@@ -38,7 +38,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   const classes = useStyles();
   const dispatch = useDispatch();
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
-  const { firstName, lastName } = useSelector((state: Store) => state.user.currentUser!);
+  const { firstName, lastName, _id } = useSelector((state: Store) => state.user.currentUser!);
   const { isFetching, error } = useSelector((state: Store) => state.reservations);
   const [openComments, setOpenComments] = useState<boolean>(false);
   const [selectDate, setSelectDate] = useState<Date | null>(null);
@@ -52,8 +52,6 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   };
 
   const [reserveData, setReserveData] = useState<Reservation>(defaultReserveData);
-
-  //do dispatcha w action creator podac userid i trainerid i zobaczyc czy da sie to tak wysylac na raz
 
   const handleClickOpenComments = () => {
     setOpenComments(true);
@@ -86,7 +84,8 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   const handleAddReservation = () => {
     if (selectedTrainer) {
       const trainerId = selectedTrainer._id;
-      dispatch(addReservationActionCreator(trainerId, reserveData));
+      const userId = _id;
+      dispatch(addReservationActionCreator(trainerId, userId, reserveData));
     }
   };
 
@@ -197,7 +196,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
             </CardActions>
           </Card>
           <CommentsModal handleClickCloseComments={handleClickCloseComments} openComments={openComments} />
-          <AlertMessage isFetching={isFetching} errorTxt="Error occured!" error={error}>
+          <AlertMessage isFetching={isFetching} errorTxt="Error occured!">
             Reservation added successfully!
           </AlertMessage>
         </>
