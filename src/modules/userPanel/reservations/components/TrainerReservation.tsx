@@ -22,13 +22,13 @@ import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
 import { setHours, setMinutes } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import { FormGroup, Input, Alert } from "reactstrap";
+import { FormGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
 import { addReservationActionCreator } from "../duck/reservations.operations";
 import { Reservation } from "../duck/reservations.interfaces";
-import useDidMount from "../../../../hooks/useDidMount";
 import AlertMessage from "../../../../utils/AlertMessage";
+import LoadingContainer from "../../../../utils/LoadingContainer";
 
 interface TrainerReservationProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -90,7 +90,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   };
 
   return (
-    <>
+    <LoadingContainer isFetching={isFetching}>
       {selectedTrainer !== undefined && (
         <>
           <Card className={classes.card}>
@@ -201,7 +201,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
           </AlertMessage>
         </>
       )}
-    </>
+    </LoadingContainer>
   );
 };
 export default TrainerReservation;
