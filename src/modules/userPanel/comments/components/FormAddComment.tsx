@@ -42,6 +42,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
     const trainerId = selectedTrainer!._id;
     dispatch(addCommentActionCreator(trainerId, commentsForm));
   };
+
   return (
     <LoadingContainer isFetching={isFetching}>
       <Card className={classes.card}>
@@ -86,7 +87,13 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
             </Button>
           </Grid>
         </CardActions>
-        <AlertMessage isFetching={isFetching}>Comment has been added successfully!</AlertMessage>
+        <AlertMessage
+          isFetching={isFetching}
+          error={!commentsForm.author || !commentsForm.content ? "err" : undefined}
+          errorTxt="Fill in the empty fields!"
+        >
+          Comment has been added successfully!
+        </AlertMessage>
       </Card>
     </LoadingContainer>
   );
