@@ -1,5 +1,5 @@
 import moment from "moment";
 
-export const formatDate = (date: Date) => {
-  return moment(date).format("MMM Do YY, h:mm:ss a");
+export const formatDate = (date: Date, format = "MMM Do YY, h:mm:ss a") => {
+  return moment(date).format(format);
 };

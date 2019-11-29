@@ -9,6 +9,7 @@ export interface Reservation {
 }
 
 export interface ReservationResponse {
+  _id: string;
   firstName: string;
   lastName: string;
   selectTrainingType: string;
