@@ -4,9 +4,12 @@ import useStyles from "./FormAddComment.styles";
 import Rating from "@material-ui/lab/Rating";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { AddComment } from "../duck/comments.interfaces";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCommentActionCreator } from "../duck/comments.operations";
 import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
+import { Store } from "../../../auth/duck/auth.interfaces";
+import AlertMessage from "../../../../utils/AlertMessage";
+import LoadingContainer from "../../../../utils/LoadingContainer";
 
 interface FormAddCommentProps {}
 
@@ -14,6 +17,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  const { isFetching } = useSelector((state: Store) => state.trainerComments);
   const [valueRating, setValueRating] = useState<number>(5);
 
   const initCommentsForm = {
@@ -39,49 +43,52 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
     dispatch(addCommentActionCreator(trainerId, commentsForm));
   };
   return (
-    <Card className={classes.card}>
-      <CardActions>
-        <Grid container direction="column" justify="flex-start" alignItems="flex-start">
-          <Typography>Your rating</Typography>
-          <Rating
-            name="simple-controlled"
-            value={valueRating}
-            precision={0.5}
-            onChange={(event: React.ChangeEvent<{}>, newValue: number) => {
-              setValueRating(newValue);
-            }}
-          />
-          <TextField
-            id="filled-search"
-            label="Author"
-            type="search"
-            name="author"
-            className={classes.textFieldAuthor}
-            margin="normal"
-            onChange={handleChange}
-          />
-          <TextField
-            id="standard-multiline-static"
-            label="Comment"
-            name="content"
-            multiline
-            rows="3"
-            className={classes.textField}
-            margin="normal"
-            onChange={handleChange}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => handleAddComment()}
-            startIcon={<AddCircleIcon />}
-          >
-            Add comment
-          </Button>
-        </Grid>
-      </CardActions>
-    </Card>
+    <LoadingContainer isFetching={isFetching}>
+      <Card className={classes.card}>
+        <CardActions>
+          <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+            <Typography>Your rating</Typography>
+            <Rating
+              name="simple-controlled"
+              value={valueRating}
+              precision={0.5}
+              onChange={(event: React.ChangeEvent<{}>, newValue: number) => {
+                setValueRating(newValue);
+              }}
+            />
+            <TextField
+              id="filled-search"
+              label="Author"
+              type="search"
+              name="author"
+              className={classes.textFieldAuthor}
+              margin="normal"
+              onChange={handleChange}
+            />
+            <TextField
+              id="standard-multiline-static"
+              label="Comment"
+              name="content"
+              multiline
+              rows="3"
+              className={classes.textField}
+              margin="normal"
+              onChange={handleChange}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => handleAddComment()}
+              startIcon={<AddCircleIcon />}
+            >
+              Add comment
+            </Button>
+          </Grid>
+        </CardActions>
+        <AlertMessage isFetching={isFetching}>Comment has been added successfully!</AlertMessage>
+      </Card>
+    </LoadingContainer>
   );
 };
 export default FormAddComment;
