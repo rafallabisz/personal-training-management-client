@@ -6,6 +6,8 @@ export interface Reservation {
   lastName: string;
   selectTrainingType: string;
   reserveDate: Date;
+  firstNameTrainer: string;
+  lastNameTrainer: string;
 }
 
 export interface ReservationResponse {
@@ -14,6 +16,8 @@ export interface ReservationResponse {
   lastName: string;
   selectTrainingType: string;
   reserveDate: Date;
+  firstNameTrainer: string;
+  lastNameTrainer: string;
   trainer: UserData;
 }
 

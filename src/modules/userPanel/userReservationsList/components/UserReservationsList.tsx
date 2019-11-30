@@ -29,14 +29,15 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
               <TableCell>Trainer name</TableCell>
               <TableCell>Selected training</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell />
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {reservations.map(reservation => (
               <TableRow key={reservation._id} hover>
                 <TableCell component="th" scope="row">
-                  {reservation.firstName} {reservation.lastName}
+                  {reservation.firstNameTrainer} {reservation.lastNameTrainer}
+                  {console.log(reservation)}
                 </TableCell>
                 <TableCell>{reservation.selectTrainingType}</TableCell>
                 <TableCell>{formatDate(reservation.reserveDate, "Do MMMM YYYY, h:mm:ss a")}</TableCell>
