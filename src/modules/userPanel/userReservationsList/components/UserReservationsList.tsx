@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import useStylesUserReservationsList from "./UserReservationsList.styles";
-import { CardContent, Card, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
+import { CardContent, Card, Table, TableHead, TableRow, TableCell, TableBody, Tooltip } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getReservationsActionCreator } from "../../reservations/duck/reservations.operations";
 import { Store } from "../../../auth/duck/auth.interfaces";
 import { formatDate } from "../../../../utils/formatDate";
 import LoadingContainer from "../../../../utils/LoadingContainer";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 interface UserReservationsListProps {}
 
@@ -28,6 +29,7 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
               <TableCell>Trainer name</TableCell>
               <TableCell>Selected training</TableCell>
               <TableCell>Date</TableCell>
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
@@ -38,6 +40,11 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
                 </TableCell>
                 <TableCell>{reservation.selectTrainingType}</TableCell>
                 <TableCell>{formatDate(reservation.reserveDate, "Do MMMM YYYY, h:mm:ss a")}</TableCell>
+                <TableCell>
+                  <Tooltip title="Delete">
+                    <DeleteForeverIcon className={classes.iconExit} />
+                  </Tooltip>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

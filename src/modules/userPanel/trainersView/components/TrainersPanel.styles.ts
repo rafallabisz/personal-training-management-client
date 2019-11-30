@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) =>
       // marginTop: "30px"
     },
     containerCardTrainers: {
+      minHeight: "116px",
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gridRowGap: "35px",

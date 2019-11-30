@@ -17,6 +17,14 @@ const useStylesUserReservationsList = makeStyles((theme: Theme) =>
     },
     table: {
       minWidth: 650
+    },
+    iconExit: {
+      color: theme.palette.error.main,
+      transition: ".1s linear",
+      "&:hover": {
+        cursor: "pointer",
+        color: theme.palette.error.dark
+      }
     }
   })
 );

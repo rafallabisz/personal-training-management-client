@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "16px"
     },
     content: {
+      overflow: "hidden",
       flexGrow: 1,
       padding: theme.spacing(3),
       marginTop: "30px"
