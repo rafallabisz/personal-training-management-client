@@ -27,9 +27,9 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
           <TableHead>
             <TableRow>
               <TableCell>Trainer name</TableCell>
+              <TableCell>Phone</TableCell>
               <TableCell>Selected training</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -37,15 +37,10 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
               <TableRow key={reservation._id} hover>
                 <TableCell component="th" scope="row">
                   {reservation.firstNameTrainer} {reservation.lastNameTrainer}
-                  {console.log(reservation)}
-                </TableCell>
+                        </TableCell>
+            <TableCell>{reservation.trainerPhone}</TableCell>
                 <TableCell>{reservation.selectTrainingType}</TableCell>
                 <TableCell>{formatDate(reservation.reserveDate, "Do MMMM YYYY, h:mm:ss a")}</TableCell>
-                <TableCell>
-                  <Tooltip title="Delete">
-                    <DeleteForeverIcon className={classes.iconExit} />
-                  </Tooltip>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

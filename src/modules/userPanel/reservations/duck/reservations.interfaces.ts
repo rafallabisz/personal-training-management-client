@@ -8,6 +8,7 @@ export interface Reservation {
   reserveDate: Date;
   firstNameTrainer: string;
   lastNameTrainer: string;
+  trainerPhone: number;
 }
 
 export interface ReservationResponse {
@@ -18,6 +19,7 @@ export interface ReservationResponse {
   reserveDate: Date;
   firstNameTrainer: string;
   lastNameTrainer: string;
+  trainerPhone: number;
   trainer: UserData;
 }
 

@@ -50,7 +50,8 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
     selectTrainingType: "",
     reserveDate: new Date(),
     firstNameTrainer: selectedTrainer!.firstName,
-    lastNameTrainer: selectedTrainer!.lastName
+    lastNameTrainer: selectedTrainer!.lastName,
+    trainerPhone: selectedTrainer!.data.phone
   };
 
   const [reserveData, setReserveData] = useState<Reservation>(defaultReserveData);
