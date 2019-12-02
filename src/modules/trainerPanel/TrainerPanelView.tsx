@@ -16,7 +16,6 @@ const TrainerPanelView: React.FC<TrainerPanelViewProps> = props => {
   return (
     <PanelTemplate value={value} setValue={setValue} listMenu={listMenu}>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
         <TabPanel value={value} index={0}>
           <OfferPanel />
         </TabPanel>

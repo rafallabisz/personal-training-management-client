@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowY: "auto"
     },
     card: {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.secondary.light,
+      border: "1px solid #949494d9",
       paddingBottom: "10px",
       width: "35vw"
     },
