@@ -125,6 +125,19 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
 
             <Grid item xs={12} sm={6}>
               <TextField
+                // id="filled-search"
+                label="Select photo"
+                type="file"
+                name="file"
+                className={classes.textField}
+                margin="normal"
+                // defaultValue={data ? data.city : undefined}
+                // onChange={handleChangeInput}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
                 id="filled-search"
                 label="Password"
                 type="password"
