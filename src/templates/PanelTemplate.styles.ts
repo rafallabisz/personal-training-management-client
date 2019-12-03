@@ -103,6 +103,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     btnSignOut: {
       padding: "6px 20px"
+    },
+    avatarSideMenu: {
+      width: "25px",
+      borderRadius: "50%"
     }
   })
 );

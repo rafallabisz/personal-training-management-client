@@ -89,7 +89,13 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
         <List className={classes.listDrawer}>
           <ListItem>
             <Tooltip title="Name">
-              <ListItemIcon>{<AccountCircleIcon />}</ListItemIcon>
+              <ListItemIcon>
+                {currentUser.data ? (
+                  <img src={currentUser.data.avatar} className={classes.avatarSideMenu} />
+                ) : (
+                  <AccountCircleIcon />
+                )}
+              </ListItemIcon>
             </Tooltip>
             <ListItemText primary={`${currentUser.firstName} ${currentUser.lastName}`} />
           </ListItem>
