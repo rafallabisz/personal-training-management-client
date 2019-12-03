@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
     btnMoreDetails: {
       marginLeft: "8px"
+    },
+    avatarCard: {
+      width: "50px",
+      borderRadius: "50%"
     }
   })
 );

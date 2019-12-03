@@ -27,7 +27,14 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
             }}
           >
             <CardHeader
-              avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
+              // avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
+              avatar={
+                trainerData.data ? (
+                  <img src={trainerData.data.avatar} className={classes.avatarCard} />
+                ) : (
+                  <Avatar>{<AccountCircleIcon />}</Avatar>
+                )
+              }
               // action={}
               title={`${trainerData.firstName} ${trainerData.lastName}, ${
                 trainerData.data ? trainerData.data.age : "-"
@@ -35,7 +42,7 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
               subheader={trainerData.data ? trainerData.data.city : "-"}
               className={classes.cardHeader}
             />
-            <CardContent className={classes.cardContent}>
+            <CardContent className={classes.cardContent} style={{ paddingBottom: "0" }}>
               <ul className={classes.offerList}>
                 {trainerData.offers.map(offer => (
                   <li key={offer._id} className={classes.offerListItem}>

@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "6px 20px"
     },
     avatarSideMenu: {
-      width: "25px",
+      width: "28px",
       borderRadius: "50%"
     }
   })
