@@ -29,7 +29,7 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
             <CardHeader
               // avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
               avatar={
-                trainerData.data ? (
+                trainerData.data.avatar ? (
                   <img src={trainerData.data.avatar} className={classes.avatarCard} />
                 ) : (
                   <Avatar>{<AccountCircleIcon />}</Avatar>
@@ -37,9 +37,9 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
               }
               // action={}
               title={`${trainerData.firstName} ${trainerData.lastName}, ${
-                trainerData.data ? trainerData.data.age : "-"
+                trainerData.data.age ? trainerData.data.age : "-"
               }`}
-              subheader={trainerData.data ? trainerData.data.city : "-"}
+              subheader={trainerData.data.city ? trainerData.data.city : "-"}
               className={classes.cardHeader}
             />
             <CardContent className={classes.cardContent} style={{ paddingBottom: "0" }}>

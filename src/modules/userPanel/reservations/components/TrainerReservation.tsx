@@ -113,17 +113,17 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
 
                 <ListItem style={{ padding: "2px 0px" }}>
                   <ListItemIcon className={classes.listItemIcon}>{<DateRangeIcon />}</ListItemIcon>
-                  <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.age : "-"} />
+                  <ListItemText primary={selectedTrainer.data.age ? selectedTrainer.data.age : "-"} />
                 </ListItem>
 
                 <ListItem style={{ padding: "2px 0px" }}>
                   <ListItemIcon className={classes.listItemIcon}>{<LocationOnIcon />}</ListItemIcon>
-                  <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.city : "-"} />
+                  <ListItemText primary={selectedTrainer.data.city ? selectedTrainer.data.city : "-"} />
                 </ListItem>
 
                 <ListItem style={{ padding: "2px 0px" }}>
                   <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
-                  <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.phone : "-"} />
+                  <ListItemText primary={selectedTrainer.data.phone ? selectedTrainer.data.phone : "-"} />
                 </ListItem>
                 <ListItem style={{ padding: "2px 0px" }}>
                   <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
@@ -141,18 +141,6 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
               </div>
             </CardContent>
 
-            {/* <div className={classes.wrapDataTrainer}> */}
-
-            {/* <CardContent className={classes.cardContent}>
-                <List className={classes.list}>
-                  {selectedTrainer.offers.map(offer => (
-                    <ListItem key={offer._id}>
-                      <ListItemText primary={offer.description} />
-                    </ListItem>
-                  ))}
-                </List>
-              </CardContent> */}
-            {/* </div> */}
             <CardActions>
               <Button
                 variant="contained"
