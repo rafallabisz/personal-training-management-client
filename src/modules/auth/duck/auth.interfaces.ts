@@ -34,6 +34,7 @@ export interface UserData {
     age: number;
     city: string;
     phone: number;
+    avatar:string;
   };
   offers: [
     {

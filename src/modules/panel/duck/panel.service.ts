@@ -11,7 +11,8 @@ export const panelUpdateUser = (userId: string, settingsData: SettingsData): Axi
     data: {
       age: settingsData.data.age,
       city: settingsData.data.city,
-      phone: settingsData.data.phone
+      phone: settingsData.data.phone,
+      avatar:settingsData.data.avatar
     }
   });
 };

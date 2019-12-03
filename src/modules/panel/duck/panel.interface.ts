@@ -10,6 +10,7 @@ export interface SettingsData {
     age?: number;
     city?: string;
     phone?: number;
+    avatar?:string;
   };
 }
 

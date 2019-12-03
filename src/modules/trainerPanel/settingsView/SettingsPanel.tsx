@@ -6,6 +6,8 @@ import { SettingsData } from "../../panel/duck/panel.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { panelUpdateUserActionCreator } from "../../panel/duck/panel.operations";
+import imageUtility from "../../../utils/imageUtility";
+import { unwrapResponseData } from "../../../utils/unwrapResponseData";
 
 interface SettingsPanelProps {}
 
@@ -20,7 +22,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
     data: {
       age: data ? data.age : undefined,
       city: data ? data.city : undefined,
-      phone: data ? data.phone : undefined
+      phone: data ? data.phone : undefined,
+      avatar: data ? data.avatar : undefined
     }
   };
   const [settingsData, setSettingData] = useState<SettingsData>(initSettingsData);
@@ -35,6 +38,15 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
       setSettingData({
         ...settingsData,
         [e.target.name]: e.target.value
+      });
+    }
+  };
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files) {
+      setSettingData({
+        ...settingsData,
+        data: { ...settingsData.data, avatar: await imageUtility.toBase64(e.currentTarget.files[0]) }
       });
     }
   };
@@ -124,24 +136,16 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField
-                // id="filled-search"
-                label="Select photo"
-                type="file"
-                name="file"
-                className={classes.textField}
-                margin="normal"
-                // defaultValue={data ? data.city : undefined}
-                // onChange={handleChangeInput}
-              />
+              <input className={classes.textField} type="file" name="avatar" onChange={e => handleAvatarChange(e)} />
+              <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} />
             </Grid>
-
             <Grid item xs={12} sm={6}>
               <TextField
                 id="filled-search"
-                label="Password"
+                label="Confirm password"
                 type="password"
                 name="password"
+                error={settingsData.password === "" || settingsData.password === undefined}
                 className={classes.textField}
                 margin="normal"
                 autoComplete="current-password"

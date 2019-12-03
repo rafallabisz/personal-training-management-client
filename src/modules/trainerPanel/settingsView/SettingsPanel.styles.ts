@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
     btnSave: {
       marginLeft: "8px",
       marginTop: "4px"
+    },
+    avatar: {
+      margin: "5px 8px 0"
     }
   })
 );
