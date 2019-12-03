@@ -69,6 +69,16 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#0E4686",
         cursor: "pointer"
       }
+    },
+    avatarReservation: {
+      width: "170px"
+    },
+    offerList: {
+      listStyleType: "square"
+    },
+
+    offerListItem: {
+      marginLeft: "30px"
     }
   })
 );

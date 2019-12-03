@@ -29,6 +29,8 @@ import { addReservationActionCreator } from "../duck/reservations.operations";
 import { Reservation } from "../duck/reservations.interfaces";
 import AlertMessage from "../../../../utils/AlertMessage";
 import LoadingContainer from "../../../../utils/LoadingContainer";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import DateRangeIcon from "@material-ui/icons/DateRange";
 
 interface TrainerReservationProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -97,32 +99,51 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
       {selectedTrainer !== undefined && (
         <>
           <Card className={classes.card}>
-            <CardHeader
-              avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
-              // action={}
-              title={`${selectedTrainer.firstName} ${selectedTrainer.lastName}, ${
-                selectedTrainer.data ? selectedTrainer.data.age : "-"
-              }`}
-              subheader={selectedTrainer.data ? selectedTrainer.data.city : "-"}
-              className={classes.cardHeader}
-            />
+            <CardContent style={{ display: "flex", paddingBottom: "5px" }}>
+              <div>
+                {selectedTrainer.data ? (
+                  <img src={selectedTrainer.data.avatar} className={classes.avatarReservation} alt="avatar" />
+                ) : (
+                  <Avatar>{<AccountCircleIcon />}</Avatar>
+                )}
+              </div>
 
-            <div className={classes.wrapDataTrainer}>
-              <CardContent className={classes.cardContent}>
-                <List className={classes.list}>
-                  <ListItem>
-                    <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
-                    <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.phone : "-"} />
-                  </ListItem>
+              <div style={{ display: "flex", flexDirection: "column", margin: "0 20px" }}>
+                <span style={{ padding: "2px 0px" }}>{`${selectedTrainer.firstName} ${selectedTrainer.lastName}`}</span>
 
-                  <ListItem>
-                    <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
-                    <ListItemText primary={selectedTrainer.email} />
-                  </ListItem>
-                </List>
-              </CardContent>
+                <ListItem style={{ padding: "2px 0px" }}>
+                  <ListItemIcon className={classes.listItemIcon}>{<DateRangeIcon />}</ListItemIcon>
+                  <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.age : "-"} />
+                </ListItem>
 
-              <CardContent className={classes.cardContent}>
+                <ListItem style={{ padding: "2px 0px" }}>
+                  <ListItemIcon className={classes.listItemIcon}>{<LocationOnIcon />}</ListItemIcon>
+                  <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.city : "-"} />
+                </ListItem>
+
+                <ListItem style={{ padding: "2px 0px" }}>
+                  <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
+                  <ListItemText primary={selectedTrainer.data ? selectedTrainer.data.phone : "-"} />
+                </ListItem>
+                <ListItem style={{ padding: "2px 0px" }}>
+                  <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
+                  <ListItemText primary={selectedTrainer.email} />
+                </ListItem>
+              </div>
+              <div>
+                <ul className={classes.offerList}>
+                  {selectedTrainer.offers.map(offer => (
+                    <li style={{ padding: "2px 0px" }} key={offer._id} className={classes.offerListItem}>
+                      {offer.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </CardContent>
+
+            {/* <div className={classes.wrapDataTrainer}> */}
+
+            {/* <CardContent className={classes.cardContent}>
                 <List className={classes.list}>
                   {selectedTrainer.offers.map(offer => (
                     <ListItem key={offer._id}>
@@ -130,8 +151,8 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
                     </ListItem>
                   ))}
                 </List>
-              </CardContent>
-            </div>
+              </CardContent> */}
+            {/* </div> */}
             <CardActions>
               <Button
                 variant="contained"
