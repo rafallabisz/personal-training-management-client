@@ -9,15 +9,18 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "15px",
       border: "1px solid #949494d9"
     },
-    wrapDataTrainer: {
-      display: "flex"
+    cardContentWrap: {
+      display: "flex",
+      paddingBottom: "5px"
+    },
+    containerTrainerData: {
+      display: "flex",
+      flexDirection: "column",
+      margin: "0 20px"
     },
 
-    cardHeader: {
-      paddingBottom: 0
-    },
-    cardContent: {
-      padding: 0
+    listItem: {
+      padding: "2px 0px"
     },
     list: {
       padding: 0
@@ -78,7 +81,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     offerListItem: {
-      marginLeft: "30px"
+      marginLeft: "30px",
+      padding: "2px 0px"
     }
   })
 );

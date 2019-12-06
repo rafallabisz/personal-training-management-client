@@ -2,10 +2,8 @@ import React, { useContext, useState } from "react";
 import useStyles from "./TrainerReservation.styles";
 import {
   Card,
-  CardHeader,
   Avatar,
   CardContent,
-  List,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -99,7 +97,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
       {selectedTrainer !== undefined && (
         <>
           <Card className={classes.card}>
-            <CardContent style={{ display: "flex", paddingBottom: "5px" }}>
+            <CardContent className={classes.cardContentWrap}>
               <div>
                 {selectedTrainer.data ? (
                   <img src={selectedTrainer.data.avatar} className={classes.avatarReservation} alt="avatar" />
@@ -108,24 +106,24 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
                 )}
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", margin: "0 20px" }}>
-                <span style={{ padding: "2px 0px" }}>{`${selectedTrainer.firstName} ${selectedTrainer.lastName}`}</span>
+              <div className={classes.containerTrainerData}>
+                <span className={classes.listItem}>{`${selectedTrainer.firstName} ${selectedTrainer.lastName}`}</span>
 
-                <ListItem style={{ padding: "2px 0px" }}>
+                <ListItem className={classes.listItem}>
                   <ListItemIcon className={classes.listItemIcon}>{<DateRangeIcon />}</ListItemIcon>
                   <ListItemText primary={selectedTrainer.data.age ? selectedTrainer.data.age : "-"} />
                 </ListItem>
 
-                <ListItem style={{ padding: "2px 0px" }}>
+                <ListItem className={classes.listItem}>
                   <ListItemIcon className={classes.listItemIcon}>{<LocationOnIcon />}</ListItemIcon>
                   <ListItemText primary={selectedTrainer.data.city ? selectedTrainer.data.city : "-"} />
                 </ListItem>
 
-                <ListItem style={{ padding: "2px 0px" }}>
+                <ListItem className={classes.listItem}>
                   <ListItemIcon className={classes.listItemIcon}>{<PhoneIcon />}</ListItemIcon>
                   <ListItemText primary={selectedTrainer.data.phone ? selectedTrainer.data.phone : "-"} />
                 </ListItem>
-                <ListItem style={{ padding: "2px 0px" }}>
+                <ListItem className={classes.listItem}>
                   <ListItemIcon className={classes.listItemIcon}>{<EmailIcon />}</ListItemIcon>
                   <ListItemText primary={selectedTrainer.email} />
                 </ListItem>
@@ -133,7 +131,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
               <div>
                 <ul className={classes.offerList}>
                   {selectedTrainer.offers.map(offer => (
-                    <li style={{ padding: "2px 0px" }} key={offer._id} className={classes.offerListItem}>
+                    <li key={offer._id} className={classes.offerListItem}>
                       {offer.description}
                     </li>
                   ))}
