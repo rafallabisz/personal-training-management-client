@@ -34,7 +34,7 @@ export interface UserData {
     age: number;
     city: string;
     phone: number;
-    avatar:string;
+    avatar: string;
   };
   offers: [
     {
@@ -114,5 +114,5 @@ export interface Store {
   user: AuthReducerState;
   trainerComments: CommentReducerState;
   trainerOffers: OfferReducerState;
-  reservations:ReservationReducerState
+  reservations: ReservationReducerState;
 }

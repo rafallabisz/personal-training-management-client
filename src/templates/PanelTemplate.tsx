@@ -90,7 +90,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           <ListItem>
             <Tooltip title="Name">
               <ListItemIcon>
-                {currentUser.data.avatar ? (
+                {currentUser.data && currentUser.data.avatar ? (
                   <img src={currentUser.data.avatar} className={classes.avatarSideMenu} />
                 ) : (
                   <AccountCircleIcon />
@@ -104,21 +104,21 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
             <Tooltip title="City">
               <ListItemIcon>{<LocationOnIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary={currentUser.data.city ? currentUser.data.city : "-"} />
+            <ListItemText primary={currentUser.data && currentUser.data.city ? currentUser.data.city : "-"} />
           </ListItem>
 
           <ListItem>
             <Tooltip title="Age">
               <ListItemIcon>{<DateRangeIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary={currentUser.data.age ? currentUser.data.age : "-"} />
+            <ListItemText primary={currentUser.data && currentUser.data.age ? currentUser.data.age : "-"} />
           </ListItem>
 
           <ListItem>
             <Tooltip title="Phone">
               <ListItemIcon>{<PhoneIcon />}</ListItemIcon>
             </Tooltip>
-            <ListItemText primary={currentUser.data.phone ? currentUser.data.phone : "-"} />
+            <ListItemText primary={currentUser.data && currentUser.data.phone ? currentUser.data.phone : "-"} />
           </ListItem>
 
           <ListItem>

@@ -18,7 +18,7 @@ import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
 import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
-import { setHours, setMinutes, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { FormGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -45,7 +45,8 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   const [openComments, setOpenComments] = useState<boolean>(false);
   const [selectDate, setSelectDate] = useState<Date | null>(null);
   const [selectTrainingType, setSelectTrainingType] = useState<string>("");
-  const [excludeTimes, setExcludeTimes] = useState<Date[] | undefined>(undefined);
+  const [excludeTimesCollection, setExcludeTimesCollection] = useState<Date[]>([]);
+  const [dayBasedExcludeCollection, setDayBasedExcludeCollection] = useState<Date[]>([]);
 
   const defaultReserveData = {
     firstName,
@@ -83,6 +84,9 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
 
   const handleDatePicker = (date: Date | null, name: string) => {
     if (date) {
+      const excludeCollection = [...excludeTimesCollection];
+      let filtered = excludeCollection.filter(e => e.getDate() === date.getDate());
+      setDayBasedExcludeCollection(filtered);
       setSelectDate(date);
       setReserveData({
         ...reserveData,
@@ -106,9 +110,11 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
       .then(unwrapResponseData);
     const excludeTimes = res.map(x => {
       let date = x.reserveDate.toString();
+      console.log(date);
+
       return parseISO(date);
     });
-    setExcludeTimes(excludeTimes);
+    setExcludeTimesCollection(excludeTimes);
     console.log(excludeTimes, "--exclude");
   };
 
@@ -189,7 +195,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
                 timeIntervals={60}
                 placeholderText="Select training date"
                 minDate={new Date()}
-                excludeTimes={excludeTimes}
+                excludeTimes={dayBasedExcludeCollection}
                 onInputClick={() => fetchExcludeTimes()}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
