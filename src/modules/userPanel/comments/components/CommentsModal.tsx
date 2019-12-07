@@ -74,8 +74,8 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
           </Grid>
           <DialogContent dividers>
             <Typography gutterBottom>
-              {commentsList.map((comment: CommentsResponse) => (
-                <Card className={classes.dialogCard}>
+              {commentsList.map((comment: CommentsResponse, i) => (
+                <Card key={i} className={classes.dialogCard}>
                   <CardHeader
                     avatar={<Avatar>{<ChatIcon />}</Avatar>}
                     action={<span className={classes.rating}>{comment.rating}</span>}
