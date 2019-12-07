@@ -110,12 +110,9 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
       .then(unwrapResponseData);
     const excludeTimes = res.map(x => {
       let date = x.reserveDate.toString();
-      console.log(date);
-
       return parseISO(date);
     });
     setExcludeTimesCollection(excludeTimes);
-    console.log(excludeTimes, "--exclude");
   };
 
   return (

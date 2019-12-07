@@ -12,7 +12,7 @@ interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = props => {
   const dispatch = useDispatch();
-  const { isFetching, error, isAuth } = useSelector((state: Store) => state.user);
+  const { isFetching, error, isAuth, currentUser } = useSelector((state: Store) => state.user);
 
   const [loginData, setLoginData] = useState<SignInCredentials>({ email: "", password: "" });
 
@@ -35,7 +35,18 @@ const LoginForm: React.FC<LoginFormProps> = props => {
   const classes = useStyles();
   const isError = error !== undefined;
 
+  // const verificationUserTrainer = ()=>{
+  //   if(currentUser === undefined) return <Redirect to={routes.loginPage}/>
+  //   const isTrainer = currentUser.isTrainer
+  //   if(isTrainer){
+  //     return <Redirect to={routes.offers}/>
+  //   } else{
+  //     return <Redirect to={routes.trainers}/>
+  //   }
+  // }
+
   if (isAuth) {
+    // verificationUserTrainer()
     return <Redirect to={routes.main} />;
   }
   return (
