@@ -190,6 +190,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
                 placeholderText="Select training date"
                 minDate={new Date()}
                 excludeTimes={excludeTimes}
+                onInputClick={() => fetchExcludeTimes()}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
 
