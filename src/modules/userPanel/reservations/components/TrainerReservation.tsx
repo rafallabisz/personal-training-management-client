@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import useStyles from "./TrainerReservation.styles";
 import {
   Card,
@@ -18,17 +18,19 @@ import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
 import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
-import { setHours, setMinutes } from "date-fns";
+import { setHours, setMinutes, parseISO } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { FormGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../../auth/duck/auth.interfaces";
 import { addReservationActionCreator } from "../duck/reservations.operations";
-import { Reservation } from "../duck/reservations.interfaces";
+import { Reservation, ReservationResponse } from "../duck/reservations.interfaces";
 import AlertMessage from "../../../../utils/AlertMessage";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import axios from "axios";
+import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
 
 interface TrainerReservationProps {
   setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,6 +45,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   const [openComments, setOpenComments] = useState<boolean>(false);
   const [selectDate, setSelectDate] = useState<Date | null>(null);
   const [selectTrainingType, setSelectTrainingType] = useState<string>("");
+  const [excludeTimes, setExcludeTimes] = useState<Date[] | undefined>(undefined);
 
   const defaultReserveData = {
     firstName,
@@ -55,6 +58,10 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
   };
 
   const [reserveData, setReserveData] = useState<Reservation>(defaultReserveData);
+
+  useEffect(() => {
+    fetchExcludeTimes();
+  }, []);
 
   const handleClickOpenComments = () => {
     setOpenComments(true);
@@ -90,6 +97,19 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
       const userId = _id;
       dispatch(addReservationActionCreator(trainerId, userId, reserveData));
     }
+  };
+
+  const fetchExcludeTimes = async () => {
+    const id = selectedTrainer!._id;
+    const res = await axios
+      .get<ReservationResponse[]>(`http://localhost:5000/api/reservations/${id}`)
+      .then(unwrapResponseData);
+    const excludeTimes = res.map(x => {
+      let date = x.reserveDate.toString();
+      return parseISO(date);
+    });
+    setExcludeTimes(excludeTimes);
+    console.log(excludeTimes, "--exclude");
   };
 
   return (
@@ -169,12 +189,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = ({ setBtnMoreDetai
                 timeIntervals={60}
                 placeholderText="Select training date"
                 minDate={new Date()}
-                // excludeTimes={[
-                //   // setHours(setMinutes(new Date(), 0), 17),
-                //   // setHours(setMinutes(new Date(), 30), 18),
-                //   // setHours(setMinutes(new Date(), 30), 19),
-                //   // setHours(setMinutes(new Date(), 30), 17)
-                // ]}
+                excludeTimes={excludeTimes}
                 dateFormat="MMMM d, yyyy h:mm aa"
               />
 
