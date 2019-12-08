@@ -8,6 +8,7 @@ import { Store } from "../../auth/duck/auth.interfaces";
 import { panelUpdateUserActionCreator } from "../../panel/duck/panel.operations";
 import imageUtility from "../../../utils/imageUtility";
 import { unwrapResponseData } from "../../../utils/unwrapResponseData";
+import PanelTemplate from "../../../templates/PanelTemplate";
 
 interface SettingsPanelProps {}
 
@@ -57,116 +58,118 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
 
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
-      <CardContent className={classes.title}>Settings: </CardContent>
-      <CardActions>
-        <form noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="First name"
-                type="search"
-                name="firstName"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={firstName}
-                onChange={handleChangeInput}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="Last name"
-                type="search"
-                name="lastName"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={lastName}
-                onChange={handleChangeInput}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="Email"
-                type="search"
-                name="email"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={email}
-                onChange={handleChangeInput}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="Phone"
-                type="number"
-                name="phone"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={data ? data.phone : undefined}
-                onChange={handleChangeInput}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="City"
-                type="search"
-                name="city"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={data ? data.city : undefined}
-                onChange={handleChangeInput}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="Age"
-                type="number"
-                name="age"
-                className={classes.textField}
-                margin="normal"
-                defaultValue={data ? data.age : undefined}
-                onChange={handleChangeInput}
-              />
-            </Grid>
+    <PanelTemplate>
+      <Card className={classes.card}>
+        <CardContent className={classes.title}>Settings: </CardContent>
+        <CardActions>
+          <form noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="First name"
+                  type="search"
+                  name="firstName"
+                  className={classes.textField}
+                  margin="normal"
+                  defaultValue={firstName}
+                  onChange={handleChangeInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="Last name"
+                  type="search"
+                  name="lastName"
+                  className={classes.textField}
+                  margin="normal"
+                  defaultValue={lastName}
+                  onChange={handleChangeInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="Email"
+                  type="search"
+                  name="email"
+                  className={classes.textField}
+                  margin="normal"
+                  defaultValue={email}
+                  onChange={handleChangeInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="Phone"
+                  type="number"
+                  name="phone"
+                  className={classes.textField}
+                  margin="normal"
+                  defaultValue={data ? data.phone : undefined}
+                  onChange={handleChangeInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="City"
+                  type="search"
+                  name="city"
+                  className={classes.textField}
+                  margin="normal"
+                  defaultValue={data ? data.city : undefined}
+                  onChange={handleChangeInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="Age"
+                  type="number"
+                  name="age"
+                  className={classes.textField}
+                  margin="normal"
+                  defaultValue={data ? data.age : undefined}
+                  onChange={handleChangeInput}
+                />
+              </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <input className={classes.textField} type="file" name="avatar" onChange={e => handleAvatarChange(e)} />
-              <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} />
+              <Grid item xs={12} sm={6}>
+                <input className={classes.textField} type="file" name="avatar" onChange={e => handleAvatarChange(e)} />
+                <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="filled-search"
+                  label="Confirm password"
+                  type="password"
+                  name="password"
+                  error={settingsData.password === "" || settingsData.password === undefined}
+                  className={classes.textField}
+                  margin="normal"
+                  autoComplete="current-password"
+                  onChange={handleChangeInput}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="filled-search"
-                label="Confirm password"
-                type="password"
-                name="password"
-                error={settingsData.password === "" || settingsData.password === undefined}
-                className={classes.textField}
-                margin="normal"
-                autoComplete="current-password"
-                onChange={handleChangeInput}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            onClick={() => handleSaveSettingsData()}
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<SaveIcon />}
-            className={classes.btnSave}
-            disabled={settingsData.password ? false : true}
-          >
-            Save
-          </Button>
-        </form>
-      </CardActions>
-    </Card>
+            <Button
+              onClick={() => handleSaveSettingsData()}
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<SaveIcon />}
+              className={classes.btnSave}
+              disabled={settingsData.password ? false : true}
+            >
+              Save
+            </Button>
+          </form>
+        </CardActions>
+      </Card>
+    </PanelTemplate>
   );
 };
 export default SettingsPanel;

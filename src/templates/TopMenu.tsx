@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Tab, Button, Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import useStyles from "./PanelTemplate.styles";
 import { routes } from "../routes";
 import { NavLink } from "react-router-dom";
@@ -7,36 +7,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { authSignOut } from "../modules/auth/duck/auth.operations";
 import { Store } from "../modules/auth/duck/auth.interfaces";
 
-interface TopMenuProps {
-  value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
-  listMenu: string[];
+interface TopMenuProps {}
+export interface ListMenu {
+  content: string;
+  route: string;
 }
-
-const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
+const TopMenu: React.FC<TopMenuProps> = () => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state: Store) => state.user);
-
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+  const { firstName, isTrainer } = useSelector((state: Store) => state.user.currentUser!);
 
   const handleSignOut = (): void => {
     dispatch(authSignOut());
   };
   const classes = useStyles();
+  let listMenu: ListMenu[] = [];
+  if (isTrainer) {
+    listMenu = [
+      { content: "Offer", route: routes.offers },
+      { content: "Comments", route: routes.comments },
+      { content: "Settings", route: routes.settings }
+    ];
+  } else {
+    listMenu = [
+      { content: "Trainers", route: routes.main },
+      { content: "My Reservations", route: routes.myReservations },
+      { content: "Settings", route: routes.settings }
+    ];
+  }
+
   return (
     <>
       <div className={classes.wrapTopMenu}>
-        <div>
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            {listMenu.map((content, i) => (
-              <Tab label={content} {...a11yProps(i)} key={i} className={classes.tabTopMenu} />
-            ))}
-          </Tabs>
+        <div className={classes.containerNavElement}>
+          {listMenu.map((menu, i) => (
+            <NavLink to={menu.route} className={classes.navlinkMenu} key={i}>
+              <Typography className={classes.navElement}>{menu.content}</Typography>
+            </NavLink>
+          ))}
         </div>
         <div className={classes.containerRightElementsTopMenu}>
-          <Typography className={classes.typographyHello}>Hello, {currentUser!.firstName}</Typography>
+          <Typography className={classes.typographyHello}>Hello, {firstName}</Typography>
           <Button
             className={classes.btnSignOut}
             onClick={() => handleSignOut()}
@@ -50,13 +60,6 @@ const TopMenu: React.FC<TopMenuProps> = ({ value, setValue, listMenu }) => {
       </div>
     </>
   );
-};
-
-const a11yProps = (index: number) => {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
-  };
 };
 
 export default TopMenu;

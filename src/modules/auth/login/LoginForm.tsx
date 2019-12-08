@@ -4,9 +4,10 @@ import useStyles from "../AuthPage.styles";
 import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../../routes";
 import { useSelector, useDispatch } from "react-redux";
-import { Store, SignInCredentials } from "../duck/auth.interfaces";
+import { Store, SignInCredentials, UserData } from "../duck/auth.interfaces";
 import { authSignInActionCreator, authClearErrors } from "../duck/auth.operations";
 import SpinnerButton from "../../../utils/SpinnerButton";
+import VerificationWhoIsLogging from "../../../utils/VerificationWhoIsLogging";
 
 interface LoginFormProps {}
 
@@ -35,19 +36,8 @@ const LoginForm: React.FC<LoginFormProps> = props => {
   const classes = useStyles();
   const isError = error !== undefined;
 
-  // const verificationUserTrainer = ()=>{
-  //   if(currentUser === undefined) return <Redirect to={routes.loginPage}/>
-  //   const isTrainer = currentUser.isTrainer
-  //   if(isTrainer){
-  //     return <Redirect to={routes.offers}/>
-  //   } else{
-  //     return <Redirect to={routes.trainers}/>
-  //   }
-  // }
-
   if (isAuth) {
-    // verificationUserTrainer()
-    return <Redirect to={routes.main} />;
+    return VerificationWhoIsLogging(currentUser);
   }
   return (
     <>

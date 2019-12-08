@@ -2,8 +2,9 @@ export const routes = {
   loginPage: "/login",
   registerPage: "/register",
   main: "/",
-  trainers: "/trainers",
+  detailsTrainer: "/details",
   myReservations: "/my-reservations",
   settings: "/settings",
-  offers: "/offers"
+  offers: "/offers",
+  comments: "/comments"
 };

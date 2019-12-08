@@ -25,13 +25,10 @@ import { useSelector } from "react-redux";
 import { Store } from "../modules/auth/duck/auth.interfaces";
 
 interface PanelTemplateProps {
-  value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
   children: React.ReactNode;
-  listMenu: string[];
 }
 
-const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children, listMenu }) => {
+const PanelTemplate: React.FC<PanelTemplateProps> = ({ children }) => {
   const classes = useStyles();
   const currentUser = useSelector((state: Store) => state.user.currentUser!);
   const [open, setOpen] = React.useState<boolean>(true);
@@ -62,7 +59,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
           >
             <MenuIcon />
           </IconButton>
-          <TopMenu value={value} setValue={setValue} listMenu={listMenu} />
+          <TopMenu />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -130,7 +127,7 @@ const PanelTemplate: React.FC<PanelTemplateProps> = ({ value, setValue, children
         </List>
         <Divider />
       </Drawer>
-      {children}
+      <main className={classes.content}>{children}</main>
     </div>
   );
 };

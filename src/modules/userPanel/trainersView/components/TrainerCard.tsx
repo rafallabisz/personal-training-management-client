@@ -6,11 +6,10 @@ import { TrainersPanelContext } from "./TrainersPanel";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {
-  setBtnMoreDetails: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTrainer: React.Dispatch<React.SetStateAction<UserData | undefined>>;
 }
 
-const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelectedTrainer }) => {
+const TrainerCard: React.FC<TrainerCardProps> = ({ setSelectedTrainer }) => {
   const { mergeFilters } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   const classes = useStyles();
@@ -22,8 +21,8 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setBtnMoreDetails, setSelecte
             className={classes.card}
             key={trainerData._id}
             onClick={() => {
-              setBtnMoreDetails(true);
-              setSelectedTrainer(trainerData);
+              sessionStorage.setItem('trainerId', trainerData._id)
+              setSelectedTrainer(trainerData)
             }}
           >
             <CardHeader

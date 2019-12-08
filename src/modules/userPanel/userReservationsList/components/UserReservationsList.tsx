@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import useStylesUserReservationsList from "./UserReservationsList.styles";
-import { CardContent, Card, Table, TableHead, TableRow, TableCell, TableBody, Tooltip } from "@material-ui/core";
+import { CardContent, Card, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getReservationsActionCreator } from "../../reservations/duck/reservations.operations";
 import { Store } from "../../../auth/duck/auth.interfaces";
 import { formatDate } from "../../../../utils/formatDate";
 import LoadingContainer from "../../../../utils/LoadingContainer";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import PanelTemplate from "../../../../templates/PanelTemplate";
 
 interface UserReservationsListProps {}
 
@@ -20,6 +20,7 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
 
   const classes = useStylesUserReservationsList();
   return (
+    <PanelTemplate>
     <LoadingContainer isFetching={isFetching}>
       <Card className={classes.card}>
         <CardContent className={classes.title}>My reservations:</CardContent>
@@ -47,6 +48,7 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
         </Table>
       </Card>
     </LoadingContainer>
+    </PanelTemplate>
   );
 };
 export default UserReservationsList;

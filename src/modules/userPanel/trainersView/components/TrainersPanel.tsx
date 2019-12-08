@@ -4,11 +4,12 @@ import TrainerCard from "./TrainerCard";
 import axios from "axios";
 import { UserData } from "../../../auth/duck/auth.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
-import TrainerReservation from "../../reservations/components/TrainerReservation";
-import FormAddComment from "../../comments/components/FormAddComment";
 import FilterCity from "./FilterCity";
 import FilterGender, { GenderValue } from "./FilterGender";
 import { ValueType } from "react-select";
+import PanelTemplate from "../../../../templates/PanelTemplate";
+import { routes } from "../../../../routes";
+import { useHistory } from "react-router";
 
 interface TrainersPanelProps {}
 
@@ -27,8 +28,8 @@ export const TrainersPanelContext = React.createContext<TrainersPanelContext>({
 });
 ////////////////////////
 const TrainersPanel: React.FC<TrainersPanelProps> = props => {
-  const [isActiveBtnMoreDetails, setBtnMoreDetails] = useState<boolean>(false);
   const classes = useStyles();
+  const history = useHistory();
   useEffect(() => {
     const fetchTrainers = async () => {
       setIsFetching(true);
@@ -79,39 +80,32 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
 
   return (
     <>
-      <LoadingContainer isFetching={isFetching}>
-        <TrainersPanelContext.Provider
-          value={{
-            trainersList,
-            selectedTrainer,
-            trainersListWithFilterCity,
-            searchValue,
-            mergeFilters
-          }}
-        >
-          <div className={classes.container}>
-            {isActiveBtnMoreDetails ? (
-              <>
-                <TrainerReservation setBtnMoreDetails={setBtnMoreDetails} />
-                <FormAddComment />
-              </>
-            ) : (
-              <>
-                <div style={{ display: "flex", marginBottom: "30px" }}>
-                  <FilterCity
-                    handleTrainersListWithFilterCity={handleTrainersListWithFilterCity}
-                    handleSearchValue={handleSearchValue}
-                  />
-                  <FilterGender valueGender={genderValue} setGenderValue={setGenderValue} />
-                </div>
-                <div className={classes.containerCardTrainers}>
-                  <TrainerCard setBtnMoreDetails={setBtnMoreDetails} setSelectedTrainer={setSelectedTrainer} />
-                </div>
-              </>
-            )}
-          </div>
-        </TrainersPanelContext.Provider>
-      </LoadingContainer>
+      <PanelTemplate>
+        <LoadingContainer isFetching={isFetching}>
+          <TrainersPanelContext.Provider
+            value={{
+              trainersList,
+              selectedTrainer,
+              trainersListWithFilterCity,
+              searchValue,
+              mergeFilters
+            }}
+          >
+            <div className={classes.container}>
+              <div style={{ display: "flex", marginBottom: "30px" }}>
+                <FilterCity
+                  handleTrainersListWithFilterCity={handleTrainersListWithFilterCity}
+                  handleSearchValue={handleSearchValue}
+                />
+                <FilterGender valueGender={genderValue} setGenderValue={setGenderValue} />
+              </div>
+              <div className={classes.containerCardTrainers} onClick={() => history.push(routes.detailsTrainer)}>
+                <TrainerCard setSelectedTrainer={setSelectedTrainer} />
+              </div>
+            </div>
+          </TrainersPanelContext.Provider>
+        </LoadingContainer>
+      </PanelTemplate>
     </>
   );
 };

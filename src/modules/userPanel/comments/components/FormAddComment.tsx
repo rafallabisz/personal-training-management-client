@@ -11,12 +11,13 @@ import { Store } from "../../../auth/duck/auth.interfaces";
 import AlertMessage from "../../../../utils/AlertMessage";
 import LoadingContainer from "../../../../utils/LoadingContainer";
 
-interface FormAddCommentProps {}
+interface FormAddCommentProps {
+}
 
-const FormAddComment: React.FC<FormAddCommentProps> = props => {
+const FormAddComment: React.FC<FormAddCommentProps> = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  // const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { isFetching } = useSelector((state: Store) => state.trainerComments);
   const [valueRating, setValueRating] = useState<number>(5);
 
@@ -39,7 +40,8 @@ const FormAddComment: React.FC<FormAddCommentProps> = props => {
   };
 
   const handleAddComment = () => {
-    const trainerId = selectedTrainer!._id;
+    // const trainerId = selectedTrainer!._id;
+    const trainerId = sessionStorage.getItem('trainerId');
     dispatch(addCommentActionCreator(trainerId, commentsForm));
   };
 

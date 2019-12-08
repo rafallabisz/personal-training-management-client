@@ -30,6 +30,12 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.enteringScreen
       })
     },
+    content: {
+      overflow: "hidden",
+      flexGrow: 1,
+      padding: theme.spacing(3),
+      marginTop: "40px"
+    },
     menuButton: {
       marginRight: 36
     },
@@ -72,20 +78,26 @@ const useStyles = makeStyles((theme: Theme) =>
     listDrawer: {
       paddingLeft: "8px"
     },
-    typographyNameApp: {
-      paddingLeft: "48px",
-      letterSpacing: "2px"
-    },
-    tabTopMenu: {
-      transition: ".1s linear",
-      "&:hover": {
-        backgroundColor: "#135DB1"
-      }
-    },
     typographyHello: {
       padding: "12px",
       marginRight: "25px",
       marginLeft: "auto"
+    },
+
+    containerNavElement: {
+      display: "flex",
+      alignItems: "center"
+    },
+    navlinkMenu: {
+      textDecoration: "none",
+      color: theme.palette.primary.contrastText
+    },
+    navElement: {
+      padding: "13px 20px",
+      transition: ".1s linear",
+      "&:hover": {
+        backgroundColor: "#135DB1"
+      }
     },
     titleToolbar: {
       letterSpacing: "2px"

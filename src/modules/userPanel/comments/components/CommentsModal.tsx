@@ -20,27 +20,30 @@ import useStyles from "./CommentsModal.styles";
 import axios from "axios";
 import { CommentsResponse } from "../duck/comments.interfaces";
 import LoadingContainer from "../../../../utils/LoadingContainer";
+import { UserData } from "../../../auth/duck/auth.interfaces";
 
 interface CommentsModalProps {
   openComments: boolean;
   handleClickCloseComments: () => void;
+  selectedTrainer?: UserData;
 }
 
-const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClickCloseComments }) => {
+const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClickCloseComments, selectedTrainer }) => {
   const classes = useStyles();
-  const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
+  // const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
 
   useEffect(() => {
     const fetchComments = async () => {
-      const selectedTrainerId = selectedTrainer!._id;
+      // const selectedTrainerId = selectedTrainer!._id;
+      const selectedTrainerId = sessionStorage.getItem("trainerId");
       setIsFetching(true);
       const response = await axios.get<CommentsResponse[]>(
         `http://localhost:5000/trainer/${selectedTrainerId}/comments`
       );
       setCommentsList(response.data);
       setIsFetching(false);
+      fetchComments();
     };
-    fetchComments();
   }, [openComments]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [commentsList, setCommentsList] = useState<CommentsResponse[]>([]);

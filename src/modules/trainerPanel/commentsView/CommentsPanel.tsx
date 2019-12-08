@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrainerCommentsActionCreator } from "../../userPanel/comments/duck/comments.operations";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { formatDate } from "../../../utils/formatDate";
+import PanelTemplate from "../../../templates/PanelTemplate";
 
 interface CommentsPanelProps {}
 
@@ -24,29 +25,31 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
 
   return (
     <>
-      <div className={classes.container}>
-        {trainerComments.comments !== undefined ? (
-          <>
-            {trainerComments.comments.map(comment => (
-              <Card className={classes.card}>
-                <CardHeader
-                  avatar={<Avatar>{<ChatIcon />}</Avatar>}
-                  action={<span className={classes.rating}>{comment.rating}</span>}
-                  title={comment.author}
-                  subheader={formatDate(comment.createdAt)}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {comment.content}
-                  </Typography>
-                </CardContent>
-              </Card>
-            ))}
-          </>
-        ) : (
-          <div>Brak komentarzy</div>
-        )}
-      </div>
+      <PanelTemplate>
+        <div className={classes.container}>
+          {trainerComments.comments !== undefined ? (
+            <>
+              {trainerComments.comments.map(comment => (
+                <Card className={classes.card}>
+                  <CardHeader
+                    avatar={<Avatar>{<ChatIcon />}</Avatar>}
+                    action={<span className={classes.rating}>{comment.rating}</span>}
+                    title={comment.author}
+                    subheader={formatDate(comment.createdAt)}
+                  />
+                  <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {comment.content}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
+            </>
+          ) : (
+            <div>Brak komentarzy</div>
+          )}
+        </div>
+      </PanelTemplate>
     </>
   );
 };
