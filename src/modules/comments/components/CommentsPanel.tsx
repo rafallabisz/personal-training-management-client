@@ -3,7 +3,7 @@ import { CardContent, Card, CardHeader, Avatar, IconButton, Typography } from "@
 import useStyles from "./CommentsPanel.styles";
 import ChatIcon from "@material-ui/icons/Chat";
 import { useDispatch, useSelector } from "react-redux";
-import { getTrainerCommentsActionCreator } from "../../userPanel/comments/duck/comments.operations";
+import { getTrainerCommentsActionCreator } from "../duck/comments.operations";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { formatDate } from "../../../utils/formatDate";
 import PanelTemplate from "../../../templates/PanelTemplate";

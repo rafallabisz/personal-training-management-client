@@ -1,5 +1,5 @@
 import { ReservationActionTypes } from "./reservations.types";
-import { UserData } from "../../../auth/duck/auth.interfaces";
+import { UserData } from "../../auth/duck/auth.interfaces";
 
 export interface Reservation {
   firstName: string;

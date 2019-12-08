@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { routes } from "../routes";
 import LoginPage from "./auth/login/LoginPage";
 import RegisterPage from "./auth/register/RegisterPage";
-import TrainersPanel from "./userPanel/trainersView/components/TrainersPanel";
-import SettingsPanel from "./trainerPanel/settingsView/SettingsPanel";
-import UserReservationsList from "./userPanel/userReservationsList/components/UserReservationsList";
-import OfferPanel from "./trainerPanel/offerView/components/OfferPanel";
-import CommentsPanel from "./trainerPanel/commentsView/CommentsPanel";
-import TrainerReservation from "./userPanel/reservations/components/TrainerReservation";
+import TrainersPanel from "./trainers/components/TrainersPanel";
+import SettingsPanel from "./settings/components/SettingsPanel";
+import UserReservationsList from "./reservations/components/UserReservationsList";
+import OfferPanel from "./offers/components/OfferPanel";
+import CommentsPanel from "./comments/components/CommentsPanel";
+import TrainerReservation from "./reservations/components/TrainerReservation";
 
 const App: React.FC = () => {
   return (

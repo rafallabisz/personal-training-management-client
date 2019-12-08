@@ -3,10 +3,10 @@ import {
   UpdateUserRequestAction,
   UpdateUserSuccessAction,
   UpdateUserFailureAction
-} from "../../panel/duck/panel.interface";
-import { CommentReducerState } from "../../userPanel/comments/duck/comments.interfaces";
-import { OfferReducerState } from "../../trainerPanel/offerView/duck/offers.interfaces";
-import { ReservationReducerState } from "../../userPanel/reservations/duck/reservations.interfaces";
+} from "../../settings/duck/panel.interface";
+import { CommentReducerState } from "../../comments/duck/comments.interfaces";
+import { OfferReducerState } from "../../offers/duck/offers.interfaces";
+import { ReservationReducerState } from "../../reservations/duck/reservations.interfaces";
 
 export interface SignInCredentials {
   email: string;

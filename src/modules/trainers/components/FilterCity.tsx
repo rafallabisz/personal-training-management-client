@@ -1,7 +1,7 @@
 import React, { useState, useContext, FormEvent } from "react";
 import Autosuggest, { SuggestionsFetchRequestedParams } from "react-autosuggest";
 import * as theme from "./themeAutosuggest.module.css";
-import { UserData } from "../../../auth/duck/auth.interfaces";
+import { UserData } from "../../auth/duck/auth.interfaces";
 import { TrainersPanelContext } from "./TrainersPanel";
 
 interface FilterCityProps {

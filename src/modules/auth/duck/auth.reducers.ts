@@ -1,7 +1,7 @@
 import { AuthReducerState, AuthActions } from "./auth.interfaces";
 import { Reducer } from "redux";
 import { AuthActionTypes } from "./auth.types";
-import { PanelActionTypes } from "../../panel/duck/panel.types";
+import { PanelActionTypes } from "../../settings/duck/panel.types";
 
 const initState: AuthReducerState = {
   isFetching: false,

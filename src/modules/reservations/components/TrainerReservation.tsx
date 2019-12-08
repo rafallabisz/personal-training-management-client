@@ -15,27 +15,27 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
+import { TrainersPanelContext } from "../../trainers/components/TrainersPanel";
 import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
 import { parseISO } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { FormGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { Store, UserData } from "../../../auth/duck/auth.interfaces";
+import { Store, UserData } from "../../auth/duck/auth.interfaces";
 import { addReservationActionCreator } from "../duck/reservations.operations";
 import { Reservation, ReservationResponse } from "../duck/reservations.interfaces";
-import AlertMessage from "../../../../utils/AlertMessage";
-import LoadingContainer from "../../../../utils/LoadingContainer";
+import AlertMessage from "../../../utils/AlertMessage";
+import LoadingContainer from "../../../utils/LoadingContainer";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import axios from "axios";
-import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
-import PanelTemplate from "../../../../templates/PanelTemplate";
+import { unwrapResponseData } from "../../../utils/unwrapResponseData";
+import PanelTemplate from "../../../templates/PanelTemplate";
 import FormAddComment from "../../comments/components/FormAddComment";
 import { useHistory } from "react-router";
-import { routes } from "../../../../routes";
-import { roundedDate } from "../../../../utils/roundedDate";
+import { routes } from "../../../routes";
+import { roundedDate } from "../../../utils/roundedDate";
 
 interface TrainerReservationProps {}
 

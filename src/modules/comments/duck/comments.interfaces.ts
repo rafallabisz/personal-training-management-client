@@ -1,5 +1,5 @@
 import { CommentActionTypes } from "./comments.types";
-import { UserData } from "../../../auth/duck/auth.interfaces";
+import { UserData } from "../../auth/duck/auth.interfaces";
 
 export interface AddComment {
   author: string;

@@ -12,7 +12,7 @@ import {
   deleteOfferSuccess,
   deleteOfferFailure
 } from "./offers.actions";
-import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
+import { unwrapResponseData } from "../../../utils/unwrapResponseData";
 import { postNewOffer, getTrainerOffers, deleteTrainerOffer } from "./offers.service";
 
 export const addOfferActionCreator: ActionCreator<ThunkAction<Promise<Action>, OfferResponse[], any, AnyAction>> = (

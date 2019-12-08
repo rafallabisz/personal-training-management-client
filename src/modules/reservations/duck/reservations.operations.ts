@@ -10,7 +10,7 @@ import {
   getReservationsFailure
 } from "./reservations.actions";
 import { sendNewReservation, fetchReservations } from "./reservations.service";
-import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
+import { unwrapResponseData } from "../../../utils/unwrapResponseData";
 
 export const addReservationActionCreator: ActionCreator<ThunkAction<Promise<Action>, any, any, AnyAction>> = (
   trainerId: string,

@@ -9,7 +9,7 @@ import {
   getTrainerCommentsSuccess,
   getTrainerCommentsFailure
 } from "./comments.actions";
-import { unwrapResponseData } from "../../../../utils/unwrapResponseData";
+import { unwrapResponseData } from "../../../utils/unwrapResponseData";
 import { sendNewComment, fetchTrainerComments } from "./comments.service";
 
 export const addCommentActionCreator: ActionCreator<ThunkAction<Promise<Action>, any, any, AnyAction>> = (

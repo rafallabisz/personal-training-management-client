@@ -3,7 +3,7 @@ import useStyles from "./TrainerCard.styles";
 import { Card, CardHeader, Avatar, CardContent } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { TrainersPanelContext } from "./TrainersPanel";
-import { UserData } from "../../../auth/duck/auth.interfaces";
+import { UserData } from "../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {
   setSelectedTrainer: React.Dispatch<React.SetStateAction<UserData | undefined>>;

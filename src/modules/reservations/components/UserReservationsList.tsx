@@ -3,10 +3,10 @@ import useStylesUserReservationsList from "./UserReservationsList.styles";
 import { CardContent, Card, Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getReservationsActionCreator } from "../../reservations/duck/reservations.operations";
-import { Store } from "../../../auth/duck/auth.interfaces";
-import { formatDate } from "../../../../utils/formatDate";
-import LoadingContainer from "../../../../utils/LoadingContainer";
-import PanelTemplate from "../../../../templates/PanelTemplate";
+import { Store } from "../../auth/duck/auth.interfaces";
+import { formatDate } from "../../../utils/formatDate";
+import LoadingContainer from "../../../utils/LoadingContainer";
+import PanelTemplate from "../../../templates/PanelTemplate";
 
 interface UserReservationsListProps {}
 

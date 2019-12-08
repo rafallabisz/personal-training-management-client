@@ -13,14 +13,14 @@ import {
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { formatDate } from "../../../../utils/formatDate";
+import { formatDate } from "../../../utils/formatDate";
 import ChatIcon from "@material-ui/icons/Chat";
-import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
+import { TrainersPanelContext } from "../../trainers/components/TrainersPanel";
 import useStyles from "./CommentsModal.styles";
 import axios from "axios";
 import { CommentsResponse } from "../duck/comments.interfaces";
-import LoadingContainer from "../../../../utils/LoadingContainer";
-import { UserData } from "../../../auth/duck/auth.interfaces";
+import LoadingContainer from "../../../utils/LoadingContainer";
+import { UserData } from "../../auth/duck/auth.interfaces";
 
 interface CommentsModalProps {
   openComments: boolean;

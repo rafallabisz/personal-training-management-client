@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import useStyles from "./TrainersPanel.styles";
 import TrainerCard from "./TrainerCard";
 import axios from "axios";
-import { UserData } from "../../../auth/duck/auth.interfaces";
-import LoadingContainer from "../../../../utils/LoadingContainer";
+import { UserData } from "../../auth/duck/auth.interfaces";
+import LoadingContainer from "../../../utils/LoadingContainer";
 import FilterCity from "./FilterCity";
 import FilterGender, { GenderValue } from "./FilterGender";
 import { ValueType } from "react-select";
-import PanelTemplate from "../../../../templates/PanelTemplate";
-import { routes } from "../../../../routes";
+import PanelTemplate from "../../../templates/PanelTemplate";
+import { routes } from "../../../routes";
 import { useHistory } from "react-router";
 
 interface TrainersPanelProps {}

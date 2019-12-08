@@ -6,10 +6,10 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { AddComment } from "../duck/comments.interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommentActionCreator } from "../duck/comments.operations";
-import { TrainersPanelContext } from "../../trainersView/components/TrainersPanel";
-import { Store } from "../../../auth/duck/auth.interfaces";
-import AlertMessage from "../../../../utils/AlertMessage";
-import LoadingContainer from "../../../../utils/LoadingContainer";
+import { TrainersPanelContext } from "../../trainers/components/TrainersPanel";
+import { Store } from "../../auth/duck/auth.interfaces";
+import AlertMessage from "../../../utils/AlertMessage";
+import LoadingContainer from "../../../utils/LoadingContainer";
 
 interface FormAddCommentProps {
 }
