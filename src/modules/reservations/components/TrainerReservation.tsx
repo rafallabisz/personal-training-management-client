@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./TrainerReservation.styles";
 import {
   Card,
@@ -15,7 +15,6 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-import { TrainersPanelContext } from "../../trainers/components/TrainersPanel";
 import CommentsModal from "../../comments/components/CommentsModal";
 import DatePicker from "react-datepicker";
 import { parseISO } from "date-fns";
@@ -24,18 +23,16 @@ import { FormGroup, Input } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Store, UserData } from "../../auth/duck/auth.interfaces";
 import { addReservationActionCreator } from "../duck/reservations.operations";
-import { Reservation, ReservationResponse } from "../duck/reservations.interfaces";
+import { Reservation } from "../duck/reservations.interfaces";
 import AlertMessage from "../../../utils/AlertMessage";
 import LoadingContainer from "../../../utils/LoadingContainer";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import DateRangeIcon from "@material-ui/icons/DateRange";
-import axios from "axios";
-import { unwrapResponseData } from "../../../utils/unwrapResponseData";
 import PanelTemplate from "../../../templates/PanelTemplate";
 import FormAddComment from "../../comments/components/FormAddComment";
 import { useHistory } from "react-router";
 import { routes } from "../../../routes";
-import { roundedDate } from "../../../utils/roundedDate";
+import api from "../../../services";
 
 interface TrainerReservationProps {}
 
@@ -43,7 +40,6 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  // const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { firstName, lastName, _id } = useSelector((state: Store) => state.user.currentUser!);
   const { isFetching, error } = useSelector((state: Store) => state.reservations);
   const [openComments, setOpenComments] = useState<boolean>(false);
@@ -52,17 +48,15 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
   const [excludeTimesCollection, setExcludeTimesCollection] = useState<Date[]>([]);
   const [dayBasedExcludeCollection, setDayBasedExcludeCollection] = useState<Date[]>([]);
   const [selectedTrainer, setSelectedTrainer] = useState<UserData>();
+  const [promise, setPromise] = useState<boolean>(false);
   const defaultReserveData = {
     firstName,
     lastName,
     selectTrainingType: "",
     reserveDate: new Date(),
     firstNameTrainer: "",
-    // firstNameTrainer: selectedTrainer!.firstName,
     lastNameTrainer: "",
-    // lastNameTrainer: selectedTrainer!.lastName,
     trainerPhone: 0
-    // trainerPhone: selectedTrainer!.data.phone
   };
 
   const [reserveData, setReserveData] = useState<Reservation>(defaultReserveData);
@@ -70,10 +64,8 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
   useEffect(() => {
     const trainerId = sessionStorage.getItem("trainerId")!;
     const fetchSelectedTrainer = async () => {
-      console.log(trainerId, "-trainerID");
-
-      const res = await axios.get<UserData>(`http://localhost:5000/user/${trainerId}`).then(unwrapResponseData);
-      setSelectedTrainer(res);
+      const selectedTrainer = await api.fetchSelectedTrainer(trainerId, setPromise);
+      setSelectedTrainer(selectedTrainer);
     };
     fetchSelectedTrainer();
     fetchExcludeTimes();
@@ -124,9 +116,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
   const fetchExcludeTimes = async () => {
     if (selectedTrainer) {
       const id = selectedTrainer._id;
-      const res = await axios
-        .get<ReservationResponse[]>(`http://localhost:5000/api/reservations/${id}`)
-        .then(unwrapResponseData);
+      const res = await api.fetchExcludeTimes(id);
       const excludeTimes = res.map(x => {
         let date = x.reserveDate.toString();
         return parseISO(date);
@@ -137,7 +127,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
 
   return (
     <PanelTemplate>
-      <LoadingContainer isFetching={isFetching}>
+      <LoadingContainer isFetching={promise || isFetching}>
         <div className={classes.container}>
           {selectedTrainer !== undefined && (
             <>
@@ -256,9 +246,9 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
               <AlertMessage isFetching={isFetching} errorTxt="Error occured!">
                 Reservation added successfully!
               </AlertMessage>
+              <FormAddComment />
             </>
           )}
-          <FormAddComment />
         </div>
       </LoadingContainer>
     </PanelTemplate>
