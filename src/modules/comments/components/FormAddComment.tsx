@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Card, CardActions, Grid, Typography, TextField, Button } from "@material-ui/core";
 import useStyles from "./FormAddComment.styles";
 import Rating from "@material-ui/lab/Rating";
@@ -6,7 +6,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { AddComment } from "../duck/comments.interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommentActionCreator } from "../duck/comments.operations";
-import { TrainersPanelContext } from "../../trainers/components/TrainersPanel";
 import { Store } from "../../auth/duck/auth.interfaces";
 import AlertMessage from "../../../utils/AlertMessage";
 import LoadingContainer from "../../../utils/LoadingContainer";
@@ -17,7 +16,6 @@ interface FormAddCommentProps {
 const FormAddComment: React.FC<FormAddCommentProps> = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const { selectedTrainer } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const { isFetching } = useSelector((state: Store) => state.trainerComments);
   const [valueRating, setValueRating] = useState<number>(5);
 
@@ -40,7 +38,6 @@ const FormAddComment: React.FC<FormAddCommentProps> = () => {
   };
 
   const handleAddComment = () => {
-    // const trainerId = selectedTrainer!._id;
     const trainerId = sessionStorage.getItem('trainerId');
     dispatch(addCommentActionCreator(trainerId, commentsForm));
   };

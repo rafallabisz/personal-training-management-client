@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { CardContent, Card, CardHeader, Avatar, IconButton, Typography } from "@material-ui/core";
+import { CardContent, Card, CardHeader, Avatar, Typography } from "@material-ui/core";
 import useStyles from "./CommentsPanel.styles";
 import ChatIcon from "@material-ui/icons/Chat";
 import { useDispatch, useSelector } from "react-redux";

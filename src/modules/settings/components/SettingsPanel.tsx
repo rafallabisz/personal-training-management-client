@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { panelUpdateUserActionCreator } from "../duck/panel.operations";
 import imageUtility from "../../../utils/imageUtility";
-import { unwrapResponseData } from "../../../utils/unwrapResponseData";
 import PanelTemplate from "../../../templates/PanelTemplate";
 
 interface SettingsPanelProps {}

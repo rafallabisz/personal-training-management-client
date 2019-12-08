@@ -2,6 +2,7 @@ import axios from "axios";
 import { UserData } from "../modules/auth/duck/auth.interfaces";
 import { unwrapResponseData } from "../utils/unwrapResponseData";
 import { ReservationResponse } from "../modules/reservations/duck/reservations.interfaces";
+import { CommentsResponse } from "../modules/comments/duck/comments.interfaces";
 
 const fetchAllTrainers = async (setIsFetching: React.Dispatch<React.SetStateAction<boolean>>) => {
   setIsFetching(true);
@@ -24,10 +25,20 @@ const fetchExcludeTimes = async (trainerId: string) => {
   return res;
 };
 
+const getTrainerComments = async(trainerId:string,setIsFetching:React.Dispatch<React.SetStateAction<boolean>>)=>{
+    setIsFetching(true);
+    const response = await axios.get<CommentsResponse[]>(
+      `http://localhost:5000/trainer/${trainerId}/comments`
+    ).then(unwrapResponseData);
+    setIsFetching(false)
+    return response
+}
+
 const api = {
   fetchAllTrainers,
   fetchSelectedTrainer,
-  fetchExcludeTimes
+  fetchExcludeTimes,
+  getTrainerComments
 };
 
 export default api;

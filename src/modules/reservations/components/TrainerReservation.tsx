@@ -241,7 +241,6 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
               <CommentsModal
                 handleClickCloseComments={handleClickCloseComments}
                 openComments={openComments}
-                selectedTrainer={selectedTrainer}
               />
               <AlertMessage isFetching={isFetching} errorTxt="Error occured!">
                 Reservation added successfully!
