@@ -1,17 +1,21 @@
-import React, { useState, useContext, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import Autosuggest, { SuggestionsFetchRequestedParams } from "react-autosuggest";
-import * as theme from "./themeAutosuggest.module.css";
+import * as theme from "./FilterCity.module.css";
 import { UserData } from "../../auth/duck/auth.interfaces";
-import { TrainersPanelContext } from "./TrainersPanel";
 
 interface FilterCityProps {
   handleTrainersListWithFilterCity: (filteredList: UserData[]) => void;
   handleSearchValue: (value: string) => void;
+  trainersList: UserData[];
+  searchValue: string;
 }
 
-const FilterCity: React.FC<FilterCityProps> = ({ handleTrainersListWithFilterCity, handleSearchValue }) => {
-  const { trainersList, searchValue } = useContext<TrainersPanelContext>(TrainersPanelContext);
-
+const FilterCity: React.FC<FilterCityProps> = ({
+  handleTrainersListWithFilterCity,
+  handleSearchValue,
+  trainersList,
+  searchValue
+}) => {
   const trainersListWithFieldCity = trainersList.filter(
     x => x.data !== undefined && x.data.city !== undefined && x.data.city !== ""
   );

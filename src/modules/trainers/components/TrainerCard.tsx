@@ -3,15 +3,11 @@ import useStyles from "./TrainerCard.styles";
 import { Card, CardHeader, Avatar, CardContent } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { TrainersPanelContext } from "./TrainersPanel";
-import { UserData } from "../../auth/duck/auth.interfaces";
 
-interface TrainerCardProps {
-  setSelectedTrainer: React.Dispatch<React.SetStateAction<UserData | undefined>>;
-}
+interface TrainerCardProps {}
 
-const TrainerCard: React.FC<TrainerCardProps> = ({ setSelectedTrainer }) => {
+const TrainerCard: React.FC<TrainerCardProps> = () => {
   const { mergeFilters } = useContext<TrainersPanelContext>(TrainersPanelContext);
-
   const classes = useStyles();
   return (
     <>
@@ -21,12 +17,10 @@ const TrainerCard: React.FC<TrainerCardProps> = ({ setSelectedTrainer }) => {
             className={classes.card}
             key={trainerData._id}
             onClick={() => {
-              sessionStorage.setItem('trainerId', trainerData._id)
-              setSelectedTrainer(trainerData)
+              sessionStorage.setItem("trainerId", trainerData._id);
             }}
           >
             <CardHeader
-              // avatar={<Avatar>{<AccountCircleIcon />}</Avatar>}
               avatar={
                 trainerData.data.avatar ? (
                   <img src={trainerData.data.avatar} className={classes.avatarCard} />
