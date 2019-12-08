@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { TextField, Grid } from "@material-ui/core";
 import useStyles from "../AuthPage.styles";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { routes } from "../../../routes";
 import { useSelector, useDispatch } from "react-redux";
-import { Store, SignInCredentials, UserData } from "../duck/auth.interfaces";
+import { Store, SignInCredentials } from "../duck/auth.interfaces";
 import { authSignInActionCreator, authClearErrors } from "../duck/auth.operations";
 import SpinnerButton from "../../../utils/SpinnerButton";
 import VerificationWhoIsLogging from "../../../utils/VerificationWhoIsLogging";

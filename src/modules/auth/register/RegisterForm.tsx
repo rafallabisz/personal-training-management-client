@@ -7,13 +7,14 @@ import { SignUpCredentials, Store } from "../duck/auth.interfaces";
 import { authSignUpActionCreator } from "../duck/auth.operations";
 import { useDispatch, useSelector } from "react-redux";
 import SpinnerButton from "../../../utils/SpinnerButton";
+import VerificationWhoIsLogging from "../../../utils/VerificationWhoIsLogging";
 
 interface RegisterFormProps {}
 
 const RegisterForm: React.FC<RegisterFormProps> = props => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { isFetching, error, isAuth } = useSelector((state: Store) => state.user);
+  const { isFetching, error, isAuth, currentUser } = useSelector((state: Store) => state.user);
   const initRegisterData = {
     firstName: "",
     lastName: "",
@@ -46,7 +47,7 @@ const RegisterForm: React.FC<RegisterFormProps> = props => {
   };
 
   if (isAuth) {
-    return <Redirect to={routes.main} />;
+    return VerificationWhoIsLogging(currentUser);
   }
   return (
     <form className={classes.form} noValidate onSubmit={(e: React.SyntheticEvent<any, Event>) => handleSignUp(e)}>
