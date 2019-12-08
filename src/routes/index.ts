@@ -2,7 +2,7 @@ export const routes = {
   loginPage: "/login",
   registerPage: "/register",
   main: "/",
-  detailsTrainer: "/details",
+  reservation: "/reservation",
   myReservations: "/my-reservations",
   settings: "/settings",
   offers: "/offers",

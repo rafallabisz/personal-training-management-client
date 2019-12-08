@@ -21,7 +21,7 @@ const App: React.FC = () => {
         <Route exact path={routes.settings} component={SettingsPanel} />
         <Route exact path={routes.offers} component={OfferPanel} />
         <Route exact path={routes.comments} component={CommentsPanel} />
-        <Route exact path={routes.detailsTrainer} component={TrainerReservation} />
+        <Route exact path={routes.reservation} component={TrainerReservation} />
         <Redirect to={routes.loginPage} />
       </Switch>
     </Router>

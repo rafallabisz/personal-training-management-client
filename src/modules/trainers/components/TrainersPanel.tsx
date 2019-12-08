@@ -99,7 +99,7 @@ const TrainersPanel: React.FC<TrainersPanelProps> = props => {
                 />
                 <FilterGender valueGender={genderValue} setGenderValue={setGenderValue} />
               </div>
-              <div className={classes.containerCardTrainers} onClick={() => history.push(routes.detailsTrainer)}>
+              <div className={classes.containerCardTrainers} onClick={() => history.push(routes.reservation)}>
                 <TrainerCard setSelectedTrainer={setSelectedTrainer} />
               </div>
             </div>
