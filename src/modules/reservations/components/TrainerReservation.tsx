@@ -116,6 +116,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
       setTimeout(() => {
         setSelectDate(null);
         setSelectTrainingType("");
+        fetchExcludeTimes(selectedTrainer._id);
       }, 2100);
     }
   };
@@ -212,7 +213,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
                     minDate={new Date()}
                     excludeTimes={dayBasedExcludeCollection}
                     onInputClick={() => {
-                      fetchExcludeTimes(selectedTrainer._id);
+                      // fetchExcludeTimes(selectedTrainer._id);
                       handleDatePicker(roundedDate(60), "openDatePicker");
                     }}
                     dateFormat="MMMM d, yyyy h:mm aa"
