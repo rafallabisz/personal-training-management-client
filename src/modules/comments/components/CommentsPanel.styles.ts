@@ -17,18 +17,18 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: "10px",
       width: "35vw"
     },
-    rating: {
-      width: "37px",
-      height: "37px",
-      textAlign: "center",
-      display: "inline-block",
-      padding: "5px",
-      margin: "4px 6px 0 0",
-      borderRadius: "50%",
-      backgroundColor: "#f5c10430",
-      border: "2px solid #f5c104db",
-      boxShadow: "1px 0 3px #f5c104db",
-      fontWeight: 600
+    avatarComments: {
+      width: "50px",
+      borderRadius: "50%"
+    },
+    cardContent: {
+      padding: "0 16px",
+      "&:last-child": {
+        paddingBottom: "0px"
+      }
+    },
+    cardHeader: {
+      paddingBottom: "8px"
     }
   })
 );

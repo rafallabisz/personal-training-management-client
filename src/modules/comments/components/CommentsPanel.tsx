@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { CardContent, Card, CardHeader, Avatar, Typography } from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
 import useStyles from "./CommentsPanel.styles";
 import ChatIcon from "@material-ui/icons/Chat";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,12 +33,19 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
               {trainerComments.comments.map(comment => (
                 <Card className={classes.card}>
                   <CardHeader
-                    avatar={<Avatar>{<ChatIcon />}</Avatar>}
-                    action={<span className={classes.rating}>{comment.rating}</span>}
+                    avatar={
+                      comment.avatar ? (
+                        <img src={comment.avatar} className={classes.avatarComments} />
+                      ) : (
+                        <Avatar>{<ChatIcon />}</Avatar>
+                      )
+                    }
+                    action={<Rating name="read-only" value={comment.rating} readOnly precision={0.5} />}
                     title={comment.author}
                     subheader={formatDate(comment.createdAt)}
+                    className={classes.cardHeader}
                   />
-                  <CardContent>
+                  <CardContent className={classes.cardContent}>
                     <Typography variant="body2" color="textSecondary" component="p">
                       {comment.content}
                     </Typography>
