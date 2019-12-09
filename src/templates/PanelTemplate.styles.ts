@@ -88,15 +88,20 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center"
     },
-    navlinkMenu: {
+    navLinkMenu: {
       textDecoration: "none",
-      color: theme.palette.primary.contrastText
-    },
-    navElement: {
+      color: theme.palette.primary.contrastText,
       padding: "13px 20px",
       transition: ".1s linear",
       "&:hover": {
         backgroundColor: "#135DB1"
+      }
+    },
+    activeMenu: {
+      backgroundColor: "#014b9b",
+      transition: ".1s linear",
+      "&:hover": {
+        backgroundColor: "#014b9b"
       }
     },
     titleToolbar: {

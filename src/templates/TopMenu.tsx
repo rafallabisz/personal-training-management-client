@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authSignOut } from "../modules/auth/duck/auth.operations";
 import { Store } from "../modules/auth/duck/auth.interfaces";
+import { useLocation } from "react-router";
 
 interface TopMenuProps {}
 export interface ListMenu {
@@ -13,13 +14,14 @@ export interface ListMenu {
   route: string;
 }
 const TopMenu: React.FC<TopMenuProps> = () => {
+  const classes = useStyles();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const { firstName, isTrainer } = useSelector((state: Store) => state.user.currentUser!);
 
   const handleSignOut = (): void => {
     dispatch(authSignOut());
   };
-  const classes = useStyles();
   let listMenu: ListMenu[] = [];
   if (isTrainer) {
     listMenu = [
@@ -37,11 +39,17 @@ const TopMenu: React.FC<TopMenuProps> = () => {
 
   return (
     <>
-      <div className={classes.wrapTopMenu}>
+      <nav className={classes.wrapTopMenu}>
         <div className={classes.containerNavElement}>
           {listMenu.map((menu, i) => (
-            <NavLink to={menu.route} className={classes.navlinkMenu} key={i}>
-              <Typography className={classes.navElement}>{menu.content}</Typography>
+            <NavLink
+              exact
+              to={menu.route}
+              className={`${classes.navLinkMenu}`}
+              key={i}
+              activeClassName={classes.activeMenu}
+            >
+              <Typography>{menu.content}</Typography>
             </NavLink>
           ))}
         </div>
@@ -57,7 +65,7 @@ const TopMenu: React.FC<TopMenuProps> = () => {
             Sign out
           </Button>
         </div>
-      </div>
+      </nav>
     </>
   );
 };
