@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import { Theme, createStyles } from "@material-ui/core";
 import bgcImage from "../assets/img/bgc6.jpg";
-//#cccbcbd9 -color card trainer
 
 const drawerWidth = 240;
 
@@ -91,7 +90,8 @@ const useStyles = makeStyles((theme: Theme) =>
     navLinkMenu: {
       textDecoration: "none",
       color: theme.palette.primary.contrastText,
-      padding: "13px 20px",
+      letterSpacing: "1px",
+      padding: "15px 20px",
       transition: ".1s linear",
       "&:hover": {
         backgroundColor: "#135DB1"

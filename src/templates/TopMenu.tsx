@@ -22,36 +22,46 @@ const TopMenu: React.FC<TopMenuProps> = () => {
   const handleSignOut = (): void => {
     dispatch(authSignOut());
   };
-  let listMenu: ListMenu[] = [];
-  if (isTrainer) {
-    listMenu = [
-      { content: "Offer", route: routes.offers },
-      { content: "Comments", route: routes.comments },
-      { content: "Settings", route: routes.settings }
-    ];
-  } else {
-    listMenu = [
-      { content: "Trainers", route: routes.main },
-      { content: "My Reservations", route: routes.myReservations },
-      { content: "Settings", route: routes.settings }
-    ];
-  }
 
   return (
     <>
       <nav className={classes.wrapTopMenu}>
         <div className={classes.containerNavElement}>
-          {listMenu.map((menu, i) => (
-            <NavLink
-              exact
-              to={menu.route}
-              className={`${classes.navLinkMenu}`}
-              key={i}
-              activeClassName={classes.activeMenu}
-            >
-              <Typography>{menu.content}</Typography>
-            </NavLink>
-          ))}
+          {isTrainer ? (
+            <>
+              <NavLink exact to={routes.offers} className={classes.navLinkMenu} activeClassName={classes.activeMenu}>
+                Offer
+              </NavLink>
+              <NavLink exact to={routes.comments} className={classes.navLinkMenu} activeClassName={classes.activeMenu}>
+                Comments
+              </NavLink>
+              <NavLink exact to={routes.settings} className={classes.navLinkMenu} activeClassName={classes.activeMenu}>
+                Settings
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                exact
+                to={routes.main}
+                className={`${classes.navLinkMenu} ${pathname === routes.reservation && classes.activeMenu}`}
+                activeClassName={classes.activeMenu}
+              >
+                Trainers
+              </NavLink>
+              <NavLink
+                exact
+                to={routes.myReservations}
+                className={classes.navLinkMenu}
+                activeClassName={classes.activeMenu}
+              >
+                My Reservations
+              </NavLink>
+              <NavLink exact to={routes.settings} className={classes.navLinkMenu} activeClassName={classes.activeMenu}>
+                Settings
+              </NavLink>
+            </>
+          )}
         </div>
         <div className={classes.containerRightElementsTopMenu}>
           <Typography className={classes.typographyHello}>Hello, {firstName}</Typography>
