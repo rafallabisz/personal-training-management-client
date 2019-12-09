@@ -33,6 +33,7 @@ import FormAddComment from "../../comments/components/FormAddComment";
 import { useHistory } from "react-router";
 import { routes } from "../../../routes";
 import api from "../../../services";
+import { roundedDate } from "../../../utils/roundedDate";
 
 interface TrainerReservationProps {}
 
@@ -66,9 +67,9 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
     const fetchSelectedTrainer = async () => {
       const selectedTrainer = await api.fetchSelectedTrainer(trainerId, setPromise);
       setSelectedTrainer(selectedTrainer);
+      fetchExcludeTimes(selectedTrainer._id);
     };
     fetchSelectedTrainer();
-    fetchExcludeTimes();
   }, []);
 
   const handleClickOpenComments = () => {
@@ -97,11 +98,13 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
       const excludeCollection = [...excludeTimesCollection];
       let filtered = excludeCollection.filter(e => e.getDate() === date.getDate());
       setDayBasedExcludeCollection(filtered);
-      setSelectDate(date);
-      setReserveData({
-        ...reserveData,
-        [name]: date
-      });
+      if (name === "reserveDate") {
+        setSelectDate(date);
+        setReserveData({
+          ...reserveData,
+          [name]: date
+        });
+      }
     }
   };
 
@@ -110,19 +113,20 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
       const trainerId = selectedTrainer._id;
       const userId = _id;
       dispatch(addReservationActionCreator(trainerId, userId, reserveData));
+      setTimeout(() => {
+        setSelectDate(null);
+        setSelectTrainingType("");
+      }, 2100);
     }
   };
 
-  const fetchExcludeTimes = async () => {
-    if (selectedTrainer) {
-      const id = selectedTrainer._id;
-      const res = await api.fetchExcludeTimes(id);
-      const excludeTimes = res.map(x => {
-        let date = x.reserveDate.toString();
-        return parseISO(date);
-      });
-      setExcludeTimesCollection(excludeTimes);
-    }
+  const fetchExcludeTimes = async (trainerId: string) => {
+    const res = await api.fetchExcludeTimes(trainerId);
+    const excludeTimes = res.map(x => {
+      let date = x.reserveDate.toString();
+      return parseISO(date);
+    });
+    setExcludeTimesCollection(excludeTimes);
   };
 
   return (
@@ -207,7 +211,10 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
                     placeholderText="Select training date"
                     minDate={new Date()}
                     excludeTimes={dayBasedExcludeCollection}
-                    onInputClick={() => fetchExcludeTimes()}
+                    onInputClick={() => {
+                      fetchExcludeTimes(selectedTrainer._id);
+                      handleDatePicker(roundedDate(60), "openDatePicker");
+                    }}
                     dateFormat="MMMM d, yyyy h:mm aa"
                   />
 
@@ -238,10 +245,7 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
                   </Button>
                 </CardActions>
               </Card>
-              <CommentsModal
-                handleClickCloseComments={handleClickCloseComments}
-                openComments={openComments}
-              />
+              <CommentsModal handleClickCloseComments={handleClickCloseComments} openComments={openComments} />
               <AlertMessage isFetching={isFetching} errorTxt="Error occured!">
                 Reservation added successfully!
               </AlertMessage>
