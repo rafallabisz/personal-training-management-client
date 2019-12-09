@@ -5,6 +5,7 @@ export interface AddComment {
   author: string;
   content: string;
   rating: number;
+  avatar: string;
 }
 
 export interface CommentsResponse {
@@ -12,7 +13,8 @@ export interface CommentsResponse {
   content: string;
   rating: number;
   createdAt: Date;
-  trainer: UserData;
+  avatar: string;
+  // trainer: UserData;
 }
 
 /**====Action Comments Interfaces ==== */

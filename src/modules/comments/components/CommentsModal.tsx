@@ -33,6 +33,7 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
     const fetchComments = async () => {
       const trainerId = sessionStorage.getItem("trainerId")!;
       const commentsList = await api.getTrainerComments(trainerId, setIsFetching);
+      // const { comments, data } = await api.fetchSelectedTrainer(trainerId, setIsFetching);
       setCommentsList(commentsList);
     };
     fetchComments();
@@ -69,7 +70,14 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
             {commentsList.map((comment: CommentsResponse, i) => (
               <Card key={i} className={classes.dialogCard}>
                 <CardHeader
-                  avatar={<Avatar>{<ChatIcon />}</Avatar>}
+                  // avatar={<Avatar>{<ChatIcon />}</Avatar>}
+                  avatar={
+                    comment.avatar ? (
+                      <img src={comment.avatar} className={classes.avatarComments} />
+                    ) : (
+                      <Avatar>{<ChatIcon />}</Avatar>
+                    )
+                  }
                   action={<span className={classes.rating}>{comment.rating}</span>}
                   title={comment.author}
                   subheader={formatDate(comment.createdAt)}

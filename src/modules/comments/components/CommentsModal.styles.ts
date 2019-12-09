@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
       border: "2px solid #f5c104db",
       boxShadow: "1px 0 3px #f5c104db",
       fontWeight: 600
+    },
+    avatarComments: {
+      width: "50px",
+      borderRadius: "50%"
     }
   })
 );

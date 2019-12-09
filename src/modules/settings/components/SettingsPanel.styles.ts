@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.secondary.light,
       border: "1px solid #949494d9",
       paddingBottom: "10px",
-      maxHeight: "70vh",
+      maxHeight: "80vh",
       overflowY: "auto"
     },
     textField: {
