@@ -11,6 +11,7 @@ import {
   Avatar,
   CardHeader
 } from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { formatDate } from "../../../utils/formatDate";
@@ -33,7 +34,6 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
     const fetchComments = async () => {
       const trainerId = sessionStorage.getItem("trainerId")!;
       const commentsList = await api.getTrainerComments(trainerId, setIsFetching);
-      // const { comments, data } = await api.fetchSelectedTrainer(trainerId, setIsFetching);
       setCommentsList(commentsList);
     };
     fetchComments();
@@ -70,7 +70,6 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
             {commentsList.map((comment: CommentsResponse, i) => (
               <Card key={i} className={classes.dialogCard}>
                 <CardHeader
-                  // avatar={<Avatar>{<ChatIcon />}</Avatar>}
                   avatar={
                     comment.avatar ? (
                       <img src={comment.avatar} className={classes.avatarComments} />
@@ -78,7 +77,7 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
                       <Avatar>{<ChatIcon />}</Avatar>
                     )
                   }
-                  action={<span className={classes.rating}>{comment.rating}</span>}
+                  action={<Rating name="read-only" value={comment.rating} readOnly precision={0.5} />}
                   title={comment.author}
                   subheader={formatDate(comment.createdAt)}
                 />
