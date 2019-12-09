@@ -22,6 +22,15 @@ const useStyles = makeStyles((theme: Theme) =>
     avatarComments: {
       width: "50px",
       borderRadius: "50%"
+    },
+    cardContent: {
+      padding: "0 16px 8px",
+      "&:last-child": {
+        paddingBottom: "8px"
+      }
+    },
+    cardHeader: {
+      paddingBottom: "8px"
     }
   })
 );

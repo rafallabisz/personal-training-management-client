@@ -80,8 +80,9 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
                   action={<Rating name="read-only" value={comment.rating} readOnly precision={0.5} />}
                   title={comment.author}
                   subheader={formatDate(comment.createdAt)}
+                  className={classes.cardHeader}
                 />
-                <CardContent>
+                <CardContent className={classes.cardContent}>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {comment.content}
                   </Typography>
