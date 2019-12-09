@@ -41,6 +41,10 @@ const FormAddComment: React.FC<FormAddCommentProps> = () => {
   const handleAddComment = () => {
     const trainerId = sessionStorage.getItem("trainerId");
     dispatch(addCommentActionCreator(trainerId, commentsForm));
+    setTimeout(() => {
+      setCommentsForm(initCommentsForm);
+      setValueRating(5);
+    }, 2100);
   };
 
   return (
@@ -65,6 +69,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = () => {
               className={classes.textFieldAuthor}
               margin="normal"
               onChange={handleChange}
+              value={commentsForm.author}
             />
             <TextField
               id="standard-multiline-static"
@@ -75,6 +80,7 @@ const FormAddComment: React.FC<FormAddCommentProps> = () => {
               className={classes.textField}
               margin="normal"
               onChange={handleChange}
+              value={commentsForm.content}
             />
             <Button
               variant="contained"
