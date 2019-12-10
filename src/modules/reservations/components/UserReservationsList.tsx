@@ -7,7 +7,7 @@ import { Store } from "../../auth/duck/auth.interfaces";
 import { formatDate } from "../../../utils/formatDate";
 import LoadingContainer from "../../../utils/LoadingContainer";
 import PanelTemplate from "../../../templates/PanelTemplate";
-import { ReservationResponse } from "../duck/reservations.interfaces";
+import { sortReservationsByDate } from "../../../utils/sortUtility";
 
 interface UserReservationsListProps {}
 
@@ -20,10 +20,6 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
   }, []);
 
   const classes = useStylesUserReservationsList();
-
-  const sortByDate = (reservations: ReservationResponse[]) => {
-    return reservations.sort((a, b) => new Date(b.reserveDate).getTime() - new Date(a.reserveDate).getTime());
-  };
 
   return (
     <PanelTemplate>
@@ -40,7 +36,7 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortByDate(reservations).map(reservation => (
+              {sortReservationsByDate(reservations).map(reservation => (
                 <TableRow key={reservation._id} hover>
                   <TableCell component="th" scope="row">
                     {reservation.firstNameTrainer} {reservation.lastNameTrainer}

@@ -19,6 +19,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import useStyles from "./CommentsModal.styles";
 import { CommentsResponse } from "../duck/comments.interfaces";
 import api from "../../../services";
+import { sortCommentsListByDate } from "../../../utils/sortUtility";
 
 interface CommentsModalProps {
   openComments: boolean;
@@ -67,7 +68,7 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ openComments, handleClick
         </Grid>
         <DialogContent dividers>
           <Typography gutterBottom>
-            {commentsList.map((comment: CommentsResponse, i) => (
+            {sortCommentsListByDate(commentsList).map((comment: CommentsResponse, i) => (
               <Card key={i} className={classes.dialogCard}>
                 <CardHeader
                   avatar={
