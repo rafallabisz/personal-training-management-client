@@ -24,7 +24,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
       city: data ? data.city : undefined,
       phone: data ? data.phone : undefined,
       avatar: data ? data.avatar : undefined,
-      gallery: data ? ["img1", "img2"] : undefined
+      gallery: data ? data.gallery : undefined
     }
   };
   const [settingsData, setSettingData] = useState<SettingsData>(initSettingsData);
@@ -167,7 +167,9 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
                   name="gallery"
                   onChange={e => handleGallery(e)}
                 />
-                {/* <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} /> */}
+                {data
+                  ? data.gallery.map(img => <img src={img} width="80px" alt="gallery" className={classes.gallery} />)
+                  : ""}
               </Grid>
 
               <Grid item xs={12} sm={6}>

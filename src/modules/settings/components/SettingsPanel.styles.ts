@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     avatar: {
       margin: "5px 8px 0"
+    },
+    gallery: {
+      margin: "5px"
     }
   })
 );
