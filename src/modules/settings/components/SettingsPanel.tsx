@@ -13,7 +13,9 @@ interface SettingsPanelProps {}
 
 const SettingsPanel: React.FC<SettingsPanelProps> = props => {
   const dispatch = useDispatch();
-  const { _id, firstName, lastName, email, password, data } = useSelector((state: Store) => state.user.currentUser!);
+  const { _id, firstName, lastName, email, password, data, isTrainer } = useSelector(
+    (state: Store) => state.user.currentUser!
+  );
   const initSettingsData = {
     firstName,
     lastName,
@@ -159,18 +161,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
                 <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
-                <input
-                  className={classes.textField}
-                  id="galley"
-                  type="file"
-                  name="gallery"
-                  onChange={e => handleGallery(e)}
-                />
-                {data
-                  ? data.gallery.map(img => <img src={img} width="80px" alt="gallery" className={classes.gallery} />)
-                  : ""}
-              </Grid>
+              {isTrainer && (
+                <Grid item xs={12} sm={6}>
+                  <input
+                    className={classes.textField}
+                    id="galley"
+                    type="file"
+                    name="gallery"
+                    onChange={e => handleGallery(e)}
+                  />
+                  {data
+                    ? data.gallery.map(img => <img src={img} width="80px" alt="gallery" className={classes.gallery} />)
+                    : ""}
+                </Grid>
+              )}
 
               <Grid item xs={12} sm={6}>
                 <TextField
