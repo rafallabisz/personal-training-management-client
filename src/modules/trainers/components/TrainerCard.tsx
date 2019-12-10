@@ -2,13 +2,23 @@ import React, { useContext } from "react";
 import useStyles from "./TrainerCard.styles";
 import { Card, CardHeader, Avatar, CardContent } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Rating from "@material-ui/lab/Rating";
 import { TrainersPanelContext } from "./TrainersPanel";
+import { UserData } from "../../auth/duck/auth.interfaces";
 
 interface TrainerCardProps {}
 
 const TrainerCard: React.FC<TrainerCardProps> = () => {
   const { mergeFilters } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const classes = useStyles();
+
+  const countOverallRating = (trainerData: UserData) => {
+    const ratingTotal = trainerData.comments.reduce((prev, current) => prev + current.rating, 0);
+    const numberOfComments = trainerData.comments.length;
+    const averageRating = ratingTotal / numberOfComments;
+    return averageRating;
+  };
+
   return (
     <>
       {mergeFilters() &&
@@ -28,7 +38,15 @@ const TrainerCard: React.FC<TrainerCardProps> = () => {
                   <Avatar>{<AccountCircleIcon />}</Avatar>
                 )
               }
-              // action={}
+              action={
+                <Rating
+                  name="read-only"
+                  value={countOverallRating(trainerData)}
+                  readOnly
+                  precision={0.25}
+                  size="small"
+                />
+              }
               title={`${trainerData.firstName} ${trainerData.lastName}, ${
                 trainerData.data.age ? trainerData.data.age : "-"
               }`}
