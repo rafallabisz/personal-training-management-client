@@ -24,31 +24,33 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
   return (
     <PanelTemplate>
       <LoadingContainer isFetching={isFetching}>
-        <Card className={classes.card}>
-          <CardContent className={classes.title}>My reservations:</CardContent>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Trainer name</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Selected training</TableCell>
-                <TableCell>Date</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortReservationsByDate(reservations).map(reservation => (
-                <TableRow key={reservation._id} hover>
-                  <TableCell component="th" scope="row">
-                    {reservation.firstNameTrainer} {reservation.lastNameTrainer}
-                  </TableCell>
-                  <TableCell>{reservation.trainerPhone}</TableCell>
-                  <TableCell>{reservation.selectTrainingType}</TableCell>
-                  <TableCell>{formatDate(reservation.reserveDate, "Do MMMM YYYY, h:mm:ss a")}</TableCell>
+        {!isFetching && (
+          <Card className={classes.card}>
+            <CardContent className={classes.title}>My reservations:</CardContent>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Trainer name</TableCell>
+                  <TableCell>Phone</TableCell>
+                  <TableCell>Selected training</TableCell>
+                  <TableCell>Date</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Card>
+              </TableHead>
+              <TableBody>
+                {sortReservationsByDate(reservations).map(reservation => (
+                  <TableRow key={reservation._id} hover>
+                    <TableCell component="th" scope="row">
+                      {reservation.firstNameTrainer} {reservation.lastNameTrainer}
+                    </TableCell>
+                    <TableCell>{reservation.trainerPhone}</TableCell>
+                    <TableCell>{reservation.selectTrainingType}</TableCell>
+                    <TableCell>{formatDate(reservation.reserveDate, "Do MMMM YYYY, h:mm:ss a")}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Card>
+        )}
       </LoadingContainer>
     </PanelTemplate>
   );
