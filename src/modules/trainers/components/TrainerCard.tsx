@@ -19,6 +19,12 @@ const TrainerCard: React.FC<TrainerCardProps> = () => {
     return averageRating;
   };
 
+  const variationWordOpinions = (trainerData: UserData) => {
+    const numberOfComments = trainerData.comments.length;
+    if (numberOfComments === 1) return "opinion";
+    return "opinions";
+  };
+
   return (
     <>
       {mergeFilters() &&
@@ -39,13 +45,16 @@ const TrainerCard: React.FC<TrainerCardProps> = () => {
                 )
               }
               action={
-                <Rating
-                  name="read-only"
-                  value={countOverallRating(trainerData)}
-                  readOnly
-                  precision={0.25}
-                  size="small"
-                />
+                <div style={{ display: "flex", flexDirection: "column", textAlign: "right" }}>
+                  <Rating
+                    name="read-only"
+                    value={countOverallRating(trainerData)}
+                    readOnly
+                    precision={0.25}
+                    size="small"
+                  />
+                  <span>{`(${trainerData.comments.length} ${variationWordOpinions(trainerData)})`}</span>
+                </div>
               }
               title={`${trainerData.firstName} ${trainerData.lastName}, ${
                 trainerData.data.age ? trainerData.data.age : "-"
