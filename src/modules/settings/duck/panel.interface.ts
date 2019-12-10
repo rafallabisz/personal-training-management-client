@@ -11,6 +11,7 @@ export interface SettingsData {
     city?: string;
     phone?: number;
     avatar?:string;
+    gallery?:string[]
   };
 }
 

@@ -23,7 +23,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
       age: data ? data.age : undefined,
       city: data ? data.city : undefined,
       phone: data ? data.phone : undefined,
-      avatar: data ? data.avatar : undefined
+      avatar: data ? data.avatar : undefined,
+      gallery: data ? ["img1", "img2"] : undefined
     }
   };
   const [settingsData, setSettingData] = useState<SettingsData>(initSettingsData);
@@ -51,9 +52,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
     }
   };
 
+  const handleGallery = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files) {
+      const img: string[] = settingsData.data.gallery || [];
+      setSettingData({
+        ...settingsData,
+        data: { ...settingsData.data, gallery: [...img, await imageUtility.toBase64(e.currentTarget.files[0])] }
+      });
+    }
+  };
+
   const handleSaveSettingsData = () => {
     dispatch(panelUpdateUserActionCreator(_id, settingsData));
   };
+  console.log(settingsData, "--settingsData");
 
   const classes = useStyles();
   return (
@@ -137,9 +149,27 @@ const SettingsPanel: React.FC<SettingsPanelProps> = props => {
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <input className={classes.textField} type="file" name="avatar" onChange={e => handleAvatarChange(e)} />
+                <input
+                  className={classes.textField}
+                  id="upload_avatar"
+                  type="file"
+                  name="avatar"
+                  onChange={e => handleAvatarChange(e)}
+                />
                 <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} />
               </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <input
+                  className={classes.textField}
+                  id="galley"
+                  type="file"
+                  name="gallery"
+                  onChange={e => handleGallery(e)}
+                />
+                {/* <img src={data ? data.avatar : ""} width="150px" alt="avatar" className={classes.avatar} /> */}
+              </Grid>
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="filled-search"
