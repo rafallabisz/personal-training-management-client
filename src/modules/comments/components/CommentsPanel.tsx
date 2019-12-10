@@ -8,6 +8,7 @@ import { getTrainerCommentsActionCreator } from "../duck/comments.operations";
 import { Store } from "../../auth/duck/auth.interfaces";
 import { formatDate } from "../../../utils/formatDate";
 import PanelTemplate from "../../../templates/PanelTemplate";
+import LoadingContainer from "../../../utils/LoadingContainer";
 
 interface CommentsPanelProps {}
 
@@ -27,36 +28,36 @@ const CommentsPanel: React.FC<CommentsPanelProps> = props => {
   return (
     <>
       <PanelTemplate>
-        <div className={classes.container}>
-          {trainerComments.comments !== undefined ? (
-            <>
-              {trainerComments.comments.map(comment => (
-                <Card className={classes.card}>
-                  <CardHeader
-                    avatar={
-                      comment.avatar ? (
-                        <img src={comment.avatar} className={classes.avatarComments} />
-                      ) : (
-                        <Avatar>{<ChatIcon />}</Avatar>
-                      )
-                    }
-                    action={<Rating name="read-only" value={comment.rating} readOnly precision={0.5} />}
-                    title={comment.author}
-                    subheader={formatDate(comment.createdAt)}
-                    className={classes.cardHeader}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {comment.content}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))}
-            </>
-          ) : (
-            <div>Brak komentarzy</div>
-          )}
-        </div>
+        <LoadingContainer isFetching={trainerComments.isFetching}>
+          <div className={classes.container}>
+            {trainerComments.comments !== undefined && !trainerComments.isFetching && (
+              <>
+                {trainerComments.comments.map(comment => (
+                  <Card className={classes.card}>
+                    <CardHeader
+                      avatar={
+                        comment.avatar ? (
+                          <img src={comment.avatar} className={classes.avatarComments} />
+                        ) : (
+                          <Avatar>{<ChatIcon />}</Avatar>
+                        )
+                      }
+                      action={<Rating name="read-only" value={comment.rating} readOnly precision={0.5} />}
+                      title={comment.author}
+                      subheader={formatDate(comment.createdAt)}
+                      className={classes.cardHeader}
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        {comment.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+              </>
+            )}
+          </div>
+        </LoadingContainer>
       </PanelTemplate>
     </>
   );

@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme: Theme) =>
     cardHeader: {
       paddingBottom: 0
     },
+
+    cardHeaderActionWrap: {
+      display: "flex",
+      flexDirection: "column",
+      textAlign: "right"
+    },
     cardContent: {
       padding: 0
     },

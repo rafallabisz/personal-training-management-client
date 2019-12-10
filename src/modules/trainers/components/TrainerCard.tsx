@@ -12,11 +12,14 @@ const TrainerCard: React.FC<TrainerCardProps> = () => {
   const { mergeFilters } = useContext<TrainersPanelContext>(TrainersPanelContext);
   const classes = useStyles();
 
-  const countOverallRating = (trainerData: UserData) => {
+  const overallRating = (trainerData: UserData) => {
     const ratingTotal = trainerData.comments.reduce((prev, current) => prev + current.rating, 0);
     const numberOfComments = trainerData.comments.length;
     const averageRating = ratingTotal / numberOfComments;
-    return averageRating;
+    return {
+      averageRating,
+      numberOfComments
+    };
   };
 
   const variationWordOpinions = (trainerData: UserData) => {
@@ -45,15 +48,17 @@ const TrainerCard: React.FC<TrainerCardProps> = () => {
                 )
               }
               action={
-                <div style={{ display: "flex", flexDirection: "column", textAlign: "right" }}>
+                <div className={classes.cardHeaderActionWrap}>
                   <Rating
                     name="read-only"
-                    value={countOverallRating(trainerData)}
+                    value={overallRating(trainerData).averageRating}
                     readOnly
                     precision={0.25}
                     size="small"
                   />
-                  <span>{`(${trainerData.comments.length} ${variationWordOpinions(trainerData)})`}</span>
+                  <span>{`(${overallRating(trainerData).numberOfComments} ${variationWordOpinions(
+                    trainerData
+                  )})`}</span>
                 </div>
               }
               title={`${trainerData.firstName} ${trainerData.lastName}, ${
