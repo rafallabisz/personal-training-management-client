@@ -87,6 +87,13 @@ const useStyles = makeStyles((theme: Theme) =>
     offerListItem: {
       marginLeft: "30px",
       padding: "2px 0px"
+    },
+    wrapGallery: {
+      padding: "5px"
+    },
+    galleryImg: {
+      marginLeft: "10px",
+      width: "125px"
     }
   })
 );

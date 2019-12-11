@@ -20,6 +20,7 @@ import { AddOffer } from "../duck/offers.interfaces";
 import { addOfferActionCreator, getOfferActionCreator, deleteOfferActionCreator } from "../duck/offers.operations";
 import LoadingContainer from "../../../utils/LoadingContainer";
 import PanelTemplate from "../../../templates/PanelTemplate";
+import useDidMount from "../../../hooks/useDidMount";
 
 interface OfferPanelProps {}
 
@@ -28,6 +29,7 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
   const { offers, isFetching, error } = useSelector((state: Store) => state.trainerOffers);
   const dispatch = useDispatch();
   const [offerDescription, setOfferDescription] = useState<AddOffer>({ description: "" });
+  const isMount = useDidMount();
 
   useEffect(() => {
     const fetchTrainerOffers = () => {
@@ -64,46 +66,44 @@ const OfferPanel: React.FC<OfferPanelProps> = props => {
   return (
     <PanelTemplate>
       <LoadingContainer isFetching={isFetching} errorTxt={error}>
-        {!isFetching && (
-          <Card className={classes.card}>
-            <div className={classes.wrapper}>
-              <CardContent className={classes.title}>Offer:</CardContent>
-              <CardActions>
-                <TextField
-                  id="filled-search"
-                  label="Add training type"
-                  type="search"
-                  className={classes.textField}
-                  margin="normal"
-                  value={offerDescription.description}
-                  onChange={handleChangeInput}
-                  onKeyDown={e => submitOnEnter(e)}
-                />
-                <Button
-                  onClick={() => handleAddOffer()}
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  startIcon={<AddCircleIcon />}
-                >
-                  Add
-                </Button>
-              </CardActions>
-            </div>
-            <CardContent>
-              <List>
-                {offers.map(offer => (
-                  <ListItem key={offer._id}>
-                    <ListItemText primary={offer.description} className={classes.listItem} />
-                    <Tooltip title="Delete">
-                      <DeleteForeverIcon className={classes.iconExit} onClick={() => handleDeleteOffer(offer._id)} />
-                    </Tooltip>
-                  </ListItem>
-                ))}
-              </List>
-            </CardContent>
-          </Card>
-        )}
+        <Card className={classes.card}>
+          <div className={classes.wrapper}>
+            <CardContent className={classes.title}>Offer:</CardContent>
+            <CardActions>
+              <TextField
+                id="filled-search"
+                label="Add training type"
+                type="search"
+                className={classes.textField}
+                margin="normal"
+                value={offerDescription.description}
+                onChange={handleChangeInput}
+                onKeyDown={e => submitOnEnter(e)}
+              />
+              <Button
+                onClick={() => handleAddOffer()}
+                variant="contained"
+                color="primary"
+                size="small"
+                startIcon={<AddCircleIcon />}
+              >
+                Add
+              </Button>
+            </CardActions>
+          </div>
+          <CardContent>
+            <List>
+              {offers.map(offer => (
+                <ListItem key={offer._id}>
+                  <ListItemText primary={offer.description} className={classes.listItem} />
+                  <Tooltip title="Delete">
+                    <DeleteForeverIcon className={classes.iconExit} onClick={() => handleDeleteOffer(offer._id)} />
+                  </Tooltip>
+                </ListItem>
+              ))}
+            </List>
+          </CardContent>
+        </Card>
       </LoadingContainer>
     </PanelTemplate>
   );

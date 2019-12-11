@@ -179,6 +179,11 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
                       ))}
                     </ul>
                   </div>
+                  <div className={classes.wrapGallery}>
+                    {selectedTrainer.data.gallery.map(img => (
+                      <img src={img} alt="gallery" className={classes.galleryImg} />
+                    ))}
+                  </div>
                 </CardContent>
 
                 <CardActions>
