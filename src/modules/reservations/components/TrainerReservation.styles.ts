@@ -93,7 +93,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     galleryImg: {
       marginLeft: "10px",
-      width: "125px"
+      width: "125px",
+      transition: ".2s linear",
+      "&:hover": {
+        cursor: "pointer",
+        opacity: "0.7"
+      }
     }
   })
 );
