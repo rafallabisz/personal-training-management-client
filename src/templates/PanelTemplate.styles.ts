@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundPosition: "center"
     },
     appBar: {
-      zIndex: theme.zIndex.drawer + 1,
+      zIndex: 11,
+      // zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(["width", "margin"], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
       whiteSpace: "nowrap"
     },
     drawerOpen: {
+      zIndex: 10,
       width: drawerWidth,
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
@@ -55,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.secondary.light
     },
     drawerClose: {
+      zIndex: 10,
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen

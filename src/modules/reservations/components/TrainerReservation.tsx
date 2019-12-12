@@ -34,6 +34,8 @@ import { useHistory } from "react-router";
 import { routes } from "../../../routes";
 import api from "../../../services";
 import { roundedDate } from "../../../utils/roundedDate";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 
 interface TrainerReservationProps {}
 
@@ -61,6 +63,8 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
   };
 
   const [reserveData, setReserveData] = useState<Reservation>(defaultReserveData);
+  const [photoIndex, setPhotoIndex] = useState<number>(0);
+  const [isOpenLightBox, setOpenLightbox] = useState<boolean>(false);
 
   useEffect(() => {
     const trainerId = sessionStorage.getItem("trainerId")!;
@@ -180,10 +184,36 @@ const TrainerReservation: React.FC<TrainerReservationProps> = () => {
                     </ul>
                   </div>
                   <div className={classes.wrapGallery}>
-                    {selectedTrainer.data.gallery.map(img => (
-                      <img src={img} alt="gallery" className={classes.galleryImg} />
+                    {selectedTrainer.data.gallery.map((img, index) => (
+                      <img
+                        src={img}
+                        alt="gallery"
+                        className={classes.galleryImg}
+                        onClick={() => {
+                          setOpenLightbox(true);
+                          setPhotoIndex(index);
+                        }}
+                      />
                     ))}
                   </div>
+                  {isOpenLightBox && (
+                    <Lightbox
+                      mainSrc={selectedTrainer.data.gallery[photoIndex]}
+                      nextSrc={selectedTrainer.data.gallery[(photoIndex + 1) % selectedTrainer.data.gallery.length]}
+                      prevSrc={
+                        selectedTrainer.data.gallery[
+                          (photoIndex + selectedTrainer.data.gallery.length - 1) % selectedTrainer.data.gallery.length
+                        ]
+                      }
+                      onCloseRequest={() => setOpenLightbox(false)}
+                      onMovePrevRequest={() =>
+                        setPhotoIndex(
+                          (photoIndex + selectedTrainer.data.gallery.length - 1) % selectedTrainer.data.gallery.length
+                        )
+                      }
+                      onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % selectedTrainer.data.gallery.length)}
+                    />
+                  )}
                 </CardContent>
 
                 <CardActions>
