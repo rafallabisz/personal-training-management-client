@@ -35,6 +35,14 @@ const TopMenu: React.FC<TopMenuProps> = () => {
               <NavLink exact to={routes.comments} className={classes.navLinkMenu} activeClassName={classes.activeMenu}>
                 Comments
               </NavLink>
+              <NavLink
+                exact
+                to={routes.myReservations}
+                className={classes.navLinkMenu}
+                activeClassName={classes.activeMenu}
+              >
+                Reservations
+              </NavLink>
               <NavLink exact to={routes.settings} className={classes.navLinkMenu} activeClassName={classes.activeMenu}>
                 Settings
               </NavLink>

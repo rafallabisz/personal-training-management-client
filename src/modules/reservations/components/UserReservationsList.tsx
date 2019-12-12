@@ -13,7 +13,7 @@ interface UserReservationsListProps {}
 
 const UserReservationsList: React.FC<UserReservationsListProps> = props => {
   const dispatch = useDispatch();
-  const { _id } = useSelector((state: Store) => state.user.currentUser!);
+  const { _id, isTrainer } = useSelector((state: Store) => state.user.currentUser!);
   const { reservations, isFetching } = useSelector((state: Store) => state.reservations);
   useEffect(() => {
     dispatch(getReservationsActionCreator(_id));
@@ -30,7 +30,7 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Trainer name</TableCell>
+                  <TableCell>{isTrainer ? "Client name" : "Trainer name"}</TableCell>
                   <TableCell>Phone</TableCell>
                   <TableCell>Selected training</TableCell>
                   <TableCell>Date</TableCell>
@@ -40,7 +40,9 @@ const UserReservationsList: React.FC<UserReservationsListProps> = props => {
                 {sortReservationsByDate(reservations).map(reservation => (
                   <TableRow key={reservation._id} hover>
                     <TableCell component="th" scope="row">
-                      {reservation.firstNameTrainer} {reservation.lastNameTrainer}
+                      {console.log(reservation, "---reserv")}
+                      {isTrainer ? reservation.firstName : reservation.firstNameTrainer}{" "}
+                      {isTrainer ? reservation.lastName : reservation.lastNameTrainer}
                     </TableCell>
                     <TableCell>{reservation.trainerPhone}</TableCell>
                     <TableCell>{reservation.selectTrainingType}</TableCell>
