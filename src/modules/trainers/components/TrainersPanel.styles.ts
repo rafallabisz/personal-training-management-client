@@ -4,7 +4,7 @@ import { Theme, createStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      maxHeight: "70vh",
+      maxHeight: "85vh",
       overflowY: "auto"
     },
     containerCardTrainers: {
