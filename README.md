@@ -1,7 +1,19 @@
-# [Personal training management](https://github.com/rafallabisz/personal-training-management-client/blob/master/README.md)
+# [Personal training management](https://youtu.be/wvRIswdKi5g)
 
-Fullstack project based on React, Node.js and TypeScript.
+"Personal Training Management" is a fullstack application. It allows you to manage personal training. 
 
 [Server side code for this project](https://github.com/rafallabisz/personal-training-management-server)
 
-In process...
+[![personal-training-management](https://img.youtube.com/vi/wvRIswdKi5g/0.jpg)](https://youtu.be/wvRIswdKi5g)
+
+## Features
+- registration / login as a client or personal trainer
+- selecting a given trainer
+- reservation a specific workout (+calendar validation)
+- personal training rating
+- booking history
+- profile edition
+
+## Technologies
+- React, Redux, TypeScript, MaterialUI
+- Node, Express, MongoDB, Mongoose
